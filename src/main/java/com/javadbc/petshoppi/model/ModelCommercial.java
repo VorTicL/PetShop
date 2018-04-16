@@ -11,29 +11,15 @@ import java.util.Date;
  *
  * @author victor.rslucca
  */
-abstract class ModelCommercial {
-    protected double valorUni;
+public class ModelCommercial {
+    protected double valor;
     protected String nome;
-    protected String nomeUser;
     protected String filial;
-    protected int qtdContract;
 
-    protected Date dataContract;
-
-    public ModelCommercial(double valorUni, String nome, int qtdContract, Date dataContract) {
-        this.valorUni = valorUni;
+    public ModelCommercial(double valor, String nome, String filial) {
         this.nome = nome;
-        this.qtdContract = qtdContract;
-        this.dataContract = dataContract;
-    }
-    
-    
-    public String getNomeUser() {
-        return nomeUser;
-    }
-
-    public void setNomeUser(String nomeUser) {
-        this.nomeUser = nomeUser;
+        this.valor = valor;
+        this.filial = filial;
     }
 
     public String getFilial() {
@@ -44,22 +30,6 @@ abstract class ModelCommercial {
         this.filial = filial;
     }
 
-    public Date getDataContract() {
-        return dataContract;
-    }
-
-    public void setDataContract(Date dataContract) {
-        this.dataContract = dataContract;
-    }
-
-    public double getValor() {
-        return valorUni;
-    }
-
-    public void setValor(double valorUni) {
-        this.valorUni = valorUni;
-    }
-
     public String getNome() {
         return nome;
     }
@@ -67,15 +37,5 @@ abstract class ModelCommercial {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public int getQtdContract() {
-        return qtdContract;
-    }
-
-    public void setQtdContract(int qtdContract) {
-        this.qtdContract = qtdContract;
-    }
-    
-    public abstract double calculaTotal();
     
 }

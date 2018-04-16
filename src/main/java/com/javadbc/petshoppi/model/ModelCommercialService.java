@@ -13,12 +13,18 @@ import java.util.Date;
  */
 public class ModelCommercialService extends ModelCommercial{
     
-    public ModelCommercialService(double valorUni, String nome, int qtdContract, Date dataContract) {
-        super(valorUni, nome, qtdContract, dataContract);
+    private String pet;
+
+    public ModelCommercialService(String pet, double valor, String nome, String filial) {
+        super(valor, nome, filial);
+        this.pet = pet;
     }
-    
-    @Override
-    public double calculaTotal(){
-        return qtdContract*valorUni;
+
+    public String getPet() {
+        return pet;
+    }
+
+    public void setPet(String pet) {
+        this.pet = pet;
     }
 }
