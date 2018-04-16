@@ -24,8 +24,11 @@ public class ModelCommercialCliente {
 
    
     
-    public ModelCommercialCliente(String nome, String dataNascimentoT) {
+    public ModelCommercialCliente(String nome, String dataNascimentoT, String genero, String tel,String email) {
     this.nome = nome;
+    this.genero = genero;
+    this.tel = tel;
+    this.email = email;
     DateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
     try {
       this.dataNascimento = formatador.parse(dataNascimentoT);
@@ -33,15 +36,8 @@ public class ModelCommercialCliente {
 
     }
   }
-    public ModelCommercialCliente(String nome, String dataNascimentoT, String genero, String tel,String email ){
-      this(nome, dataNascimentoT);
-      this.genero = genero;
-      this.tel = tel;
-      this.email = email;
-    }
-    
-    
-    
+
+      
      public String getTel() {
         return tel;
     }
