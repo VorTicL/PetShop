@@ -5,6 +5,9 @@
  */
 package com.javadbc.petshoppi.model;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -12,24 +15,47 @@ import java.util.Date;
  * @author João
  */
 public class ModelCommercialCliente {
-    private Integer id;
+    
     private String nome;
-    private String sobrenome;
     private Date dataNascimento;
     private String genero;
+    private String tel;
+    private String email;
 
-    /**
-     * @return the id
-     */
-    public Integer getId() {
-        return id;
+   
+    
+    public ModelCommercialCliente(String nome, String dataNascimentoT) {
+    this.nome = nome;
+    DateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+    try {
+      this.dataNascimento = formatador.parse(dataNascimentoT);
+    } catch (ParseException e) {
+
+    }
+  }
+    public ModelCommercialCliente(String nome, String dataNascimentoT, String genero, String tel,String email ){
+      this(nome, dataNascimentoT);
+      this.genero = genero;
+      this.tel = tel;
+      this.email = email;
+    }
+    
+    
+    
+     public String getTel() {
+        return tel;
     }
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(Integer id) {
-        this.id = id;
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**
@@ -44,20 +70,6 @@ public class ModelCommercialCliente {
      */
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    /**
-     * @return the sobrenome
-     */
-    public String getSobrenome() {
-        return sobrenome;
-    }
-
-    /**
-     * @param sobrenome the sobrenome to set
-     */
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
     }
 
     /**
