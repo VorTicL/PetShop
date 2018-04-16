@@ -15,7 +15,7 @@ public class ModelCommercialProduct extends ModelCommercial{
 
     private int qtdProd;
     
-    public ModelCommercialProduct(int qtdProd, double valor, String nome, String filial) {
+    public ModelCommercialProduct(String nome, double valor, String filial, int qtdProd) {
         super(valor, nome, filial);
         this.qtdProd = qtdProd;
     }
