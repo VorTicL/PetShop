@@ -5,13 +5,19 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>JSP Page</title>
+    <title>Cliente</title>
   </head>
   <body>
-    <h1>Exemplo Servlet + JSP em conjunto</h1>
     <hr />
-    <h2><c:out value="${xpto.nome}" /></h2>
+    <p>Nome:
+        <c:out value="${xpto.nome}" /></p>
     <p>Data de nascimento:
-      <fmt:formatDate value="${xpto.dtNascimento}" pattern="dd/MM/yyyy" /></p>
+      <fmt:formatDate value="${xpto.dataNascimento}" pattern="dd/MM/yyyy" /></p>
+    <p>Genero:
+        <c:out value="${xpto.genero}" /></p>
+    <p>Telefone:
+        <c:out value="${xpto.tel}" /></p>
+    <p>E-mail:
+        <c:out value="${xpto.email}" /></p>
   </body>
 </html>
