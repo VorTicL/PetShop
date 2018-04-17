@@ -8,20 +8,20 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/index.css">
 </head>
 <body>
-  <form action="${pageContext.request.contextPath}/cadastro-pessoa" method="post">
+  <form action="${pageContext.request.contextPath}/product-serv" method="post">
             <div class="data-container">
                 <div>
                     <div>
                     Nome do Produto: <input type="text" name="nomeProd"/> 
                 </div>
                 <div>
-                    Valor Unitario: <input type="number" name="dtnasc"/>
+                    Valor Unitario: <input type="number" name="uniValue"/>
                 </div>
                 <div>
-                    Filial Para Distribuição: <input type="text" name="email"/>
+                    Filial Para Distribuição: <input type="text" name="filial"/>
                 </div>
                 <div>
-                    Quantidade Em Estoque: <input type="number" name="telefone"/>
+                    Quantidade Em Estoque: <input type="number" name="qtdEstoque"/>
                 </div> 
                 <div>
                     <button type="submit">Enviar</button>
