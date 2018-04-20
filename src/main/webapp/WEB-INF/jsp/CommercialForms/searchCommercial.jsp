@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,7 +14,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="${pageContext.request.contextPath}/product-serv" method="post">
+        <form action="${pageContext.request.contextPath}/comm-service" method="post">
+            <p id="action" hidden>search</p>
             <div class="data-container">
                 <div>
                     <div>
@@ -25,5 +28,27 @@
             </div>
             <
         </form>
+        <c:if test="${listCommercial.size()>0}" >   
+        <table>
+            <c:forEach var="objeto" items="${listCommercial}">
+                <tr>
+                    <td>
+                        <form action="${pageContext.request.contextPath}/comm-service" method="post">
+                            <p id="action" hidden>choose</p>
+                            <p id="idSelected" hidden> {objeto.id}</p>
+                            <button type="submit">Enviar</button>
+                        </form>    
+                    </td>
+                    <td>
+                        ${objeto.nome}
+                    </td>
+                    <td>
+                        ${objeto.valor}
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
+        </c:if>
+
     </body>
 </html>
