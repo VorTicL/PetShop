@@ -26,15 +26,14 @@
                 </div>
                 </div>
             </div>
-            <
         </form>
-        <c:if test="${listCommercial.size()>0}" >   
+        <c:if test="${not empty listCommercial}" >   
         <table>
             <c:forEach var="objeto" items="${listCommercial}">
                 <tr>
                     <td>
                         <form action="${pageContext.request.contextPath}/comm-service" method="post">
-                            <p id="action" hidden>choose</p>
+                            <input id="action" hidden>choose</p>
                             <p id="idSelected" hidden> {objeto.id}</p>
                             <button type="submit">Enviar</button>
                         </form>    

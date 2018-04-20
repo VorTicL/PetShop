@@ -17,10 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author joao.vrevangelista
  */
-public class CallProduct {
-    @WebServlet(name = "ProductServlet", urlPatterns = {"/product-serv"})
-public class CommercialProductServlet extends HttpServlet{
-
+@WebServlet(name = "CallProduct", urlPatterns = {"/callProduct"})
+public class CallProduct extends HttpServlet{
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
 	  throws ServletException, IOException {
@@ -36,7 +34,4 @@ public class CommercialProductServlet extends HttpServlet{
 
   }
 
-}
-
-    
 }

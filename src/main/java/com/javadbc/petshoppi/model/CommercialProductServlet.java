@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author victor.rslucca
  */
-@WebServlet(name = "ProductServlet", urlPatterns = {"/product-serv"})
+@WebServlet(name = "CommercialProductServlet", urlPatterns = {"/product-serv"})
 public class CommercialProductServlet extends HttpServlet{
 
   @Override
