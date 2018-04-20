@@ -14,7 +14,7 @@
     </head>
     <body>
         <form action="${pageContext.request.contextPath}/cadastro-cliente" method="post">
-         <div class="data-container">
+         <div>
                 <div>
                     <div>
                     Nome: <input type="text" name="nome"/> 
