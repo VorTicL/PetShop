@@ -8,7 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/index.css">
 </head>
 <body>
-  <form action="${pageContext.request.contextPath}/product-serv" method="post">
+  <form action="http://localhost:8080/PetShop-1.0-SNAPSHOT/product-serv" method="post">
             <div class="data-container">
                 <div>
                     <div>

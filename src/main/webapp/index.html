@@ -6,45 +6,17 @@
         <link rel="stylesheet" type="text/css" href="css/estilo.css"/>
     </head>
     <body>
-        <div id="pag">
-            <div id="logo"/></div>
-        <div id="banner" style="text-align:center; ">    
-            <div id="titulo"> 
-                <br/>  
-                <h1>  Pet Shop - dedicado ao seu amigo</h1>
-            </div>
-            <div id="login">
-                <iframe scrolling="no" width="250" height="150" frameborder="0" src="login.html"></iframe>
-            </div>
-        </div>
-        <div id="menu">
-           
-		<ul>
-			<li><a href="index.html">Home</a></li>
-			<li><a href="sobre.html">Sobre</a></li>
-			<li><a href="protudtos-servicos.html">Produtos/Serviços</a></li>
-			<li><a href="">Funcionários</a></li>
-			<li><a href="contato.html">Contato</a></li>
-		</ul>
-	
-        </div>
+        <h3> Login</h3>
+        <form method="get" action="http://localhost:8080/PetShop-1.0-SNAPSHOT/callProduct">
+            <pre>
         
-        <div id="conteudo">
-            <h3>Venha trazer seu animal de estimação, aqui ele é bem tratado</h3>
-            <br/>
-            <h3>Tratamos bem o seu amigo desde 2005</h3> 
-        </div>
-        
-        <div id="rodape">
-           © Copyright 2018 PetShop All rights reserved.
-        </div>
-        <form action="WEB-INF/jsp/CommercialForms/searchCommercial.jsp">
-            <div class="data-container">
-                <div>
-                    <button type="submit">Enviar</button>
-                </div>
-            </div>
+            Usuario:    <input type="text" name="usuario">
+            Senha:      <input type="password" name="senha">  
+                        <input type="submit" value="Enviar">
+                        <input type="reset" value="Cancelar">
+
+       
+            </pre>
         </form>
-    </div>
     </body>
 </html>

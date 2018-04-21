@@ -24,14 +24,7 @@ public class CommercialProductServlet extends HttpServlet{
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
 	  throws ServletException, IOException {
     
-    String nome = request.getParameter("nomeProd");
-    double valueUni = Double.parseDouble(request.getParameter("uniValue"));
-    String filial = request.getParameter("filial");
-    int qtdEstoque = Integer.parseInt(request.getParameter("qtdEstoque"));
     
-    ModelCommercialProduct prod1 = new ModelCommercialProduct(nome, valueUni, filial, qtdEstoque);
-    request.setAttribute("xpto", "Produto Cadastrado com sucesso!");
-
     RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/cliente-mvc.jsp");
     dispatcher.forward(request, response);
   }
@@ -40,6 +33,15 @@ public class CommercialProductServlet extends HttpServlet{
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	  throws ServletException, IOException {
 
+    String nome = request.getParameter("nomeProd");
+    double valueUni = Double.parseDouble(request.getParameter("uniValue"));
+    String filial = request.getParameter("filial");
+    int qtdEstoque = Integer.parseInt(request.getParameter("qtdEstoque"));
+    
+    ModelCommercialProduct prod1 = new ModelCommercialProduct(nome, valueUni, filial, qtdEstoque);
+    request.setAttribute("xpto", "Produto Cadastrado com sucesso!");
+    
+      System.out.println(nome+valueUni+filial+qtdEstoque);
   }
 
 }
