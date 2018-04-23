@@ -1,0 +1,63 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18/04/2018, 15:51:53
+    Author     : João
+*/
+body{
+    margin:0;
+    padding:0;
+    text-align: center;
+    background: url("../imagens/menu/papelparede.jpg");
+}
+#pag{
+    width: 1024px;
+    margin-top: 10px;
+    margin: 0 auto;
+}
+#logo {
+    width: 200px;
+    height: 180px;
+    float: left;
+    background: url("../imagens/menu/logo-para-petshop-2.jpg");
+ 
+}
+#banner{
+    width: 824px;
+    height: 180px;
+    float: left;    
+    background-color: #87CEFA;  
+}
+#titulo {
+    width: 500px;
+    height: 180px;
+    float: left;
+}
+#login{
+    width: 370px;
+    height: 200px;
+    float: left; 
+}
+#menu{
+    width: 200px;
+    height: 500px;
+    float: left; 
+}
+#conteudo{
+    width: 824px;
+    height: 500px;
+    float: left; 
+}
+#rodape{
+    width: 1024px;
+    height: 50px;
+    float: right;
+    background-color: darkgoldenrod;
+}
+
+
+
+
