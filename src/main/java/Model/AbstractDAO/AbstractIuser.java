@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author dev
+ * @author João
  */
 public abstract class AbstractIuser {
     

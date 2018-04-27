@@ -1,13 +1,10 @@
 com\javadbc\petshoppi\model\ModelCommercial.class
+Model\DAO\IuserDAO.class
 Controller\ServiceServlet\LoginServlet.class
 Model\Connect\Connect.class
 com\javadbc\petshoppi\model\CallProduct.class
-com\javadbc\petshoppi\model\ModelCommercialService.class
-com\javadbc\petshoppi\model\ModelCommercialCliente.class
-Model\DAO\IuserDAO.class
-com\javadbc\petshoppi\model\CadastroClienteMVCServlet.class
 com\javadbc\petshoppi\model\CommercialProductServlet.class
 com\javadbc\petshoppi\model\ModelCommercialProduct.class
+com\javadbc\petshoppi\model\ModelCommercialService.class
 Model\AbstractDAO\AbstractIuser.class
 Model\Entity\Iuser.class
-com\javadbc\petshoppi\model\ClienteMVCServlet.class

@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author dev
+ * @author João
  */
 public class Connect {
 

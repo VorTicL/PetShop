@@ -7,7 +7,7 @@ package Model.Entity;
 
 /**
  *
- * @author dev
+ * @author João
  */
 public class Iuser {
     

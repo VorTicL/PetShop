@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author dev
+ * @author João
  */
 public class IuserDAO extends AbstractIuser {
 
