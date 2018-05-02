@@ -17,14 +17,14 @@ public class Cliente {
     private String sexo;
     private String rg;
     private String cpf;
-    private String endereco;
-    private String datacri;
+    private int endereco;
+    private String dataCri;
     
     public Cliente(){
         
     }
 
-    public Cliente(int id, String nome, String dataNasc, String sexo, String rg, String cpf, String endereco, String datacri) {
+    public Cliente(int id, String nome, String dataNasc, String sexo, String rg, String cpf, int endereco, String dataCri) {
         this.id = id;
         this.nome = nome;
         this.dataNasc = dataNasc;
@@ -32,7 +32,7 @@ public class Cliente {
         this.rg = rg;
         this.cpf = cpf;
         this.endereco = endereco;
-        this.datacri = datacri;
+        this.dataCri = dataCri;
     }
 
     /**
@@ -122,29 +122,29 @@ public class Cliente {
     /**
      * @return the endereco
      */
-    public String getEndereco() {
+    public int getEndereco() {
         return endereco;
     }
 
     /**
      * @param endereco the endereco to set
      */
-    public void setEndereco(String endereco) {
+    public void setEndereco(int endereco) {
         this.endereco = endereco;
     }
 
     /**
      * @return the datacri
      */
-    public String getDatacri() {
-        return datacri;
+    public String getDataCri() {
+        return dataCri;
     }
 
     /**
-     * @param datacri the datacri to set
+     * @param dataCri the datacri to set
      */
-    public void setDatacri(String datacri) {
-        this.datacri = datacri;
+    public void setDataCri(String dataCri) {
+        this.dataCri = dataCri;
     }
     
 }

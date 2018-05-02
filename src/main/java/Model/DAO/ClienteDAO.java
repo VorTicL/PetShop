@@ -5,44 +5,46 @@
  */
 package Model.DAO;
 
-import Model.AbstractDAO.AbstractAnimal;
-import Model.Entity.Animal;
-import Model.Connect.Connect;
+import Model.AbstractDAO.AbstractCliente;
+import Model.Entity.Cliente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import Model.Connect.Connect;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author João
  */
-public class AnimalDAO extends AbstractAnimal{
+public class ClienteDAO extends AbstractCliente{
+    
     private Connection conexao;
     private PreparedStatement pst;
     private ResultSet rs;
     
     
     @Override
-    public boolean insert(Animal animal) {
+    public boolean insert(Cliente cliente) {
 
         conexao = Connect.connect();
 
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("insert into animal(nome,raca,dataCri)");
-            sql.append(" values (?,?,date(now()))");
+            sql.append("insert into cliente(nome,dataNasc,sexo,rg,cpf,endereco,dataCri)");
+            sql.append(" values (?,?,?,?,?,?,date(now()))");
 
             pst = conexao.prepareStatement(sql.toString());
 
-            pst.setString(1, animal.getNome());
-            pst.setString(2, animal.getRaca());
-
+            pst.setString(1, cliente.getNome());
+            pst.setString(2, cliente.getDataNasc());
+            pst.setString(3, cliente.getSexo());
+            pst.setString(5, cliente.getRg());
+            pst.setString(5, cliente.getCpf());
+            pst.setInt(5, cliente.getEndereco());
+            
             pst.execute();
 
             return true;
@@ -57,32 +59,37 @@ public class AnimalDAO extends AbstractAnimal{
         }
 
     }
-    
-    @Override
-    public List<Animal> selectAll() {
 
-        ArrayList<Animal> animal = new ArrayList<>();
+    @Override
+    public List<Cliente> selectAll() {
+
+        ArrayList<Cliente> cliente = new ArrayList<>();
         
         conexao = Connect.connect();
 
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("select id,nome,raca,dataCri");
-            sql.append(" from animal and ativo = true");
+            sql.append("select id,nome,dataNasc,sexo,rg,cpf,endereco,dataCri");
+            sql.append(" from cliente and ativo = true");
 
             pst = conexao.prepareStatement(sql.toString());
 
             rs = pst.executeQuery();
             
             while(rs.next()){
-                animal.add(new Animal(rs.getInt(1),
+                cliente.add(new Cliente(rs.getInt(1),
                         rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4)));
+                        rs.getString(3), 
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getInt(7),
+                        rs.getString(8)
+                ));
             }
 
-            return animal;
+            return cliente;
         } catch (SQLException e) {
 
             try {
@@ -90,36 +97,38 @@ public class AnimalDAO extends AbstractAnimal{
             } catch (SQLException ex) {
             }
             
-            return animal;
+            return cliente;
         }
 
     }
-    
     @Override
-    public Animal selectId(Animal animal) {
+    public Cliente selectId(Cliente cliente) {
         
         conexao = Connect.connect();
 
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("select id,nome,raca,dataCri");
-            sql.append(" from animal where id = ? and ativo = true");
+            sql.append("select id,nome,dataNasc,sexo,rg,cpf,endereco,dataCri");
+            sql.append(" from cliente where id = ? and ativo = true");
 
             pst = conexao.prepareStatement(sql.toString());
             
-            pst.setInt(1, animal.getId());
+            pst.setInt(1, cliente.getId());
 
             rs = pst.executeQuery();
             
             if(rs.next()){
-                animal.setNome(rs.getString(2));
-                animal.setRaca(rs.getString(3));
-                animal.setDataCri(rs.getString(4));
-               
+                cliente.setNome(rs.getString(2));
+                cliente.setDataNasc(rs.getString(3));
+                cliente.setSexo(rs.getString(4));
+                cliente.setRg(rs.getString(5));
+                cliente.setCpf(rs.getString(6));
+                cliente.setEndereco(rs.getInt(7));
+                cliente.setDataCri(rs.getString(8));
             }
 
-            return animal;
+            return cliente;
         } catch (SQLException e) {
 
             try {
@@ -127,26 +136,29 @@ public class AnimalDAO extends AbstractAnimal{
             } catch (SQLException ex) {
             }
             
-            return animal;
+            return cliente;
         }
     }
     
     @Override
-    public boolean update(Animal animal) {
+    public boolean update(Cliente cliente) {
          conexao = Connect.connect();
 
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("update animal set nome = ? , raca = ?");
+            sql.append("update cliente set nome = ? , dataNasc = ? , sexo = ? , rg = ? , cpf = ? , endereco = ?");
             sql.append(" where id = ? and ativo = true");
 
             pst = conexao.prepareStatement(sql.toString());
 
-            pst.setString(1, animal.getNome());
-            pst.setString(2, animal.getRaca());
-            pst.setInt(3, animal.getId());
-           
+            pst.setString(1, cliente.getNome());
+            pst.setString(2, cliente.getDataNasc());
+            pst.setString(3, cliente.getSexo());
+            pst.setString(4, cliente.getRg());
+            pst.setString(5, cliente.getCpf());
+            pst.setInt(6, cliente.getEndereco());
+            pst.setInt(7, cliente.getId());
 
             pst.executeUpdate();
 
@@ -162,19 +174,19 @@ public class AnimalDAO extends AbstractAnimal{
         }
     }
     
-     @Override
-    public boolean delete(Animal animal) {
+    @Override
+    public boolean delete(Cliente cliente) {
          conexao = Connect.connect();
 
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("update animal set ativo = false");
+            sql.append("update cliente set ativo = false");
             sql.append(" where id = ?");
 
             pst = conexao.prepareStatement(sql.toString());
             
-            pst.setInt(1, animal.getId());
+            pst.setInt(1, cliente.getId());
 
             pst.execute();
 
@@ -189,28 +201,32 @@ public class AnimalDAO extends AbstractAnimal{
             return false;
         }
     }
-   @Override
-    public boolean animal(Animal animal) {
+    @Override
+    public boolean cliente(Cliente cliente) {
      
         conexao = Connect.connect();
 
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("select id,nome,raca,dataCri");
-            sql.append(" from animal where nome = ? and raca = ? and ativo = true");
+            sql.append("select id,nome,dataNasc,sexo,rg,cpf,endereco,dataCri");
+            sql.append(" from cliente where nome = ? and cpf = ? and ativo = true");
 
             pst = conexao.prepareStatement(sql.toString());
             
-            pst.setString(1, animal.getNome());
-            pst.setString(2, animal.getRaca());
+            pst.setString(1, cliente.getNome());
+            pst.setString(2, cliente.getCpf());
 
             rs = pst.executeQuery();
             
             if(rs.next()){
-                animal.setId(rs.getInt(1));
-                animal.setDataCri(rs.getString(4));
-                
+                cliente.setId(rs.getInt(1));
+                cliente.setDataNasc(rs.getString(3));
+                cliente.setSexo(rs.getString(4));
+                cliente.setRg(rs.getString(5));
+                cliente.setEndereco(rs.getInt(7));
+                cliente.setDataCri(rs.getString(8));
+            
                 return true;
             }
 
@@ -225,5 +241,6 @@ public class AnimalDAO extends AbstractAnimal{
             return false;
         }
     }
+
     
 }
