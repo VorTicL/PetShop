@@ -5,46 +5,43 @@
  */
 package Model.DAO;
 
-import Model.AbstractDAO.AbstractCliente;
-import Model.Entity.Cliente;
+import Model.AbstractDAO.AbstractVenda;
+import Model.Connect.Connect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import Model.Connect.Connect;
+import Model.Entity.Venda;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  *
  * @author João
  */
-public class ClienteDAO extends AbstractCliente{
+public class VendaDAO extends AbstractVenda{
     
     private Connection conexao;
     private PreparedStatement pst;
     private ResultSet rs;
     
-    
     @Override
-    public boolean insert(Cliente cliente) {
+    public boolean insert(Venda venda) {
 
         conexao = Connect.connect();
 
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("insert into cliente(nome,dataNasc,sexo,rg,cpf,endereco,dataCri)");
-            sql.append(" values (?,?,?,?,?,?,date(now()))");
+            sql.append("insert into venda(idservico,idcliente,dataCri)");
+            sql.append(" values (?,?,date(now()))");
 
             pst = conexao.prepareStatement(sql.toString());
 
-            pst.setString(1, cliente.getNome());
-            pst.setString(2, cliente.getDataNasc());
-            pst.setString(3, cliente.getSexo());
-            pst.setString(4, cliente.getRg());
-            pst.setString(5, cliente.getCpf());
-            pst.setInt(6, cliente.getEndereco());
+            pst.setInt(1, venda.getIdservico());
+            pst.setInt(2, venda.getIdcliente());
             
+
             pst.execute();
 
             return true;
@@ -59,37 +56,31 @@ public class ClienteDAO extends AbstractCliente{
         }
 
     }
+     @Override
+    public List<Venda> selectAll() {
 
-    @Override
-    public List<Cliente> selectAll() {
-
-        ArrayList<Cliente> cliente = new ArrayList<>();
+        ArrayList<Venda> venda= new ArrayList<>();
         
         conexao = Connect.connect();
 
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("select id,nome,dataNasc,sexo,rg,cpf,endereco,dataCri");
-            sql.append(" from cliente and ativo = true");
+            sql.append("select id,idservico,idcliente,dataCri");
+            sql.append(" from venda and ativo = true");
 
             pst = conexao.prepareStatement(sql.toString());
 
             rs = pst.executeQuery();
             
             while(rs.next()){
-                cliente.add(new Cliente(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3), 
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getInt(7),
-                        rs.getString(8)
-                ));
+                venda.add(new Venda(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3), 
+                        rs.getString(4)));
             }
 
-            return cliente;
+            return venda;
         } catch (SQLException e) {
 
             try {
@@ -97,38 +88,35 @@ public class ClienteDAO extends AbstractCliente{
             } catch (SQLException ex) {
             }
             
-            return cliente;
+            return venda;
         }
 
     }
+
     @Override
-    public Cliente selectId(Cliente cliente) {
+    public Venda selectId(Venda venda) {
         
         conexao = Connect.connect();
 
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("select id,nome,dataNasc,sexo,rg,cpf,endereco,dataCri");
-            sql.append(" from cliente where id = ? and ativo = true");
+            sql.append("select id,idservico,idcliente,dataCri");
+            sql.append(" from venda where id = ? and ativo = true");
 
             pst = conexao.prepareStatement(sql.toString());
             
-            pst.setInt(1, cliente.getId());
+            pst.setInt(1, venda.getId());
 
             rs = pst.executeQuery();
             
             if(rs.next()){
-                cliente.setNome(rs.getString(2));
-                cliente.setDataNasc(rs.getString(3));
-                cliente.setSexo(rs.getString(4));
-                cliente.setRg(rs.getString(5));
-                cliente.setCpf(rs.getString(6));
-                cliente.setEndereco(rs.getInt(7));
-                cliente.setDataCri(rs.getString(8));
+                venda.setIdservico(rs.getInt(2));
+                venda.setIdcliente(rs.getInt(3));
+                venda.setDataCri(rs.getString(4));
             }
 
-            return cliente;
+            return venda;
         } catch (SQLException e) {
 
             try {
@@ -136,29 +124,24 @@ public class ClienteDAO extends AbstractCliente{
             } catch (SQLException ex) {
             }
             
-            return cliente;
+            return venda;
         }
     }
-    
     @Override
-    public boolean update(Cliente cliente) {
+    public boolean update(Venda venda) {
          conexao = Connect.connect();
 
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("update cliente set nome = ? , dataNasc = ? , sexo = ? , rg = ? , cpf = ? , endereco = ?");
+            sql.append("update venda set idservico = ? , idcliente = ?");
             sql.append(" where id = ? and ativo = true");
 
             pst = conexao.prepareStatement(sql.toString());
 
-            pst.setString(1, cliente.getNome());
-            pst.setString(2, cliente.getDataNasc());
-            pst.setString(3, cliente.getSexo());
-            pst.setString(4, cliente.getRg());
-            pst.setString(5, cliente.getCpf());
-            pst.setInt(6, cliente.getEndereco());
-            pst.setInt(7, cliente.getId());
+            pst.setInt(1, venda.getIdservico());
+            pst.setInt(2, venda.getIdcliente());
+            pst.setInt(3, venda.getId());
 
             pst.executeUpdate();
 
@@ -173,20 +156,19 @@ public class ClienteDAO extends AbstractCliente{
             return false;
         }
     }
-    
-    @Override
-    public boolean delete(Cliente cliente) {
+     @Override
+    public boolean delete(Venda venda) {
          conexao = Connect.connect();
 
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("update cliente set ativo = false");
+            sql.append("update venda set ativo = false");
             sql.append(" where id = ?");
 
             pst = conexao.prepareStatement(sql.toString());
             
-            pst.setInt(1, cliente.getId());
+            pst.setInt(1, venda.getId());
 
             pst.execute();
 
@@ -202,30 +184,26 @@ public class ClienteDAO extends AbstractCliente{
         }
     }
     @Override
-    public boolean cliente(Cliente cliente) {
+    public boolean venda(Venda venda) {
      
         conexao = Connect.connect();
 
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("select id,nome,dataNasc,sexo,rg,cpf,endereco,dataCri");
-            sql.append(" from cliente where nome = ? and dataNasc = ? and sexo = ? and rg = ? and cpf = ? and ativo = true");
+            sql.append("select id,idservico,idcliente,dataCri");
+            sql.append(" from venda where idservico = ? and dataCri = ? and ativo = true");
 
             pst = conexao.prepareStatement(sql.toString());
             
-            pst.setString(1, cliente.getNome());
-            pst.setString(2, cliente.getDataNasc());
-            pst.setString(3, cliente.getSexo());
-            pst.setString(4, cliente.getRg());
-            pst.setString(5, cliente.getCpf());
+            pst.setInt(1, venda.getIdservico());
+            pst.setString(2, venda.getDataCri());
 
             rs = pst.executeQuery();
             
             if(rs.next()){
-                cliente.setId(rs.getInt(1));
-                cliente.setEndereco(rs.getInt(7));
-                cliente.setDataCri(rs.getString(8));
+                venda.setId(rs.getInt(1));
+                venda.setIdcliente(rs.getInt(3));
             
                 return true;
             }
@@ -242,5 +220,5 @@ public class ClienteDAO extends AbstractCliente{
         }
     }
 
-    
+
 }

@@ -5,8 +5,8 @@
  */
 package Model.DAO;
 
-import Model.AbstractDAO.AbstractCliente;
-import Model.Entity.Cliente;
+import Model.AbstractDAO.AbstractEndereco;
+import Model.Entity.Endereco;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,37 +14,35 @@ import java.sql.SQLException;
 import Model.Connect.Connect;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  *
  * @author João
  */
-public class ClienteDAO extends AbstractCliente{
+public class EnderecoDAO extends AbstractEndereco {
     
     private Connection conexao;
     private PreparedStatement pst;
     private ResultSet rs;
     
-    
     @Override
-    public boolean insert(Cliente cliente) {
+    public boolean insert(Endereco endereco) {
 
         conexao = Connect.connect();
 
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("insert into cliente(nome,dataNasc,sexo,rg,cpf,endereco,dataCri)");
-            sql.append(" values (?,?,?,?,?,?,date(now()))");
+            sql.append("insert into endereco(rua,bairro,numero,dataCri)");
+            sql.append(" values (?,?,?,date(now()))");
 
             pst = conexao.prepareStatement(sql.toString());
 
-            pst.setString(1, cliente.getNome());
-            pst.setString(2, cliente.getDataNasc());
-            pst.setString(3, cliente.getSexo());
-            pst.setString(4, cliente.getRg());
-            pst.setString(5, cliente.getCpf());
-            pst.setInt(6, cliente.getEndereco());
+            pst.setString(1, endereco.getRua());
+            pst.setString(2, endereco.getBairro());
+            pst.setString(3, endereco.getNumero());
             
+
             pst.execute();
 
             return true;
@@ -59,37 +57,33 @@ public class ClienteDAO extends AbstractCliente{
         }
 
     }
-
+    
     @Override
-    public List<Cliente> selectAll() {
+    public List<Endereco> selectAll() {
 
-        ArrayList<Cliente> cliente = new ArrayList<>();
+        ArrayList<Endereco> endereco = new ArrayList<>();
         
         conexao = Connect.connect();
 
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("select id,nome,dataNasc,sexo,rg,cpf,endereco,dataCri");
-            sql.append(" from cliente and ativo = true");
+            sql.append("select id,rua,bairro,numero,dataCri");
+            sql.append(" from endereco and ativo = true");
 
             pst = conexao.prepareStatement(sql.toString());
 
             rs = pst.executeQuery();
             
             while(rs.next()){
-                cliente.add(new Cliente(rs.getInt(1),
+                endereco.add(new Endereco(rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3), 
                         rs.getString(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getInt(7),
-                        rs.getString(8)
-                ));
+                        rs.getString(5)));
             }
 
-            return cliente;
+            return endereco;
         } catch (SQLException e) {
 
             try {
@@ -97,38 +91,36 @@ public class ClienteDAO extends AbstractCliente{
             } catch (SQLException ex) {
             }
             
-            return cliente;
+            return endereco;
         }
 
     }
+    
     @Override
-    public Cliente selectId(Cliente cliente) {
+    public Endereco selectId(Endereco endereco) {
         
         conexao = Connect.connect();
 
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("select id,nome,dataNasc,sexo,rg,cpf,endereco,dataCri");
-            sql.append(" from cliente where id = ? and ativo = true");
+            sql.append("select id,rua,bairro,numero,dataCri");
+            sql.append(" from endereco where id = ? and ativo = true");
 
             pst = conexao.prepareStatement(sql.toString());
             
-            pst.setInt(1, cliente.getId());
+            pst.setInt(1, endereco.getId());
 
             rs = pst.executeQuery();
             
             if(rs.next()){
-                cliente.setNome(rs.getString(2));
-                cliente.setDataNasc(rs.getString(3));
-                cliente.setSexo(rs.getString(4));
-                cliente.setRg(rs.getString(5));
-                cliente.setCpf(rs.getString(6));
-                cliente.setEndereco(rs.getInt(7));
-                cliente.setDataCri(rs.getString(8));
+                endereco.setRua(rs.getString(2));
+                endereco.setBairro(rs.getString(3));
+                endereco.setNumero(rs.getString(4));
+                endereco.setDataCri(rs.getString(5));
             }
 
-            return cliente;
+            return endereco;
         } catch (SQLException e) {
 
             try {
@@ -136,29 +128,26 @@ public class ClienteDAO extends AbstractCliente{
             } catch (SQLException ex) {
             }
             
-            return cliente;
+            return endereco;
         }
     }
-    
     @Override
-    public boolean update(Cliente cliente) {
+    public boolean update(Endereco endereco) {
          conexao = Connect.connect();
 
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("update cliente set nome = ? , dataNasc = ? , sexo = ? , rg = ? , cpf = ? , endereco = ?");
+            sql.append("update endereco set rua = ? , bairro = ? , numero = ?");
             sql.append(" where id = ? and ativo = true");
 
             pst = conexao.prepareStatement(sql.toString());
 
-            pst.setString(1, cliente.getNome());
-            pst.setString(2, cliente.getDataNasc());
-            pst.setString(3, cliente.getSexo());
-            pst.setString(4, cliente.getRg());
-            pst.setString(5, cliente.getCpf());
-            pst.setInt(6, cliente.getEndereco());
-            pst.setInt(7, cliente.getId());
+            pst.setString(1, endereco.getRua());
+            pst.setString(2, endereco.getBairro());
+            pst.setString(3, endereco.getNumero());
+            pst.setInt(4, endereco.getId());
+            
 
             pst.executeUpdate();
 
@@ -173,20 +162,20 @@ public class ClienteDAO extends AbstractCliente{
             return false;
         }
     }
-    
+
     @Override
-    public boolean delete(Cliente cliente) {
+    public boolean delete(Endereco endereco) {
          conexao = Connect.connect();
 
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("update cliente set ativo = false");
+            sql.append("update endereco set ativo = false");
             sql.append(" where id = ?");
 
             pst = conexao.prepareStatement(sql.toString());
             
-            pst.setInt(1, cliente.getId());
+            pst.setInt(1, endereco.getId());
 
             pst.execute();
 
@@ -202,30 +191,27 @@ public class ClienteDAO extends AbstractCliente{
         }
     }
     @Override
-    public boolean cliente(Cliente cliente) {
+    public boolean endereco(Endereco endereco) {
      
         conexao = Connect.connect();
 
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("select id,nome,dataNasc,sexo,rg,cpf,endereco,dataCri");
-            sql.append(" from cliente where nome = ? and dataNasc = ? and sexo = ? and rg = ? and cpf = ? and ativo = true");
+            sql.append("select id,rua,bairro,numero,dataCri");
+            sql.append(" from endereco where rua = ? and bairro = ? and numero = ? and ativo = true");
 
             pst = conexao.prepareStatement(sql.toString());
             
-            pst.setString(1, cliente.getNome());
-            pst.setString(2, cliente.getDataNasc());
-            pst.setString(3, cliente.getSexo());
-            pst.setString(4, cliente.getRg());
-            pst.setString(5, cliente.getCpf());
-
+            pst.setString(1, endereco.getRua());
+            pst.setString(2, endereco.getBairro());
+            pst.setString(3, endereco.getNumero());
+              
             rs = pst.executeQuery();
             
             if(rs.next()){
-                cliente.setId(rs.getInt(1));
-                cliente.setEndereco(rs.getInt(7));
-                cliente.setDataCri(rs.getString(8));
+                endereco.setId(rs.getInt(1));
+                endereco.setDataCri(rs.getString(5));
             
                 return true;
             }
@@ -242,5 +228,4 @@ public class ClienteDAO extends AbstractCliente{
         }
     }
 
-    
 }

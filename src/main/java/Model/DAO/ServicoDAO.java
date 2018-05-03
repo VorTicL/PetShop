@@ -5,46 +5,42 @@
  */
 package Model.DAO;
 
-import Model.AbstractDAO.AbstractCliente;
-import Model.Entity.Cliente;
+import Model.AbstractDAO.AbstractServico;
+import Model.Connect.Connect;
+import Model.Entity.Servico;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import Model.Connect.Connect;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  *
  * @author João
  */
-public class ClienteDAO extends AbstractCliente{
-    
-    private Connection conexao;
+public class ServicoDAO extends AbstractServico {
+     private Connection conexao;
     private PreparedStatement pst;
     private ResultSet rs;
     
-    
     @Override
-    public boolean insert(Cliente cliente) {
+    public boolean insert(Servico servico) {
 
         conexao = Connect.connect();
 
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("insert into cliente(nome,dataNasc,sexo,rg,cpf,endereco,dataCri)");
-            sql.append(" values (?,?,?,?,?,?,date(now()))");
+            sql.append("insert into servico(nome,preco,animal,dataCri)");
+            sql.append(" values (?,?,?,date(now()))");
 
             pst = conexao.prepareStatement(sql.toString());
 
-            pst.setString(1, cliente.getNome());
-            pst.setString(2, cliente.getDataNasc());
-            pst.setString(3, cliente.getSexo());
-            pst.setString(4, cliente.getRg());
-            pst.setString(5, cliente.getCpf());
-            pst.setInt(6, cliente.getEndereco());
-            
+            pst.setString(1, servico.getNome());
+            pst.setDouble(2, servico.getPreco());
+            pst.setInt(3, servico.getAnimal());
+
             pst.execute();
 
             return true;
@@ -59,37 +55,32 @@ public class ClienteDAO extends AbstractCliente{
         }
 
     }
+@Override
+    public List<Servico> selectAll() {
 
-    @Override
-    public List<Cliente> selectAll() {
-
-        ArrayList<Cliente> cliente = new ArrayList<>();
+        ArrayList<Servico> servico = new ArrayList<>();
         
         conexao = Connect.connect();
 
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("select id,nome,dataNasc,sexo,rg,cpf,endereco,dataCri");
-            sql.append(" from cliente and ativo = true");
+            sql.append("select id,nome,preco,animal,dataCri");
+            sql.append(" from servico and ativo = true");
 
             pst = conexao.prepareStatement(sql.toString());
 
             rs = pst.executeQuery();
             
             while(rs.next()){
-                cliente.add(new Cliente(rs.getInt(1),
+                servico.add(new Servico(rs.getInt(1),
                         rs.getString(2),
-                        rs.getString(3), 
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getInt(7),
-                        rs.getString(8)
-                ));
+                        rs.getDouble(3), 
+                        rs.getInt(4),
+                        rs.getString(5)));
             }
 
-            return cliente;
+            return servico;
         } catch (SQLException e) {
 
             try {
@@ -97,38 +88,36 @@ public class ClienteDAO extends AbstractCliente{
             } catch (SQLException ex) {
             }
             
-            return cliente;
+            return servico;
         }
 
     }
+
     @Override
-    public Cliente selectId(Cliente cliente) {
+    public Servico selectId(Servico servico) {
         
         conexao = Connect.connect();
 
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("select id,nome,dataNasc,sexo,rg,cpf,endereco,dataCri");
-            sql.append(" from cliente where id = ? and ativo = true");
+            sql.append("select id,nome,preco,animal,dataCri");
+            sql.append(" from servico where id = ? and ativo = true");
 
             pst = conexao.prepareStatement(sql.toString());
             
-            pst.setInt(1, cliente.getId());
+            pst.setInt(1, servico.getId());
 
             rs = pst.executeQuery();
             
             if(rs.next()){
-                cliente.setNome(rs.getString(2));
-                cliente.setDataNasc(rs.getString(3));
-                cliente.setSexo(rs.getString(4));
-                cliente.setRg(rs.getString(5));
-                cliente.setCpf(rs.getString(6));
-                cliente.setEndereco(rs.getInt(7));
-                cliente.setDataCri(rs.getString(8));
+                servico.setNome(rs.getString(2));
+                servico.setPreco(rs.getDouble(3));
+                servico.setAnimal(rs.getInt(4));
+                servico.setDataCri(rs.getString(5));
             }
 
-            return cliente;
+            return servico;
         } catch (SQLException e) {
 
             try {
@@ -136,29 +125,27 @@ public class ClienteDAO extends AbstractCliente{
             } catch (SQLException ex) {
             }
             
-            return cliente;
+            return servico;
         }
     }
     
     @Override
-    public boolean update(Cliente cliente) {
+    public boolean update(Servico servico) {
          conexao = Connect.connect();
 
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("update cliente set nome = ? , dataNasc = ? , sexo = ? , rg = ? , cpf = ? , endereco = ?");
+            sql.append("update servico set nome = ? , preco = ? , animal = ?");
             sql.append(" where id = ? and ativo = true");
 
             pst = conexao.prepareStatement(sql.toString());
 
-            pst.setString(1, cliente.getNome());
-            pst.setString(2, cliente.getDataNasc());
-            pst.setString(3, cliente.getSexo());
-            pst.setString(4, cliente.getRg());
-            pst.setString(5, cliente.getCpf());
-            pst.setInt(6, cliente.getEndereco());
-            pst.setInt(7, cliente.getId());
+            pst.setString(1, servico.getNome());
+            pst.setDouble(2, servico.getPreco());
+            pst.setInt(3, servico.getAnimal());
+            pst.setInt(4, servico.getId());
+            
 
             pst.executeUpdate();
 
@@ -173,20 +160,20 @@ public class ClienteDAO extends AbstractCliente{
             return false;
         }
     }
-    
+
     @Override
-    public boolean delete(Cliente cliente) {
+    public boolean delete(Servico servico) {
          conexao = Connect.connect();
 
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("update cliente set ativo = false");
+            sql.append("update iuser set ativo = false");
             sql.append(" where id = ?");
 
             pst = conexao.prepareStatement(sql.toString());
             
-            pst.setInt(1, cliente.getId());
+            pst.setInt(1, servico.getId());
 
             pst.execute();
 
@@ -202,31 +189,28 @@ public class ClienteDAO extends AbstractCliente{
         }
     }
     @Override
-    public boolean cliente(Cliente cliente) {
+    public boolean servico(Servico servico) {
      
         conexao = Connect.connect();
 
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("select id,nome,dataNasc,sexo,rg,cpf,endereco,dataCri");
-            sql.append(" from cliente where nome = ? and dataNasc = ? and sexo = ? and rg = ? and cpf = ? and ativo = true");
+            sql.append("select id,nome,preco,animal,dataCri");
+            sql.append(" from servico where nome = ? and preco = ? and ativo = true");
 
             pst = conexao.prepareStatement(sql.toString());
             
-            pst.setString(1, cliente.getNome());
-            pst.setString(2, cliente.getDataNasc());
-            pst.setString(3, cliente.getSexo());
-            pst.setString(4, cliente.getRg());
-            pst.setString(5, cliente.getCpf());
+            pst.setString(1, servico.getNome());
+            pst.setDouble(2, servico.getPreco());
 
             rs = pst.executeQuery();
             
             if(rs.next()){
-                cliente.setId(rs.getInt(1));
-                cliente.setEndereco(rs.getInt(7));
-                cliente.setDataCri(rs.getString(8));
-            
+                servico.setId(rs.getInt(1));
+                servico.setAnimal(rs.getInt(4));
+                servico.setDataCri(rs.getString(5));
+                  
                 return true;
             }
 
@@ -241,6 +225,5 @@ public class ClienteDAO extends AbstractCliente{
             return false;
         }
     }
-
     
 }

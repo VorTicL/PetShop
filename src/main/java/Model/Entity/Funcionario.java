@@ -12,12 +12,12 @@ package Model.Entity;
 public class Funcionario {
     
     private int id;
-    private int idendereco;
     private String nome;
     private String dataNasc;
     private String sexo;
     private String rg;
     private String cpf;
+    private int idendereco;
     private String dataCri;
 
     public Funcionario(int id, int idendereco, String nome, String dataNasc, String sexo, String rg, String cpf, String dataCri) {
