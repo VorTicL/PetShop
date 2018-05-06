@@ -206,7 +206,7 @@ public class IuserDAO extends AbstractIuser {
             StringBuilder sql = new StringBuilder();
             sql.append("select id,login,senha,idfuncionario,email,dataCri");
             sql.append(" from iuser where login = ? and senha = ? and ativo = true");
-
+                
             pst = conexao.prepareStatement(sql.toString());
             
             pst.setString(1, iuser.getLogin());

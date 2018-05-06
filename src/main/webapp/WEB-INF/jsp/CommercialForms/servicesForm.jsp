@@ -8,26 +8,31 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/index.css">
 </head>
 <body>
-  <form action="${pageContext.request.contextPath}/cadastro-pessoa" method="post">
-            <div class="data-container">
+    <form>
+        <div class="data-container">
+            <div>
                 <div>
-                    <div>
-                    Nome do Produto: <input type="text" name="nomeProd"/> 
+                    Nome do Produto: <input type="text" name="nomeProd" value="${product.nome}"/> 
                 </div>
                 <div>
-                    Valor Unitario: <input type="number" name="dtnasc"/>
+                    Valor Unitario: <input type="number" name="uniValue" value="${product.valorUni}"/>
                 </div>
                 <div>
-                    Filial Para Distribuição: <input type="text" name="email"/>
+                    Filial Para Distribuição: <input type="text" name="filial" value="${product.filial}"/>
                 </div>
                 <div>
-                    Pet Que Recebera o Produto: <input type="text" name="telefone"/>
+                    Quantidade Em Estoque: <input type="number" name="qtdEstoque" value="${product.qtdEstoque}"/>
                 </div> 
                 <div>
-                    <button type="submit">Enviar</button>
-                </div>
+                    <button type="submit"  action="http://localhost:8080/PetShop-1.0-SNAPSHOT/product-serv" method="post">
+                        Alterar
+                    </button>
+                    <button type="submit"  action="http://localhost:8080/PetShop-1.0-SNAPSHOT/product-serv" method="post">
+                        Excluir
+                    </button>
                 </div>
             </div>
-        </form>
+        </div>
+    </form>
 </body>
 </html>

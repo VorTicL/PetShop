@@ -33,7 +33,11 @@ public class Iuser {
     public int getId() {
         return id;
     }
-
+    
+    public boolean validarSenha(String senha){
+        return this.senha.compareTo(senha)==0;
+    }
+    
     public void setId(int id) {
         this.id = id;
     }
