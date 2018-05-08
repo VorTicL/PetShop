@@ -11,5 +11,6 @@
     <a href="${pageContext.request.contextPath}/logout">SAIR</a>
     <a href="${pageContext.request.contextPath}/product">Adicionar Produto</a>
     <a href="${pageContext.request.contextPath}/searchProduct">Gerenciar Produto</a>
+    <a href="${pageContext.request.contextPath}/funcionario">Adicionar Funcionario</a>
   </body>
 </html>

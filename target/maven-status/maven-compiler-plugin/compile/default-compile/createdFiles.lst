@@ -8,9 +8,11 @@ Model\DAO\FuncionarioDAO.class
 Model\AbstractDAO\AbstractVenda.class
 Model\Entity\ModelCommercialService.class
 Model\DAO\VendaDAO.class
+Servlet\SearchFuncionarioServlet.class
 Model\Entity\Cliente.class
 Servlet\LoginServlet.class
 Servlet\CommercialProductServlet.class
+ServiceMock\MockFuncionario.class
 Model\AbstractDAO\AbstractIuser.class
 Model\Entity\Servico.class
 Model\DAO\AnimalDAO.class
@@ -24,6 +26,7 @@ Model\Entity\ModelCommercial.class
 Model\DAO\ClienteDAO.class
 ServiceMock\MockUsuario.class
 Model\Entity\Funcionario.class
+Servlet\FuncionarioServlet.class
 Model\DAO\IuserDAO.class
 Model\AbstractDAO\AbstractCliente.class
 Model\Entity\ModelCommercialProduct.class
