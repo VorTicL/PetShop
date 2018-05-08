@@ -9,5 +9,7 @@
   <body>
     <h1>Bem vindo <c:out value="${sessionScope.usuario.email}" /></h1>
     <a href="${pageContext.request.contextPath}/logout">SAIR</a>
+    <a href="${pageContext.request.contextPath}/product">Adicionar Produto</a>
+    <a href="${pageContext.request.contextPath}/searchProduct">Gerenciar Produto</a>
   </body>
 </html>

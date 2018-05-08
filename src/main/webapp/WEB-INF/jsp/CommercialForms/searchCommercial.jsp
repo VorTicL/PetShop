@@ -14,40 +14,36 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="${pageContext.request.contextPath}/comm-service" method="post">
-            <p id="action" hidden>search</p>
+        <form action="${pageContext.request.contextPath}/searchProduct" method="get">
             <div class="data-container">
                 <div>
                     <div>
-                    <input type="text" name="nomeProd"/> 
-                </div>
-                <div>
-                    <button type="submit">Enviar</button>
-                </div>
+                        <input type="text" name="nomeProd"/> 
+                    </div>
+                    <div>
+                        <button type="submit">Enviar</button>
+                    </div>
                 </div>
             </div>
         </form>
-        <c:if test="${not empty listCommercial}" >   
-        <table>
-            <c:forEach var="objeto" items="${listCommercial}">
-                <tr>
-                    <td>
-                        <form action="${pageContext.request.contextPath}/comm-service" method="post">
-                            <input id="action" hidden>choose</p>
-                            <p id="idSelected" hidden> {objeto.id}</p>
-                            <button type="submit">Enviar</button>
-                        </form>    
-                    </td>
-                    <td>
-                        ${objeto.nome}
-                    </td>
-                    <td>
-                        ${objeto.valor}
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>
-        </c:if>
+            <form action="${pageContext.request.contextPath}/searchProduct" method="post">
+            <table>
 
+                </tr>     
+
+                <c:if test="${not empty listCommercial}" >
+                    <tr>
+                        <c:forEach var="item" items="${listCommercial}">
+                            <td>
+                                <input type="text" value="${item.nome}" name="nome">
+                            </td>
+                            <td>
+                                <button type="submit" >selecionar</button>
+                            </td>
+                        </c:forEach>
+                    </tr>
+                </c:if>  
+            </table>
+        </form>    
     </body>
 </html>
