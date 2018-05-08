@@ -8,5 +8,6 @@
   </head>
   <body>
     <h1>Bem vindo <c:out value="${sessionScope.usuario.email}" /></h1>
+    <a href="${pageContext.request.contextPath}/logout">SAIR</a>
   </body>
 </html>

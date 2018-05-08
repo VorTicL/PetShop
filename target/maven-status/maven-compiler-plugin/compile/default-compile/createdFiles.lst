@@ -1,5 +1,6 @@
 Model\AbstractDAO\AbstractEndereco.class
 Model\Entity\Endereco.class
+Servlet\LogoutServlet.class
 Model\Connect\Connect.class
 Servlet\ModelCommercialService.class
 Model\DAO\EnderecoDAO.class

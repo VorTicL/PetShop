@@ -32,7 +32,7 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/home");
             return;
         }
-        request.getRequestDispatcher("WEB-INF/jsp/login.jsp")
+        request.getRequestDispatcher("/index.jsp")
                 .forward(request, response);
     }
 
