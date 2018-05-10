@@ -25,10 +25,10 @@
                     Quantidade Em Estoque: <input type="number" name="qtdEstoque" value="${prod.qtdProd}"/>
                 </div> 
                 <div>
-                    <button type="submit"  action="http://localhost:8080/PetShop-1.0-SNAPSHOT/product-serv" method="post">
+                    <button type="submit"  action="${pageContext.request.contextPath}/manageProduct" method="get">
                         Alterar
                     </button>
-                    <button type="submit"  action="http://localhost:8080/PetShop-1.0-SNAPSHOT/product-serv" method="post">
+                    <button type="submit"  action="${pageContext.request.contextPath}/manageProduct" method="post">
                         Excluir
                     </button>
                 </div>

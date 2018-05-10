@@ -48,7 +48,7 @@ public class CommercialProductServlet extends HttpServlet {
         } catch (Exception e) {
             request.setAttribute("productResponse", "ERRO!");
         }finally{
-            request.getRequestDispatcher("WEB-INF/jsp/responseProduct.jsp")
+            request.getRequestDispatcher("WEB-INF/jsp/CommercialForms/responseInsertProduct.jsp")
                     .forward(request, response);
         }
     }

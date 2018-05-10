@@ -20,6 +20,10 @@ public class ModelCommercialProduct extends ModelCommercial{
         this.qtdProd = qtdProd;
     }
     
+    public ModelCommercialProduct(){
+        
+    }
+    
     public int getQtdProd() {
         return qtdProd;
     }

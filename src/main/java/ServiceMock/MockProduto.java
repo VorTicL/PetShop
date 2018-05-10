@@ -32,7 +32,7 @@ public class MockProduto {
     } 
     
     public static void inserirProduto(ModelCommercialProduct product){
-        product.setId(PRODUTOS_CADASTRADOS.size()+1);
+        product.setId(PRODUTOS_CADASTRADOS.get(PRODUTOS_CADASTRADOS.size()-1).getId()+1);
         PRODUTOS_CADASTRADOS.add(product);
     }
   
@@ -45,6 +45,25 @@ public class MockProduto {
       }
     return result;
   }
+  public static void remover(int id) {
+      for (int i = 0; i < PRODUTOS_CADASTRADOS.size(); i++) {
+          if (PRODUTOS_CADASTRADOS.get(i).getId() == id) {
+              PRODUTOS_CADASTRADOS.remove(PRODUTOS_CADASTRADOS.get(i));
+              return;
+          }
+      }
+  }
+  
+  public static void alterar(ModelCommercialProduct modelCommercialProduct) {
+      for (int i = 0; i < PRODUTOS_CADASTRADOS.size(); i++) {
+          if (PRODUTOS_CADASTRADOS.get(i).getId() == modelCommercialProduct.getId()) {
+              PRODUTOS_CADASTRADOS.remove(PRODUTOS_CADASTRADOS.get(i));
+              PRODUTOS_CADASTRADOS.add(modelCommercialProduct);
+              return;
+          }
+      }
+  }
+  
   public static ModelCommercialProduct buscarPorId(int id) {
       ModelCommercialProduct modelCommercialProduct = null;
       for (int i = 0; i < PRODUTOS_CADASTRADOS.size(); i++) {
