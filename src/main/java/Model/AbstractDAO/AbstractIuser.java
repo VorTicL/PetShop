@@ -6,7 +6,7 @@
 package Model.AbstractDAO;
 
 import Model.Entity.Iuser;
-import java.util.List;
+
 
 /**
  *
@@ -14,16 +14,6 @@ import java.util.List;
  */
 public abstract class AbstractIuser {
     
-    public abstract boolean login(Iuser iuser);
-
-    public abstract boolean insert(Iuser iuser);
-
-    public abstract List<Iuser> selectAll();
-
-    public abstract Iuser selectId(Iuser iuser);
-
-    public abstract boolean update(Iuser iuser);
-
-    public abstract boolean delete(Iuser iuser);
+   public abstract boolean login(Iuser iuser);
 
 }

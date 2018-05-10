@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model.DAO;
+/*package Model.DAO;
 
 import Model.AbstractDAO.AbstractIuser;
 import Model.Connect.Connect;
 import Model.Entity.Iuser;
+import Model.SQL.IuserSQL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,219 +21,175 @@ import java.util.logging.Logger;
 /**
  *
  * @author João
- */
-public class IuserDAO extends AbstractIuser {
+ /
+public class IuserDAO extends IuserSQL implements AbstractIuser {
 
-    private Connection conexao;
-    private PreparedStatement pst;
-    private ResultSet rs;
+    private Connection conexao; 
+    private PreparedStatement pst; 
+    private ResultSet rs; 
 
     @Override
     public boolean insert(Iuser iuser) {
 
-        conexao = Connect.connect();
-
         try {
+            conexao = Model.Connect.Connect.connect();
 
-            StringBuilder sql = new StringBuilder();
-            sql.append("insert into iuser(login,senha,email,idfuncionario,dataCri)");
-            sql.append(" values (?,?,?,?,date(now()))");
+            insert(conexao, pst, iuser);
 
-            pst = conexao.prepareStatement(sql.toString());
-
-            pst.setString(1, iuser.getLogin());
-            pst.setString(2, iuser.getSenha());
-            pst.setString(3, iuser.getEmail());
-            pst.setInt(4, iuser.getIdfuncionario());
-
-            pst.execute();
+            conexao.close();
 
             return true;
-        } catch (SQLException e) {
+        } catch (SQLException t) {
 
             try {
                 conexao.close();
             } catch (SQLException ex) {
             }
-            
+
             return false;
         }
+    }
 
+    @Override
+    public boolean update(Iuser iuser) {
+        try {
+            conexao = Model.Connect.Connect.connect();
+
+            update(conexao, pst, iuser);
+
+            conexao.close();
+
+            return true;
+        } catch (SQLException t) {
+
+            try {
+                conexao.close();
+            } catch (SQLException ex) {
+            }
+
+            return false;
+        }
     }
 
     @Override
     public List<Iuser> selectAll() {
-
-        ArrayList<Iuser> iusers = new ArrayList<>();
-        
-        conexao = Connect.connect();
-
         try {
+            List<Iuser> iuser = null;
 
-            StringBuilder sql = new StringBuilder();
-            sql.append("select id,login,senha,idfuncionario,email,dataCri");
-            sql.append(" from iuser and ativo = true");
+            conexao = Model.Connect.Connect.connect();
 
-            pst = conexao.prepareStatement(sql.toString());
+            rs = selectAll(conexao, pst, null);
 
-            rs = pst.executeQuery();
-            
-            while(rs.next()){
-                iusers.add(new Iuser(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3), 
-                        rs.getInt(4),
-                        rs.getString(5),
-                        rs.getString(6)));
+            if (rs.next()) {
+                iuser = new ArrayList<>();
+
+                while (rs.next()) {
+                    iuser.add(new Iuser(rs.getInt(1),
+                            rs.getString(2),
+                            rs.getString(3),
+                            rs.getInt(4),
+                            rs.getString(5),
+                            rs.getString(6)));
+                }
             }
+            conexao.close();
 
-            return iusers;
-        } catch (SQLException e) {
+            return iuser;
+        } catch (SQLException t) {
 
             try {
                 conexao.close();
             } catch (SQLException ex) {
             }
-            
-            return iusers;
+            return null;
         }
-
     }
 
     @Override
     public Iuser selectId(Iuser iuser) {
-        
-        conexao = Connect.connect();
-
         try {
 
-            StringBuilder sql = new StringBuilder();
-            sql.append("select id,login,senha,idfuncionario,email,dataCri");
-            sql.append(" from iuser where id = ? and ativo = true");
+            conexao = Model.Connect.Connect.connect();
 
-            pst = conexao.prepareStatement(sql.toString());
-            
-            pst.setInt(1, iuser.getId());
+            rs = selectId(conexao, pst, iuser);
 
-            rs = pst.executeQuery();
-            
-            if(rs.next()){
+            if (rs.next()) {
+                iuser.setId(rs.getInt(1));
                 iuser.setLogin(rs.getString(2));
                 iuser.setSenha(rs.getString(3));
                 iuser.setIdfuncionario(rs.getInt(4));
                 iuser.setEmail(rs.getString(5));
                 iuser.setDataCri(rs.getString(6));
             }
+            conexao.close();
 
-            return iuser;
-        } catch (SQLException e) {
-
-            try {
-                conexao.close();
-            } catch (SQLException ex) {
-            }
-            
-            return iuser;
-        }
-    }
-
-    @Override
-    public boolean update(Iuser iuser) {
-         conexao = Connect.connect();
-
-        try {
-
-            StringBuilder sql = new StringBuilder();
-            sql.append("update iuser set login = ? , senha = ? , email = ? , idfuncionario = ?");
-            sql.append(" where id = ? and ativo = true");
-
-            pst = conexao.prepareStatement(sql.toString());
-
-            pst.setString(1, iuser.getLogin());
-            pst.setString(2, iuser.getSenha());
-            pst.setString(3, iuser.getEmail());
-            pst.setInt(4, iuser.getIdfuncionario());
-            pst.setInt(5, iuser.getId());
-
-            pst.executeUpdate();
-
-            return true;
-        } catch (SQLException e) {
+            return null;
+        } catch (SQLException t) {
 
             try {
                 conexao.close();
             } catch (SQLException ex) {
             }
-            
-            return false;
+            return null;
         }
     }
 
     @Override
     public boolean delete(Iuser iuser) {
-         conexao = Connect.connect();
-
         try {
+            conexao = Model.Connect.Connect.connect();
 
-            StringBuilder sql = new StringBuilder();
-            sql.append("update iuser set ativo = false");
-            sql.append(" where id = ?");
+            delete(conexao, pst, iuser);
 
-            pst = conexao.prepareStatement(sql.toString());
-            
-            pst.setInt(1, iuser.getId());
-
-            pst.execute();
+            conexao.close();
 
             return true;
-        } catch (SQLException e) {
+        } catch (SQLException t) {
 
             try {
                 conexao.close();
             } catch (SQLException ex) {
             }
-            
+
             return false;
         }
     }
 
-    @Override
+    /*@Override
     public boolean login(Iuser iuser) {
-     
-        conexao = Connect.connect();
-
         try {
 
-            StringBuilder sql = new StringBuilder();
-            sql.append("select id,login,senha,idfuncionario,email,dataCri");
-            sql.append(" from iuser where login = ? and senha = ? and ativo = true");
-                
-            pst = conexao.prepareStatement(sql.toString());
-            
-            pst.setString(1, iuser.getLogin());
-            pst.setString(2, iuser.getSenha());
+            conexao = Model.Connect.Connect.connect();
 
-            rs = pst.executeQuery();
-            
-            if(rs.next()){
-                iuser.setId(rs.getInt(1));
-                iuser.setIdfuncionario(rs.getInt(4));
-                iuser.setEmail(rs.getString(5));
-                iuser.setDataCri(rs.getString(6));
-            
+            rs = login(conexao, pst, iuser);
+
+            if (rs.next()) {
+
+                ResultSet rs1 = selectNivel(conexao, pst, iuser);
+
+                if (rs1.next()) {
+                    iuser.setId(rs.getInt(1));
+                    iuser.setIdfuncionario(rs.getInt(2));
+                    iuser.setEmail(rs.getString(3));
+                   
+                }
+
+                conexao.close();
+
                 return true;
             }
 
-            return false;
-        } catch (SQLException e) {
+            conexao.close();
 
+            return false;
+        } catch (SQLException t) {
             try {
                 conexao.close();
             } catch (SQLException ex) {
             }
-            
             return false;
         }
     }
 
 }
+*/
