@@ -15,11 +15,32 @@ public class ModelCommercial {
     protected double valor;
     protected String nome;
     protected String filial;
+    protected int id;
 
     public ModelCommercial(double valor, String nome, String filial) {
         this.nome = nome;
         this.valor = valor;
         this.filial = filial;
+    }
+    
+    public ModelCommercial(){
+        
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFilial() {

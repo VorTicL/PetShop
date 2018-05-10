@@ -26,24 +26,29 @@
                 </div>
             </div>
         </form>
-            <form action="${pageContext.request.contextPath}/searchProduct" method="post">
-            <table>
-
-                </tr>     
+            <form name="send" action="${pageContext.request.contextPath}/searchProduct" method="post">
+            <table>     
 
                 <c:if test="${not empty listCommercial}" >
                     <tr>
                         <c:forEach var="item" items="${listCommercial}">
                             <td>
-                                <input type="text" value="${item.nome}" name="nome">
+                                <c:out value="${item.nome}"></c:out>
                             </td>
                             <td>
-                                <button type="submit" >selecionar</button>
+                                <button type="button" onclick="hdnID(${item.id})">selecionar</button>
                             </td>
                         </c:forEach>
                     </tr>
                 </c:if>  
             </table>
+            <input type="text" id="idProd" value="" style="visibility: hidden">
+            <script>
+                function hdnID(a){
+                    document.getElementById("idProd").value = a;
+                    document.send.submit();
+                }
+            </script>    
         </form>    
     </body>
 </html>

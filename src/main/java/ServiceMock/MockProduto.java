@@ -18,8 +18,21 @@ import java.util.Map;
  */
 public class MockProduto {
     private static final ArrayList<ModelCommercialProduct> PRODUTOS_CADASTRADOS= new ArrayList<>();
-
+    
+    
+    static{
+        ModelCommercialProduct modelCommercialProduct = new ModelCommercialProduct("victor", 20
+            , "senac", 20);
+        modelCommercialProduct.setId(1);
+        ModelCommercialProduct modelCommercialProduct1 = new ModelCommercialProduct("victorr", 30
+            , "senac1", 30);
+        modelCommercialProduct.setId(2);
+        PRODUTOS_CADASTRADOS.add(modelCommercialProduct);
+        PRODUTOS_CADASTRADOS.add(modelCommercialProduct1);
+    } 
+    
     public static void inserirProduto(ModelCommercialProduct product){
+        product.setId(PRODUTOS_CADASTRADOS.size()+1);
         PRODUTOS_CADASTRADOS.add(product);
     }
   
@@ -31,6 +44,16 @@ public class MockProduto {
           }
       }
     return result;
+  }
+  public static ModelCommercialProduct buscarPorId(int id) {
+      ModelCommercialProduct modelCommercialProduct = null;
+      for (int i = 0; i < PRODUTOS_CADASTRADOS.size(); i++) {
+          if (PRODUTOS_CADASTRADOS.get(i).getId() == id) {
+              modelCommercialProduct = PRODUTOS_CADASTRADOS.get(i);
+              return modelCommercialProduct; 
+          }
+      }
+      return modelCommercialProduct;
   }
     public static ModelCommercialProduct buscarPorNome(String nome) {
       ModelCommercialProduct result1 = null;

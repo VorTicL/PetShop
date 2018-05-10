@@ -42,9 +42,9 @@ public class SearchProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nome = request.getParameter("nome");
+        int idProd = Integer.parseInt(request.getParameter("idProd"));
         
-        ModelCommercialProduct prod1 = MockProduto.buscarPorNome(nome);
+        ModelCommercialProduct prod1 = MockProduto.buscarPorId(idProd);
         
         request.setAttribute("prod", prod1);
         

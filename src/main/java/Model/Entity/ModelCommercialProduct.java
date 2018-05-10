@@ -19,6 +19,7 @@ public class ModelCommercialProduct extends ModelCommercial{
         super(valor, nome, filial);
         this.qtdProd = qtdProd;
     }
+    
     public int getQtdProd() {
         return qtdProd;
     }

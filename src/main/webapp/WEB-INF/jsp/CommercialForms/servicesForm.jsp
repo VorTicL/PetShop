@@ -11,11 +11,12 @@
     <form>
         <div class="data-container">
             <div>
+                <input type="number" name="idProd" value="${prod.nome}" style="visibility: hidden">
                 <div>
                     Nome do Produto: <input type="text" name="nomeProd" value="${prod.nome}"/> 
                 </div>
                 <div>
-                    Valor Unitario: <input type="number" name="uniValue" value="${prod.nome}"/>
+                    Valor Unitario: <input type="number" name="uniValue" value="${prod.valor}"/>
                 </div>
                 <div>
                     Filial Para Distribuição: <input type="text" name="filial" value="${prod.filial}"/>
