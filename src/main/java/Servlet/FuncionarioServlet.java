@@ -9,6 +9,7 @@ import Model.Entity.Funcionario;
 import ServiceMock.MockFuncionario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import Model.DAO.FuncionarioDao;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,33 +28,26 @@ public class FuncionarioServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp"
-                + "/CommercialForms/funcionarioForm.jsp");
+                + "/UserForms/funcionarioForm.jsp");
         dispatcher.forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       try {
-            String nome = request.getParameter("nomeFunc");
-            String dataNasc = request.getParameter("dataNasc");
-            String  sexo = request.getParameter("sexo");
-            String  rg = request.getParameter("rg");
-            String  cpf = request.getParameter("cpf");
-            
-
-           /* Funcionario func1 = new Funcionario( nome,dataNasc,sexo,rg,cpf);
-            MockFuncionario.inserirFuncionario(func1);
-            request.setAttribute("funcionarioResponse",  func1.getNome()+"Cadastrado com sucesso!");
-           */
-        } catch (Exception e) {
-            request.setAttribute("funcionarioResponse", "ERRO!");
-        }finally{
-            request.getRequestDispatcher("WEB-INF/jsp/responseFuncionario.jsp")
-                    .forward(request, response);
-        }
+      Funcionario funcionario = new Funcionario(
+              0, 0, request.getParameter("nomeFunc"),request.getParameter("dataNasc"),
+              request.getParameter("sexo"),request.getParameter("rg"),request.getParameter("cpf"),
+              null
+      );
+      FuncionarioDao funcionarioDao = new  FuncionarioDao();
+      
+      int id = funcionarioDao.insert(funcionario);
+      request.getRequestDispatcher("WEB-INF/jsp/UserForms/funcionarioForm.jsp").forward(request, response);
+      
+      
     }
-    }
+}
 
  
 

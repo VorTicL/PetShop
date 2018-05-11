@@ -31,8 +31,8 @@ public class SearchFuncionarioServlet extends HttpServlet {
         cpf = request.getParameter("cpf");
         
         if (cpf != null) {
-            ArrayList<Funcionario> listFuncionario = MockFuncionario.buscarPorCpf(cpf);
-            request.setAttribute("listFuncionario", listFuncionario);
+            ArrayList<Funcionario> listFunc = MockFuncionario.buscarPorCpf(cpf);
+            request.setAttribute("listFunc", listFunc);
         }
             
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/CommercialForms/searchFuncionario.jsp");
@@ -50,7 +50,7 @@ public class SearchFuncionarioServlet extends HttpServlet {
         
         request.setAttribute("func", func1);
         
-        request.getRequestDispatcher("WEB-INF/jsp/CommercialForms/servicesFuncionario.jsp")
+        request.getRequestDispatcher("WEB-INF/jsp/UserForms/servicesFuncionario.jsp")
                     .forward(request, response);
         
     }

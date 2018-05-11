@@ -17,8 +17,8 @@ import java.util.Map;
  * @author Rafaela Aquino
  */
 public class MockProduto {
+    private static final ArrayList<ModelCommercialProduct> PRODUTOS_CADASTRADOS= new ArrayList<>();
 
-    private static final ArrayList<ModelCommercialProduct> PRODUTOS_CADASTRADOS = new ArrayList<>();
 
     static {
         ModelCommercialProduct modelCommercialProduct = new ModelCommercialProduct("victor", 20,

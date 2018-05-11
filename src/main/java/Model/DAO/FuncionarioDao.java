@@ -3,38 +3,56 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-/*package Model.DAO;
+package Model.DAO;
 
-import Model.AbstractDAO.AbstractIuser;
+import Model.AbstractDAO.AbstractFuncionario;
 import Model.Connect.Connect;
-import Model.Entity.Iuser;
-import Model.SQL.IuserSQL;
+import Model.Entity.Funcionario;
+import Model.SQL.FuncionarioSQL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.Connection;
 
 /**
  *
  * @author João
- /
-public class IuserDAO extends IuserSQL implements AbstractIuser {
+ */
+public class FuncionarioDao extends FuncionarioSQL {
 
     private Connection conexao; 
     private PreparedStatement pst; 
     private ResultSet rs; 
 
-    @Override
-    public boolean insert(Iuser iuser) {
+    public int insert(Funcionario funcionario) {
 
         try {
             conexao = Model.Connect.Connect.connect();
 
-            insert(conexao, pst, iuser);
+            int id = insert(conexao, pst, funcionario);
+
+            conexao.close();
+
+            return id;
+        } catch (SQLException t) {
+
+            try {
+                conexao.close();
+            } catch (SQLException ex) {
+            }
+
+            return 0;
+        }
+    }
+
+    public boolean update(Funcionario funcionario) {
+        try {
+            conexao = Model.Connect.Connect.connect();
+
+            update(conexao, pst, funcionario);
 
             conexao.close();
 
@@ -50,51 +68,32 @@ public class IuserDAO extends IuserSQL implements AbstractIuser {
         }
     }
 
-    @Override
-    public boolean update(Iuser iuser) {
+    public List<Funcionario> selectAll() {
         try {
-            conexao = Model.Connect.Connect.connect();
-
-            update(conexao, pst, iuser);
-
-            conexao.close();
-
-            return true;
-        } catch (SQLException t) {
-
-            try {
-                conexao.close();
-            } catch (SQLException ex) {
-            }
-
-            return false;
-        }
-    }
-
-    @Override
-    public List<Iuser> selectAll() {
-        try {
-            List<Iuser> iuser = null;
+            List<Funcionario> funcionario = null;
 
             conexao = Model.Connect.Connect.connect();
 
             rs = selectAll(conexao, pst, null);
 
             if (rs.next()) {
-                iuser = new ArrayList<>();
+                funcionario = new ArrayList<>();
 
                 while (rs.next()) {
-                    iuser.add(new Iuser(rs.getInt(1),
-                            rs.getString(2),
+                    funcionario.add(new Funcionario(rs.getInt(1),
+                            rs.getInt(2),
                             rs.getString(3),
-                            rs.getInt(4),
+                            rs.getString(4),
                             rs.getString(5),
-                            rs.getString(6)));
+                            rs.getString(6),
+                            rs.getString(7),
+                            rs.getString(8)));
+                            
                 }
             }
             conexao.close();
 
-            return iuser;
+            return funcionario;
         } catch (SQLException t) {
 
             try {
@@ -105,21 +104,22 @@ public class IuserDAO extends IuserSQL implements AbstractIuser {
         }
     }
 
-    @Override
-    public Iuser selectId(Iuser iuser) {
+    public Funcionario selectId(Funcionario funcionario) {
         try {
 
             conexao = Model.Connect.Connect.connect();
 
-            rs = selectId(conexao, pst, iuser);
+            rs = selectId(conexao, pst, funcionario);
 
             if (rs.next()) {
-                iuser.setId(rs.getInt(1));
-                iuser.setLogin(rs.getString(2));
-                iuser.setSenha(rs.getString(3));
-                iuser.setIdfuncionario(rs.getInt(4));
-                iuser.setEmail(rs.getString(5));
-                iuser.setDataCri(rs.getString(6));
+                return new Funcionario(rs.getInt(1),
+                            rs.getInt(2),
+                            rs.getString(3),
+                            rs.getString(4),
+                            rs.getString(5),
+                            rs.getString(6),
+                            rs.getString(7),
+                            rs.getString(8));
             }
             conexao.close();
 
@@ -134,12 +134,11 @@ public class IuserDAO extends IuserSQL implements AbstractIuser {
         }
     }
 
-    @Override
-    public boolean delete(Iuser iuser) {
+    public boolean delete(Funcionario funcionario) {
         try {
             conexao = Model.Connect.Connect.connect();
 
-            delete(conexao, pst, iuser);
+            delete(conexao, pst, funcionario);
 
             conexao.close();
 
@@ -154,42 +153,4 @@ public class IuserDAO extends IuserSQL implements AbstractIuser {
             return false;
         }
     }
-
-    /*@Override
-    public boolean login(Iuser iuser) {
-        try {
-
-            conexao = Model.Connect.Connect.connect();
-
-            rs = login(conexao, pst, iuser);
-
-            if (rs.next()) {
-
-                ResultSet rs1 = selectNivel(conexao, pst, iuser);
-
-                if (rs1.next()) {
-                    iuser.setId(rs.getInt(1));
-                    iuser.setIdfuncionario(rs.getInt(2));
-                    iuser.setEmail(rs.getString(3));
-                   
-                }
-
-                conexao.close();
-
-                return true;
-            }
-
-            conexao.close();
-
-            return false;
-        } catch (SQLException t) {
-            try {
-                conexao.close();
-            } catch (SQLException ex) {
-            }
-            return false;
-        }
-    }
-
 }
-*/

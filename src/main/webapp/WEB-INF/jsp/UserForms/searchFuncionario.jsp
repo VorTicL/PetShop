@@ -4,7 +4,7 @@
     Author     : João
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
@@ -18,7 +18,7 @@
             <div class="data-container">
                 <div>
                     <div>
-                        <input type="text" name="cpf"/> 
+                        <input type="number" name="cpf"/> 
                     </div>
                     <div>
                         <button type="submit">Enviar</button>
@@ -26,25 +26,29 @@
                 </div>
             </div>
         </form>
-            <form action="${pageContext.request.contextPath}/search" method="post">
-            <table>
+            <form name="send" action="${pageContext.request.contextPath}/searchFuncionario" method="post">
+            <table>     
 
-                </tr>     
-
-                <c:if test="${not empty listFuncionario}" >
+                <c:if test="${not empty listFunc}" >
                     <tr>
-                        <c:forEach var="item" items="${listFuncionario}">
+                        <c:forEach var="item" items="${listFunc}">
                             <td>
-                                <input type="text" value="${item.cpf}" name="cpf">
+                                <c:out value="${item.cpf}"></c:out>
                             </td>
                             <td>
-                                <button type="submit" >selecionar</button>
+                                <button type="button" onclick="hdnID(${item.id})">selecionar</button>
                             </td>
                         </c:forEach>
                     </tr>
                 </c:if>  
             </table>
+            <input type="text" id="idFunc" value="" style="visibility: hidden">
+            <script>
+                function hdnID(a){
+                    document.getElementById("idFunc").value = a;
+                    document.send.submit();
+                }
+            </script>    
         </form>    
     </body>
 </html>
-

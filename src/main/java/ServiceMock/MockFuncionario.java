@@ -28,6 +28,23 @@ public class MockFuncionario {
       }
     return result;
   }
+   public static void alterar(Funcionario func) {
+      for (int i = 0; i < FUNCIONARIOS_CADASTRADOS.size(); i++) {
+          if (FUNCIONARIOS_CADASTRADOS.get(i).getId() == func.getId()) {
+              FUNCIONARIOS_CADASTRADOS.remove(FUNCIONARIOS_CADASTRADOS.get(i));
+              FUNCIONARIOS_CADASTRADOS.add(func);
+              return;
+          }
+      }
+  }
+   public static void remover(int id) {
+      for (int i = 0; i < FUNCIONARIOS_CADASTRADOS.size(); i++) {
+          if (FUNCIONARIOS_CADASTRADOS.get(i).getId() == id) {
+              FUNCIONARIOS_CADASTRADOS.remove(FUNCIONARIOS_CADASTRADOS.get(i));
+              return;
+          }
+      }
+  }
     
   
 }
