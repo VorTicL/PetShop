@@ -21,14 +21,14 @@ import javax.servlet.http.HttpSession;
  * @author victor.rslucca
  */
 @WebServlet(name = "CommercialProductServlet", urlPatterns = {"/product"})
-public class CommercialProductServlet extends HttpServlet {
+public class ProductServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp"
-                + "/CommercialForms/productForm.jsp");
+                + "/ProductForms/productForm.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -48,7 +48,7 @@ public class CommercialProductServlet extends HttpServlet {
         } catch (Exception e) {
             request.setAttribute("productResponse", "ERRO!");
         }finally{
-            request.getRequestDispatcher("WEB-INF/jsp/CommercialForms/responseInsertProduct.jsp")
+            request.getRequestDispatcher("WEB-INF/jsp/ProductForms/responseInsertProduct.jsp")
                     .forward(request, response);
         }
     }

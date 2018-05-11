@@ -21,50 +21,46 @@ import javax.servlet.http.HttpSession;
  *
  * @author Rafaela Aquino
  */
-@WebServlet(name = "ManageProduct", urlPatterns = {"/manageProduct"})
-public class ManageProductServlet extends HttpServlet {
-
+@WebServlet(name = "ManageService", urlPatterns = {"/manageService"})
+public class ManageServiceServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-
+        
         try {
-            int id = Integer.parseInt(request.getParameter("idProd"));
-            String filial = request.getParameter("filial");
-            String nome = request.getParameter("nomeProd");
-            int qtd = Integer.parseInt(request.getParameter("qtdEstoque"));
-            double valor = Double.parseDouble(request.getParameter("uniValue"));
-            ModelCommercialProduct modelCommercialProduct = new ModelCommercialProduct();
-            modelCommercialProduct.setId(id);
-            modelCommercialProduct.setFilial(filial);
-            modelCommercialProduct.setNome(nome);
-            modelCommercialProduct.setQtdProd(qtd);
-            modelCommercialProduct.setValor(valor);
-
-            MockProduto.alterar(modelCommercialProduct);
-
-            request.setAttribute("response", "Produto Alterado Com Sucesso!");
+            
+        
+        ModelCommercialProduct modelCommercialProduct = new ModelCommercialProduct();
+        modelCommercialProduct.setId(Integer.parseInt(request.getParameter("idProd")));
+        modelCommercialProduct.setFilial(request.getParameter("filial"));
+        modelCommercialProduct.setNome(request.getParameter("nomeProd"));
+        modelCommercialProduct.setQtdProd(Integer.parseInt(request.getParameter("qtdEstoque")));
+        modelCommercialProduct.setValor(Double.parseDouble(request.getParameter("uniValue")));
+        
+        MockProduto.alterar(modelCommercialProduct);
+        
+        request.setAttribute("response", "Produto Alterado Com Sucesso!");
         } catch (Exception e) {
             request.setAttribute("response", "ERRO!");
         }
         request.getRequestDispatcher("WEB-INF/jsp/ProductForms/responseManageProduct.jsp")
-                .forward(request, response);
+                    .forward(request, response);
     }
-
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        try {
-            int idRemove = Integer.parseInt(request.getParameter("idProd"));
-            MockProduto.remover(idRemove);
-            request.setAttribute("response", "Produto Removido Com Sucesso!");
+        
+         try {
+        int idRemove = Integer.parseInt(request.getParameter("idProd"));
+             MockProduto.remover(idRemove);
+        request.setAttribute("response", "Produto Removido Com Sucesso!");
         } catch (Exception e) {
             request.setAttribute("response", "ERRO!");
         }
         request.getRequestDispatcher("WEB-INF/jsp/ProductForms/responseManageProduct.jsp")
-                .forward(request, response);
-
+                    .forward(request, response);
+        
     }
 }

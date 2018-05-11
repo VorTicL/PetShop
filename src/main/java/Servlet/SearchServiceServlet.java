@@ -20,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author joao.vrevangelista
  */
-@WebServlet(name = "searchProduct", urlPatterns = {"/searchProduct"})
-public class SearchProductServlet extends HttpServlet {
+@WebServlet(name = "searchService", urlPatterns = {"/searchService"})
+public class SearchServiceServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -34,7 +34,7 @@ public class SearchProductServlet extends HttpServlet {
             request.setAttribute("listCommercial", listCommercial);
         }
             
-        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/ProductForms/searchProduct.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/CommercialForms/searchProduct.jsp");
         dispatcher.forward(request, response);
 
     }
@@ -43,7 +43,7 @@ public class SearchProductServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-        int idProd = Integer.parseInt(request.getParameter("idProdServ"));
+            int idProd = Integer.parseInt(request.getParameter("idProd"));
             
         ModelCommercialProduct prod1 = MockProduto.buscarPorId(idProd);
         
