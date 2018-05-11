@@ -9,6 +9,6 @@
   <body>
       
     <h1><c:out value="${response}" /></h1>
-    <a href="${pageContext.request.contextPath}/searchProduct">Voltar para tela pesquisa de produto</a>
+    <a href="${pageContext.request.contextPath}/searchProduct">Voltar para tela pesquisa de serviços</a>
   </body>
 </html>

@@ -6,7 +6,9 @@
 package Servlet;
 
 import Model.Entity.ModelCommercialProduct;
+import Model.Entity.ModelCommercialService;
 import ServiceMock.MockProduto;
+import ServiceMock.MockService;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
@@ -26,15 +28,15 @@ public class SearchServiceServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nomeProd = "";
-        nomeProd = request.getParameter("nomeProd");
+        String nomeServ = "";
+        nomeServ = request.getParameter("nomeServ");
         
-        if (nomeProd != null) {
-            ArrayList<ModelCommercialProduct> listCommercial = MockProduto.buscarPorUsername(nomeProd);
+        if (nomeServ != null) {
+            ArrayList<ModelCommercialService> listCommercial = MockProduto.buscarPorUsername(nomeServ);
             request.setAttribute("listCommercial", listCommercial);
         }
             
-        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/CommercialForms/searchProduct.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/ServiceForms/searchService.jsp");
         dispatcher.forward(request, response);
 
     }
@@ -43,16 +45,16 @@ public class SearchServiceServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            int idProd = Integer.parseInt(request.getParameter("idProd"));
+            int idServ = Integer.parseInt(request.getParameter("idServ"));
             
-        ModelCommercialProduct prod1 = MockProduto.buscarPorId(idProd);
+        ModelCommercialService serv1 = MockService.buscarPorId(idServ);
         
-        request.setAttribute("prod", prod1);
+        request.setAttribute("serv", serv1);
         
-        request.getRequestDispatcher("WEB-INF/jsp/ProductForms/manageProduct.jsp")
+        request.getRequestDispatcher("WEB-INF/jsp/ServiceForms/manageService.jsp")
                     .forward(request, response);
         } catch (Exception e) {
-            request.getRequestDispatcher("WEB-INF/jsp/ProductForms/searchProduct.jsp")
+            request.getRequestDispatcher("WEB-INF/jsp/ServiceForms/searchService.jsp")
                     .forward(request, response);
         }
         

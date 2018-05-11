@@ -49,6 +49,7 @@
                     document.send.submit();
                 }
             </script>    
-        </form>    
+        </form>
+        <a href="${pageContext.request.contextPath}/HomeServlet">Home</a>    
     </body>
 </html>

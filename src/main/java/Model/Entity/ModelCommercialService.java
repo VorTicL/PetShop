@@ -19,6 +19,10 @@ public class ModelCommercialService extends ModelCommercial{
         super(valor, nome, filial);
         this.pet = pet;
     }
+    
+    public ModelCommercialService(){
+        
+    }
 
     public String getPet() {
         return pet;

@@ -14,11 +14,11 @@
         <title>Search Page</title>
     </head>
     <body>
-        <form action="${pageContext.request.contextPath}/searchProduct" method="get">
+        <form action="${pageContext.request.contextPath}/searchService" method="get">
             <div class="data-container">
                 <div>
                     <div>
-                        <input type="text" name="nomeProd"/> 
+                        <input type="text" name="nomeServ"/> 
                     </div>
                     <div>
                         <button type="submit">Enviar</button>
@@ -26,7 +26,7 @@
                 </div>
             </div>
         </form>
-            <form name="send" action="${pageContext.request.contextPath}/searchProduct" method="post">
+            <form name="send" action="${pageContext.request.contextPath}/searchService" method="post">
             <table>     
 
                 <c:if test="${not empty listCommercial}" >
@@ -42,13 +42,14 @@
                     </tr>
                 </c:if>  
             </table>
-            <input type="text" id="idProd" value="" style="visibility: hidden">
+            <input type="text" id="idServ" value="" style="visibility: hidden">
             <script>
                 function hdnID(a){
-                    document.getElementById("idProd").value = a;
+                    document.getElementById("idServ").value = a;
                     document.send.submit();
                 }
             </script>    
-        </form>    
+        </form>
+        <a href="${pageContext.request.contextPath}/HomeServlet">Home</a>        
     </body>
 </html>

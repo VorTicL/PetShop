@@ -8,7 +8,7 @@
   </head>
   <body>
       
-    <h1><c:out value="${productResponse}" /></h1>
-    <a href="${pageContext.request.contextPath}/product">Voltar para tela de cadastro de produto</a>
+    <h1><c:out value="${servResponse}" /></h1>
+    <a href="${pageContext.request.contextPath}/service">Voltar para tela de cadastro de serviços</a>
   </body>
 </html>

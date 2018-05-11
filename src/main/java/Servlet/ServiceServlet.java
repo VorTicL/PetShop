@@ -6,7 +6,9 @@
 package Servlet;
 
 import Model.Entity.ModelCommercialProduct;
+import Model.Entity.ModelCommercialService;
 import ServiceMock.MockProduto;
+import ServiceMock.MockService;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author victor.rslucca
  */
-@WebServlet(name = "ServiceServlet", urlPatterns = {"/service"})
+@WebServlet(name = "serviceServlet", urlPatterns = {"/service"})
 public class ServiceServlet extends HttpServlet {
 
     @Override
@@ -28,7 +30,7 @@ public class ServiceServlet extends HttpServlet {
             throws ServletException, IOException {
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp"
-                + "/ProductForms/productForm.jsp");
+                + "/ServiceForms/serviceForm.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -37,18 +39,18 @@ public class ServiceServlet extends HttpServlet {
             throws ServletException, IOException {
 
         try {
-            String nome = request.getParameter("nomeProd");
+            String nome = request.getParameter("nomeServ");
             double valueUni = Double.parseDouble(request.getParameter("uniValue"));
             String filial = request.getParameter("filial");
-            int qtdEstoque = Integer.parseInt(request.getParameter("qtdEstoque"));
+            String pet =request.getParameter("pet");
 
-            ModelCommercialProduct prod1 = new ModelCommercialProduct(nome, valueUni, filial, qtdEstoque);
-            MockProduto.inserirProduto(prod1);
-            request.setAttribute("productResponse",  prod1.getNome()+"Cadastrado com sucesso!");
+            ModelCommercialService serv1 = new ModelCommercialService(pet, valueUni, nome, filial);
+            MockService.inserirProduto(serv1);
+            request.setAttribute("serviceResponse",  serv1.getNome()+"Cadastrado com sucesso!");
         } catch (Exception e) {
             request.setAttribute("productResponse", "ERRO!");
         }finally{
-            request.getRequestDispatcher("WEB-INF/jsp/ProductForms/responseInsertProduct.jsp")
+            request.getRequestDispatcher("WEB-INF/jsp/ServiceForms/responseInsertService.jsp")
                     .forward(request, response);
         }
     }

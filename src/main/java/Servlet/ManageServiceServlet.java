@@ -6,8 +6,10 @@
 package Servlet;
 
 import Model.Entity.ModelCommercialProduct;
+import Model.Entity.ModelCommercialService;
 import ServiceMock.MockFuncionario;
 import ServiceMock.MockProduto;
+import ServiceMock.MockService;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -21,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Rafaela Aquino
  */
-@WebServlet(name = "ManageService", urlPatterns = {"/manageService"})
+@WebServlet(name = "manageService", urlPatterns = {"/manageService"})
 public class ManageServiceServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest request,
@@ -31,20 +33,20 @@ public class ManageServiceServlet extends HttpServlet{
         try {
             
         
-        ModelCommercialProduct modelCommercialProduct = new ModelCommercialProduct();
-        modelCommercialProduct.setId(Integer.parseInt(request.getParameter("idProd")));
-        modelCommercialProduct.setFilial(request.getParameter("filial"));
-        modelCommercialProduct.setNome(request.getParameter("nomeProd"));
-        modelCommercialProduct.setQtdProd(Integer.parseInt(request.getParameter("qtdEstoque")));
-        modelCommercialProduct.setValor(Double.parseDouble(request.getParameter("uniValue")));
+            ModelCommercialService modelCommercialService = new ModelCommercialService();
+        modelCommercialService.setId(Integer.parseInt(request.getParameter("idProd")));
+        modelCommercialService.setFilial(request.getParameter("filial"));
+        modelCommercialService.setNome(request.getParameter("nomeServ"));
+        modelCommercialService.setPet(request.getParameter("pet"));
+        modelCommercialService.setValor(Double.parseDouble(request.getParameter("uniValue")));
         
-        MockProduto.alterar(modelCommercialProduct);
+            MockService.alterar(modelCommercialService);
         
-        request.setAttribute("response", "Produto Alterado Com Sucesso!");
+        request.setAttribute("response", "Serviço Alterado Com Sucesso!");
         } catch (Exception e) {
             request.setAttribute("response", "ERRO!");
         }
-        request.getRequestDispatcher("WEB-INF/jsp/ProductForms/responseManageProduct.jsp")
+        request.getRequestDispatcher("WEB-INF/jsp/ServiceForms/responseManageService.jsp")
                     .forward(request, response);
     }
     
@@ -53,13 +55,13 @@ public class ManageServiceServlet extends HttpServlet{
             throws ServletException, IOException {
         
          try {
-        int idRemove = Integer.parseInt(request.getParameter("idProd"));
-             MockProduto.remover(idRemove);
-        request.setAttribute("response", "Produto Removido Com Sucesso!");
+        int idRemove = Integer.parseInt(request.getParameter("idServ"));
+             MockService.remover(idRemove);
+        request.setAttribute("response", "Serviço Removido Com Sucesso!");
         } catch (Exception e) {
             request.setAttribute("response", "ERRO!");
         }
-        request.getRequestDispatcher("WEB-INF/jsp/ProductForms/responseManageProduct.jsp")
+        request.getRequestDispatcher("WEB-INF/jsp/ServiceForms/responseManageService.jsp")
                     .forward(request, response);
         
     }

@@ -3,32 +3,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Gerenciar Produtos</title>
+	<title>Gerenciar Serviços</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/index.css">
 </head>
 <body>
-    <form>
+    <form action="${pageContext.request.contextPath}/manageProduct" method="get">
         <div class="data-container">
             <div>
-                <input type="number" name="idProd" value="${prod.nome}" style="visibility: hidden">
+                <input type="number" name="idProd" value="${serv.id}" style="visibility: hidden">
                 <div>
-                    Nome do Produto: <input type="text" name="nomeProd" value="${prod.nome}"/> 
+                    Nome do Serviço: <input type="text" name="nomeServ" value="${serv.nome}"/> 
                 </div>
                 <div>
-                    Valor Unitario: <input type="number" name="uniValue" value="${prod.valor}"/>
+                    Valor: <input type="number" name="uniValue" value="${serv.valor}"/>
                 </div>
                 <div>
-                    Filial Para Distribuição: <input type="text" name="filial" value="${prod.filial}"/>
+                    Filial Disponivel: <input type="text" name="filial" value="${serv.filial}"/>
                 </div>
                 <div>
-                    Quantidade Em Estoque: <input type="number" name="qtdEstoque" value="${prod.qtdProd}"/>
+                    Pet: <input type="text" name="pet" value="${serv.pet}"/>
                 </div> 
                 <div>
-                    <button type="submit"  action="${pageContext.request.contextPath}/manageProduct" method="get">
+                    <button type="submit" >
                         Alterar
                     </button>
-                    <button type="submit"  action="${pageContext.request.contextPath}/manageProduct" method="post">
+                    <button type="submit" formmethod="post">
                         Excluir
                     </button>
                 </div>
