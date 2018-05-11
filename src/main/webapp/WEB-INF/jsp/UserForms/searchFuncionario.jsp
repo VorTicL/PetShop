@@ -18,7 +18,7 @@
             <div class="data-container">
                 <div>
                     <div>
-                        <input type="number" name="cpf"/> 
+                        <input type="number" name="nomeFunc"/> 
                     </div>
                     <div>
                         <button type="submit">Enviar</button>
@@ -33,7 +33,7 @@
                     <tr>
                         <c:forEach var="item" items="${listFunc}">
                             <td>
-                                <c:out value="${item.cpf}"></c:out>
+                                <c:out value="${item.nome}"></c:out>
                             </td>
                             <td>
                                 <button type="button" onclick="hdnID(${item.id})">selecionar</button>
@@ -42,7 +42,7 @@
                     </tr>
                 </c:if>  
             </table>
-            <input type="text" id="idFunc" value="" style="visibility: hidden">
+            <input type="text" id="idFunc"  name="idFuncServ" value="" style="visibility: hidden">
             <script>
                 function hdnID(a){
                     document.getElementById("idFunc").value = a;

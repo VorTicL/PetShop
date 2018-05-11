@@ -35,6 +35,7 @@ public class FuncionarioServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
       Funcionario funcionario = new Funcionario(
               0, 0, request.getParameter("nomeFunc"),request.getParameter("dataNasc"),
               request.getParameter("sexo"),request.getParameter("rg"),request.getParameter("cpf"),

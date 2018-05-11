@@ -15,14 +15,25 @@ import java.util.ArrayList;
 public class MockFuncionario {
     private static final ArrayList<Funcionario> FUNCIONARIOS_CADASTRADOS= new ArrayList<>();
 
+    static {
+        Funcionario func = new Funcionario(1,2,"victor", "20/05/18",
+                 "masculino", "5555555","55555555","5/06/17");
+         func.setId(1);
+         func.setIdendereco(1);
+        Funcionario  func1 = new Funcionario(1,2,"luiz", "20/05/18",
+                 "masculino", "5555555","55555555","5/06/17");
+         func.setId(2);
+        FUNCIONARIOS_CADASTRADOS.add( func);
+        FUNCIONARIOS_CADASTRADOS.add( func1);
+    }
     public static void inserirFuncionario(Funcionario funcionario){
         FUNCIONARIOS_CADASTRADOS.add(funcionario);
     }
   
-  public static ArrayList buscarPorCpf(String cpf) {
+  public static ArrayList buscarPorNome(String nome) {
       ArrayList<Funcionario> result = new ArrayList<>();
       for (int i = 0; i < FUNCIONARIOS_CADASTRADOS.size(); i++) {
-          if (FUNCIONARIOS_CADASTRADOS.get(i).getCpf().contains(cpf)) {
+          if (FUNCIONARIOS_CADASTRADOS.get(i).getCpf().contains(nome)) {
               result.add(FUNCIONARIOS_CADASTRADOS.get(i));
           }
       }
@@ -45,6 +56,16 @@ public class MockFuncionario {
           }
       }
   }
+    public static Funcionario buscarPorId(int id) {
+        Funcionario funcionario = null;
+        for (int i = 0; i < FUNCIONARIOS_CADASTRADOS.size(); i++) {
+            if (FUNCIONARIOS_CADASTRADOS.get(i).getId() == id) {
+                funcionario = FUNCIONARIOS_CADASTRADOS.get(i);
+                return funcionario;
+            }
+        }
+        return funcionario;
+    }
     
   
 }

@@ -27,15 +27,15 @@ public class SearchFuncionarioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String cpf = "";
-        cpf = request.getParameter("cpf");
+        String nome = "";
+        nome = request.getParameter("nomeFunc");
         
-        if (cpf != null) {
-            ArrayList<Funcionario> listFunc = MockFuncionario.buscarPorCpf(cpf);
+        if (nome != null) {
+            ArrayList<Funcionario> listFunc = MockFuncionario.buscarPorNome(nome);
             request.setAttribute("listFunc", listFunc);
         }
             
-        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/CommercialForms/searchFuncionario.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/UserForms/searchFuncionario.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -44,14 +44,19 @@ public class SearchFuncionarioServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-         String cpf = request.getParameter("cpf");
-        
-         ArrayList func1 = MockFuncionario.buscarPorCpf(cpf);
+          try {
+        int idFunc = Integer.parseInt(request.getParameter("idFuncServ"));
+            
+        Funcionario func1 = MockFuncionario.buscarPorId(idFunc);
         
         request.setAttribute("func", func1);
         
-        request.getRequestDispatcher("WEB-INF/jsp/UserForms/servicesFuncionario.jsp")
+        request.getRequestDispatcher("WEB-INF/jsp/UserForms/manageFuncionario.jsp")
                     .forward(request, response);
+        } catch (Exception e) {
+            request.getRequestDispatcher("WEB-INF/jsp/UserForms/searchFuncionario.jsp")
+                    .forward(request, response);
+        }
         
     }
 

@@ -5,6 +5,7 @@
  */
 package Servlet;
 
+import Model.DAO.ModelCommercialProductDao;
 import Model.Entity.ModelCommercialProduct;
 import ServiceMock.MockProduto;
 import java.io.IOException;
@@ -36,7 +37,17 @@ public class ProductServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        try {
+        ModelCommercialProduct produto = new ModelCommercialProduct(
+              request.getParameter("nomeProd"),Double.parseDouble(request.getParameter("uniValue")),
+              request.getParameter("filial"),Integer.parseInt(request.getParameter("qtdEstoque"))
+              
+      );
+      ModelCommercialProductDao produtoDao = new  ModelCommercialProductDao();
+      
+      int id = produtoDao.insert(produto);
+      request.getRequestDispatcher("WEB-INF/jsp/ProductForms/productForm.jsp").forward(request, response);
+      /*
+      try {
             String nome = request.getParameter("nomeProd");
             double valueUni = Double.parseDouble(request.getParameter("uniValue"));
             String filial = request.getParameter("filial");
@@ -51,6 +62,9 @@ public class ProductServlet extends HttpServlet {
             request.getRequestDispatcher("WEB-INF/jsp/ProductForms/responseInsertProduct.jsp")
                     .forward(request, response);
         }
+      */
+    }
+        
     }
 
-}
+
