@@ -32,7 +32,7 @@ public class SearchServiceServlet extends HttpServlet {
         nomeServ = request.getParameter("nomeServ");
         
         if (nomeServ != null) {
-            ArrayList<ModelCommercialService> listCommercial = MockProduto.buscarPorUsername(nomeServ);
+            ArrayList<ModelCommercialService> listCommercial = MockService.buscarPorUsername(nomeServ);
             request.setAttribute("listCommercial", listCommercial);
         }
             
