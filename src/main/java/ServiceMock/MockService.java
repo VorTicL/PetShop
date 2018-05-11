@@ -15,7 +15,7 @@ import java.util.Map;
 
 /**
  *
- * @author Rafaela Aquino
+ * @author Victor de Lucca
  */
 public class MockService {
     private static final ArrayList<ModelCommercialService> SERVICE_CADASTRADOS= new ArrayList<>();

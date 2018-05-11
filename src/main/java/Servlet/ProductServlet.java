@@ -37,16 +37,14 @@ public class ProductServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        ModelCommercialProduct produto = new ModelCommercialProduct(
-              request.getParameter("nomeProd"),Double.parseDouble(request.getParameter("uniValue")),
-              request.getParameter("filial"),Integer.parseInt(request.getParameter("qtdEstoque"))
-              
-      );
-      ModelCommercialProductDao produtoDao = new  ModelCommercialProductDao();
+        //ModelCommercialProduct produto = new ModelCommercialProduct(
+              //request.getParameter("nomeProd"),Double.parseDouble(request.getParameter("uniValue")),
+              //request.getParameter("filial"),Integer.parseInt(request.getParameter("qtdEstoque")));
+      //ModelCommercialProductDao produtoDao = new  ModelCommercialProductDao();
       
-      int id = produtoDao.insert(produto);
-      request.getRequestDispatcher("WEB-INF/jsp/ProductForms/productForm.jsp").forward(request, response);
-      /*
+      //int id = produtoDao.insert(produto);
+      //request.getRequestDispatcher("WEB-INF/jsp/ProductForms/productForm.jsp").forward(request, response);
+      
       try {
             String nome = request.getParameter("nomeProd");
             double valueUni = Double.parseDouble(request.getParameter("uniValue"));
@@ -62,7 +60,7 @@ public class ProductServlet extends HttpServlet {
             request.getRequestDispatcher("WEB-INF/jsp/ProductForms/responseInsertProduct.jsp")
                     .forward(request, response);
         }
-      */
+      
     }
         
     }

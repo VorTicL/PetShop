@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Rafaela Aquino
+ * @author Victor de Lucca
  */
 @WebServlet(name = "manageService", urlPatterns = {"/manageService"})
 public class ManageServiceServlet extends HttpServlet{

@@ -11,7 +11,7 @@ import java.util.Map;
 
 /**
  *
- * @author Rafaela Aquino
+ * @author Victor de Lucca
  */
 public class MockUsuario {
       private static final Map<String, Iuser> USUARIOS_CADASTRADOS

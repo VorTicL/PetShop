@@ -36,7 +36,7 @@ public class FuncionarioServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-      Funcionario funcionario = new Funcionario(
+      /*Funcionario funcionario = new Funcionario(
               0, 0, request.getParameter("nomeFunc"),request.getParameter("dataNasc"),
               request.getParameter("sexo"),request.getParameter("rg"),request.getParameter("cpf"),
               null
@@ -45,8 +45,13 @@ public class FuncionarioServlet extends HttpServlet {
       
       int id = funcionarioDao.insert(funcionario);
       request.getRequestDispatcher("WEB-INF/jsp/UserForms/funcionarioForm.jsp").forward(request, response);
-      
-      
+      */
+      Funcionario funcionario = new Funcionario(
+              0, 0, request.getParameter("nomeFunc"),request.getParameter("dataNasc"),
+              request.getParameter("sexo"),request.getParameter("rg"),request.getParameter("cpf"),
+              null);
+      MockFuncionario.inserirFuncionario(funcionario);
+      request.getRequestDispatcher("WEB-INF/jsp/UserForms/funcionarioForm.jsp").forward(request, response);
     }
 }
 

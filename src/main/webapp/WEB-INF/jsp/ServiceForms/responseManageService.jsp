@@ -8,7 +8,7 @@
   </head>
   <body>
       
-    <h1><c:out value="${response}" /></h1>
+    <h1><c:out value="${serviceResponse}" /></h1>
     <a href="${pageContext.request.contextPath}/searchProduct">Voltar para tela pesquisa de serviços</a>
   </body>
 </html>

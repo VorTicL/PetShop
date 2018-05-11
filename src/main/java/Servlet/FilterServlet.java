@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author fernando.tsuda
+ * @author Victor de Lucca
  */
 @WebFilter(filterName = "filter", 
 	//urlPatterns = {"/*"})

@@ -50,6 +50,6 @@
                 }
             </script>    
         </form>
-        <a href="${pageContext.request.contextPath}/home">Home</a>    
+        <a href="${pageContext.request.contextPath}/HomeServlet">Home</a>    
     </body>
 </html>

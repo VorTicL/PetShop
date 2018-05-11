@@ -105,10 +105,14 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL {
             rs = selectId(conexao, pst, produto);
 
             if (rs.next()) {
-                return new ModelCommercialProduct(rs.getString(1),
-                            rs.getDouble(2),
-                            rs.getString(3),
-                            rs.getInt(4));
+                
+                ModelCommercialProduct modelCommercialProduct = new ModelCommercialProduct(
+                        rs.getString(1), rs.getDouble(2), rs.getString(3), rs.getInt(4));
+                ;
+                /*return new ModelCommercialProduct(,
+                            ,
+                            ,s
+                            );*/
             }
             conexao.close();
 

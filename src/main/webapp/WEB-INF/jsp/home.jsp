@@ -12,9 +12,8 @@
     <a href="${pageContext.request.contextPath}/product">Adicionar Produto</a>
     <a href="${pageContext.request.contextPath}/searchProduct">Gerenciar Produto</a>
     <a href="${pageContext.request.contextPath}/funcionario">Adicionar Funcionario</a>
+    <a href="${pageContext.request.contextPath}/searchFuncionario">Gerenciar Funcionários</a>
     <a href="${pageContext.request.contextPath}/service">Adicionar Serviço</a>
     <a href="${pageContext.request.contextPath}/searchService">Gerenciar Serviço</a>
-    <a href="${pageContext.request.contextPath}/funcionario">Adicionar Funcionário</a>
-    <a href="${pageContext.request.contextPath}/searchFuncionario">Gerenciar Funcionários</a>
   </body>
 </html>
