@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-/*package Model.DAO;
+package Model.DAO;
 
 import Model.AbstractDAO.AbstractIuser;
 import Model.Connect.Connect;
@@ -21,14 +21,13 @@ import java.util.logging.Logger;
 /**
  *
  * @author João
- /
-public class IuserDAO extends IuserSQL implements AbstractIuser {
+ */
+public class IuserDAO extends IuserSQL {
 
     private Connection conexao; 
     private PreparedStatement pst; 
     private ResultSet rs; 
 
-    @Override
     public boolean insert(Iuser iuser) {
 
         try {
@@ -50,7 +49,7 @@ public class IuserDAO extends IuserSQL implements AbstractIuser {
         }
     }
 
-    @Override
+    
     public boolean update(Iuser iuser) {
         try {
             conexao = Model.Connect.Connect.connect();
@@ -71,7 +70,6 @@ public class IuserDAO extends IuserSQL implements AbstractIuser {
         }
     }
 
-    @Override
     public List<Iuser> selectAll() {
         try {
             List<Iuser> iuser = null;
@@ -105,7 +103,6 @@ public class IuserDAO extends IuserSQL implements AbstractIuser {
         }
     }
 
-    @Override
     public Iuser selectId(Iuser iuser) {
         try {
 
@@ -134,7 +131,6 @@ public class IuserDAO extends IuserSQL implements AbstractIuser {
         }
     }
 
-    @Override
     public boolean delete(Iuser iuser) {
         try {
             conexao = Model.Connect.Connect.connect();
@@ -155,7 +151,6 @@ public class IuserDAO extends IuserSQL implements AbstractIuser {
         }
     }
 
-    /*@Override
     public boolean login(Iuser iuser) {
         try {
 
@@ -165,14 +160,8 @@ public class IuserDAO extends IuserSQL implements AbstractIuser {
 
             if (rs.next()) {
 
-                ResultSet rs1 = selectNivel(conexao, pst, iuser);
-
-                if (rs1.next()) {
                     iuser.setId(rs.getInt(1));
                     iuser.setIdfuncionario(rs.getInt(2));
-                    iuser.setEmail(rs.getString(3));
-                   
-                }
 
                 conexao.close();
 
@@ -192,4 +181,3 @@ public class IuserDAO extends IuserSQL implements AbstractIuser {
     }
 
 }
-*/

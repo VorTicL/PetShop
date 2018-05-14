@@ -5,6 +5,7 @@
  */
 package Servlet;
 
+import Model.DAO.IuserDAO;
 import Model.Entity.Iuser;
 import ServiceMock.MockUsuario;
 import java.io.IOException;
@@ -42,16 +43,16 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         String username = request.getParameter("username");
         String senha = request.getParameter("senha");
+        
+        Iuser iuser = new Iuser(0, username, senha, 0, null, null);
 
-        // Validar as informações
-        MockUsuario mockUsuario = new MockUsuario();
-        Iuser usuario = mockUsuario.buscarPorUsername(username);
-        if (usuario != null && usuario.validarSenha(senha)) {
-            HttpSession sessao = request.getSession();
-            sessao.setAttribute("usuario", usuario);
+        IuserDAO iuserDAO = new IuserDAO();
+
+        if (iuserDAO.login(iuser)) {
+            
             response.sendRedirect(request.getContextPath() + "/home");
+        
         } else {
-
             request.setAttribute("msgErro", "Usuário ou senha inválido");
             request.getRequestDispatcher("WEB-INF/jsp/erro-login.jsp")
                     .forward(request, response);

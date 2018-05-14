@@ -71,7 +71,7 @@ public class IuserSQL {
     }
 
     public ResultSet login(Connection conexao, PreparedStatement pst, Iuser iuser) throws SQLException {
-        String sql = "select id, idfuncionario, email from iuser where login = ? and senha = ? and ativo = true";
+        String sql = "select id,idfuncionario from iuser where login = ? and senha = ? and ativo = true";
         pst = conexao.prepareStatement(sql);
         pst.setString(1, iuser.getLogin());
         pst.setString(2, iuser.getSenha());
