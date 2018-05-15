@@ -5,6 +5,7 @@
  */
 package Servlet;
 
+import Model.DAO.ModelCommercialProductDao;
 import Model.Entity.ModelCommercialProduct;
 import ServiceMock.MockFuncionario;
 import ServiceMock.MockProduto;
@@ -24,6 +25,8 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "ManageProduct", urlPatterns = {"/manageProduct"})
 public class ManageProductServlet extends HttpServlet {
 
+    ModelCommercialProductDao modelCommercialProductDao =new ModelCommercialProductDao();
+    
     @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)
@@ -35,14 +38,14 @@ public class ManageProductServlet extends HttpServlet {
             String nome = request.getParameter("nomeProd");
             int qtd = Integer.parseInt(request.getParameter("qtdEstoque"));
             double valor = Double.parseDouble(request.getParameter("uniValue"));
+            
             ModelCommercialProduct modelCommercialProduct = new ModelCommercialProduct();
             modelCommercialProduct.setId(id);
             modelCommercialProduct.setFilial(filial);
             modelCommercialProduct.setNome(nome);
             modelCommercialProduct.setQtdProd(qtd);
             modelCommercialProduct.setValor(valor);
-
-            MockProduto.alterar(modelCommercialProduct);
+            modelCommercialProductDao.updateProduct(modelCommercialProduct);
 
             request.setAttribute("response", "Produto Alterado Com Sucesso!");
         } catch (Exception e) {
@@ -59,6 +62,7 @@ public class ManageProductServlet extends HttpServlet {
         try {
             int idRemove = Integer.parseInt(request.getParameter("idProd"));
             MockProduto.remover(idRemove);
+            modelCommercialProductDao.deleteProduct(idRemove);
             request.setAttribute("response", "Produto Removido Com Sucesso!");
         } catch (Exception e) {
             request.setAttribute("response", "ERRO!");

@@ -5,10 +5,12 @@
  */
 package Servlet;
 
+import Model.DAO.ModelCommercialProductDao;
 import Model.Entity.ModelCommercialProduct;
 import ServiceMock.MockProduto;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,14 +25,22 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "searchProduct", urlPatterns = {"/searchProduct"})
 public class SearchProductServlet extends HttpServlet {
 
+    ModelCommercialProductDao modelCommercialProductDao = new ModelCommercialProductDao();
+    List<ModelCommercialProduct> listCommercial = new ArrayList<>();
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String nomeProd = "";
         nomeProd = request.getParameter("nomeProd");
         
-        if (nomeProd != null) {
-            ArrayList<ModelCommercialProduct> listCommercial = MockProduto.buscarPorUsername(nomeProd);
+        if (nomeProd != null ) {
+            if (nomeProd != "") {
+                listCommercial = modelCommercialProductDao.selectNameProducts(nomeProd);
+            }else{
+                listCommercial = modelCommercialProductDao.selectAllProducts();
+            }
+
             request.setAttribute("listCommercial", listCommercial);
         }
             

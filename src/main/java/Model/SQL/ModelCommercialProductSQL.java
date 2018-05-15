@@ -16,27 +16,20 @@ import java.sql.SQLException;
  * @author João
  */
 public class ModelCommercialProductSQL {
-    public int insert(Connection conexao, PreparedStatement pst, ModelCommercialProduct produto) throws SQLException {
+    public void insert(Connection conexao, PreparedStatement pst, ModelCommercialProduct produto) throws SQLException {
 
-         String sql = "insert into produto (nome,valor,filial,qtdProd) values (?,?,?,?,?,?)";
+         String sql = "insert into produto (nome,valor,filial,qtdProd) values (?,?,?,?,?)";
 
 
         pst = conexao.prepareStatement(sql);
 
-        pst.setString(1, produto.getNome());
-        pst.setDouble(2, produto.getValor());
-        pst.setString(3, produto.getFilial());
-        pst.setInt(4, produto.getQtdProd());
+        pst.setString(0, produto.getNome());
+        pst.setDouble(1, produto.getValor());
+        pst.setString(2, produto.getFilial());
+        pst.setInt(3, produto.getQtdProd());
         
         pst.execute();
-        
-        ResultSet rs = selectProduto(conexao, pst, produto);
 
-        if (rs.next()) {
-            return rs.getInt(1);
-        }
-        return 0;
-        
     }
 
     public void update(Connection conexao, PreparedStatement pst, ModelCommercialProduct produto) throws SQLException {
@@ -69,23 +62,19 @@ public class ModelCommercialProductSQL {
         return pst.executeQuery();
     }
 
-    public void delete(Connection conexao, PreparedStatement pst, ModelCommercialProduct produto) throws SQLException {
+    public void delete(Connection conexao, PreparedStatement pst, int a) throws SQLException {
         String sql = "update produto set ativo = false where id = ?";
         pst = conexao.prepareStatement(sql);
-        pst.setInt(1, produto.getId());
+        pst.setInt(1, a);
 
         pst.execute();
     }
     
-    public ResultSet selectProduto(Connection conexao, PreparedStatement pst, ModelCommercialProduct produto) throws SQLException {
-        String sql = "select id from produto where nome = ? and valor = ? and filial = ? and qtdProd = ?  and ativo = true";
+    public ResultSet selectProduto(Connection conexao, PreparedStatement pst, String nome) throws SQLException {
+        String sql = "select * from produto where nome like ? and ativo = true";
 
         pst = conexao.prepareStatement(sql);
-        pst.setString(1, produto.getNome());
-        pst.setDouble(2, produto.getValor());
-        pst.setString(3, produto.getFilial());
-        pst.setInt(4, produto.getQtdProd());
-        
+        pst.setString(0, nome);
         
         return pst.executeQuery();
     }

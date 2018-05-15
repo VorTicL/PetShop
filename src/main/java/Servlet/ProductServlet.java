@@ -24,6 +24,8 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "CommercialProductServlet", urlPatterns = {"/product"})
 public class ProductServlet extends HttpServlet {
 
+    ModelCommercialProductDao modelCommercialProductDao = new ModelCommercialProductDao();
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -52,7 +54,7 @@ public class ProductServlet extends HttpServlet {
             int qtdEstoque = Integer.parseInt(request.getParameter("qtdEstoque"));
 
             ModelCommercialProduct prod1 = new ModelCommercialProduct(nome, valueUni, filial, qtdEstoque);
-            MockProduto.inserirProduto(prod1);
+            modelCommercialProductDao.insertProduct(prod1);
             request.setAttribute("productResponse",  prod1.getNome()+"Cadastrado com sucesso!");
         } catch (Exception e) {
             request.setAttribute("productResponse", "ERRO!");

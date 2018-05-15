@@ -29,6 +29,6 @@
                 </div>
             </div>
         </form>
-        <a href="${pageContext.request.contextPath}/HomeServlet">Home</a>    
+        <a href="${pageContext.request.contextPath}/home">Home</a>    
     </body>
 </html>

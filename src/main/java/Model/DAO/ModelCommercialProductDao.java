@@ -18,13 +18,13 @@ import java.util.List;
  *
  * @author João
  */
-public class ModelCommercialProductDao extends ModelCommercialProductSQL {
+public class ModelCommercialProductDao extends ModelCommercialProductSQL{
 
     private Connection conexao; 
     private PreparedStatement pst; 
     private ResultSet rs; 
 
-    public int insert(ModelCommercialProduct produto) {
+    public int insertProduct(ModelCommercialProduct produto) {
 
         try {
             conexao = Model.Connect.Connect.connect();
@@ -45,7 +45,7 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL {
         }
     }
 
-    public boolean update(ModelCommercialProduct produto) {
+    public boolean updateProduct(ModelCommercialProduct produto) {
         try {
             conexao = Model.Connect.Connect.connect();
 
@@ -65,7 +65,7 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL {
         }
     }
 
-    public List<ModelCommercialProduct> selectAll() {
+    public List<ModelCommercialProduct> selectAllProducts() {
         try {
             List<ModelCommercialProduct> produto = null;
 
@@ -97,7 +97,7 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL {
         }
     }
 
-    public ModelCommercialProduct selectId( ModelCommercialProduct produto) {
+    public ModelCommercialProduct selectIdProduct( ModelCommercialProduct produto) {
         try {
 
             conexao = Model.Connect.Connect.connect();
@@ -127,11 +127,11 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL {
         }
     }
 
-    public boolean delete(ModelCommercialProduct produto) {
+    public boolean deleteProduct(int a) {
         try {
             conexao = Model.Connect.Connect.connect();
 
-            delete(conexao, pst, produto);
+            delete(conexao, pst, a);
 
             conexao.close();
 
@@ -144,6 +144,38 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL {
             }
 
             return false;
+        }
+    }
+    
+    public List<ModelCommercialProduct> selectNameProducts(String nome) {
+        try {
+            List<ModelCommercialProduct> produto = null;
+
+            conexao = Model.Connect.Connect.connect();
+
+            rs = selectProduto(conexao, pst, nome);
+
+            if (rs.next()) {
+                produto = new ArrayList<>();
+
+                while (rs.next()) {
+                    produto.add(new ModelCommercialProduct(rs.getString(1),
+                            rs.getDouble(2),
+                            rs.getString(3),
+                            rs.getInt(4)));
+                                
+                }
+            }
+            conexao.close();
+
+            return produto;
+        } catch (SQLException t) {
+
+            try {
+                conexao.close();
+            } catch (SQLException ex) {
+            }
+            return null;
         }
     }
 }
