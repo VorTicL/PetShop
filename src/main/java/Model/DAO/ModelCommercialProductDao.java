@@ -22,30 +22,30 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL{
 
     private Connection conexao; 
     private PreparedStatement pst; 
-    private ResultSet rs; 
+    private ResultSet rs;
+    private boolean result = false;
 
-    public int insertProduct(ModelCommercialProduct produto) {
-
+    public boolean insertProduct(ModelCommercialProduct produto) throws SQLException {
+        
         try {
             conexao = Model.Connect.Connect.connect();
 
-            int id = insert(conexao, pst, produto);
-
+            insert(conexao, pst, produto);
+            result = true;
+                    
+        } catch (Exception e) {
+            
+            result = false;
+            
+        }finally{
+            
             conexao.close();
-
-            return id;
-        } catch (SQLException t) {
-
-            try {
-                conexao.close();
-            } catch (SQLException ex) {
-            }
-
-            return 0;
+            
         }
+        return result;
     }
 
-    public boolean updateProduct(ModelCommercialProduct produto) {
+    public boolean updateProduct(ModelCommercialProduct produto) throws SQLException {
         try {
             conexao = Model.Connect.Connect.connect();
 
@@ -53,21 +53,22 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL{
 
             conexao.close();
 
-            return true;
+            result = true;
         } catch (SQLException t) {
-
-            try {
-                conexao.close();
-            } catch (SQLException ex) {
-            }
-
-            return false;
+            
+            result = false;
+            
+        }finally{
+            conexao.close();
         }
+        return result;
     }
 
-    public List<ModelCommercialProduct> selectAllProducts() {
+    public List<ModelCommercialProduct> selectAllProducts()throws SQLException {
+        
+        List<ModelCommercialProduct> produto = null;
+        
         try {
-            List<ModelCommercialProduct> produto = null;
 
             conexao = Model.Connect.Connect.connect();
 
@@ -84,50 +85,48 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL{
                                 
                 }
             }
-            conexao.close();
-
-            return produto;
+            
         } catch (SQLException t) {
-
-            try {
-                conexao.close();
-            } catch (SQLException ex) {
-            }
-            return null;
+            
+            produto = null;
+            
+        }finally{
+            conexao.close();
         }
+        
+        return produto;
     }
 
-    public ModelCommercialProduct selectIdProduct( ModelCommercialProduct produto) {
+    public ModelCommercialProduct selectIdProduct(int id) throws SQLException{
+        
+        ModelCommercialProduct modelCommercialProduct = null;
+        
         try {
 
             conexao = Model.Connect.Connect.connect();
 
-            rs = selectId(conexao, pst, produto);
+            rs = selectId(conexao, pst, id);
 
             if (rs.next()) {
                 
-                ModelCommercialProduct modelCommercialProduct = new ModelCommercialProduct(
+                 modelCommercialProduct = new ModelCommercialProduct(
                         rs.getString(1), rs.getDouble(2), rs.getString(3), rs.getInt(4));
-                ;
-                /*return new ModelCommercialProduct(,
-                            ,
-                            ,s
-                            );*/
+                 
             }
+            
+        } catch (Exception t) {
+            
+        }finally{
+            modelCommercialProduct = null;
             conexao.close();
-
-            return null;
-        } catch (SQLException t) {
-
-            try {
-                conexao.close();
-            } catch (SQLException ex) {
-            }
-            return null;
+        
         }
+        
+        return modelCommercialProduct;
+        
     }
 
-    public boolean deleteProduct(int a) {
+    public boolean deleteProduct(int a)throws SQLException {
         try {
             conexao = Model.Connect.Connect.connect();
 
@@ -137,28 +136,31 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL{
 
             return true;
         } catch (SQLException t) {
-
-            try {
-                conexao.close();
-            } catch (SQLException ex) {
-            }
-
+            
             return false;
+            
+        }finally{
+            
+            conexao.close();
         }
     }
     
-    public List<ModelCommercialProduct> selectNameProducts(String nome) {
+    public List<ModelCommercialProduct> selectNameProducts(String nome) throws SQLException{
+        
+        List<ModelCommercialProduct> produto = null;
+        
         try {
-            List<ModelCommercialProduct> produto = null;
 
             conexao = Model.Connect.Connect.connect();
 
             rs = selectProduto(conexao, pst, nome);
 
             if (rs.next()) {
+                
                 produto = new ArrayList<>();
 
                 while (rs.next()) {
+                    
                     produto.add(new ModelCommercialProduct(rs.getString(1),
                             rs.getDouble(2),
                             rs.getString(3),
@@ -166,16 +168,15 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL{
                                 
                 }
             }
-            conexao.close();
-
-            return produto;
+            
         } catch (SQLException t) {
-
-            try {
-                conexao.close();
-            } catch (SQLException ex) {
-            }
-            return null;
+            
+             produto = null;
+            
+        }finally{
+            conexao.close();
         }
+        
+        return produto;
     }
 }

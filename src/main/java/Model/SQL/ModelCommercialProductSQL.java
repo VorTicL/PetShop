@@ -54,10 +54,10 @@ public class ModelCommercialProductSQL {
         return pst.executeQuery();
     }
 
-    public ResultSet selectId(Connection conexao, PreparedStatement pst, ModelCommercialProduct produto) throws SQLException {
+    public ResultSet selectId(Connection conexao, PreparedStatement pst, int id) throws SQLException {
         String sql = "select id,nome,valor,filial,qtdProd from produto where id = ? and ativo = true";
         pst = conexao.prepareStatement(sql);
-        pst.setInt(1, produto.getId());
+        pst.setInt(1, id);
 
         return pst.executeQuery();
     }

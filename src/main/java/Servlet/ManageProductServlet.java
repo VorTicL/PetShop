@@ -45,9 +45,13 @@ public class ManageProductServlet extends HttpServlet {
             modelCommercialProduct.setNome(nome);
             modelCommercialProduct.setQtdProd(qtd);
             modelCommercialProduct.setValor(valor);
-            modelCommercialProductDao.updateProduct(modelCommercialProduct);
-
-            request.setAttribute("response", "Produto Alterado Com Sucesso!");
+            
+            if (modelCommercialProductDao.updateProduct(modelCommercialProduct)) {
+                request.setAttribute("response", "Produto Alterado Com Sucesso!");
+            }else{
+                request.setAttribute("response", "ERRO!");
+            }
+            
         } catch (Exception e) {
             request.setAttribute("response", "ERRO!");
         }
@@ -61,9 +65,13 @@ public class ManageProductServlet extends HttpServlet {
 
         try {
             int idRemove = Integer.parseInt(request.getParameter("idProd"));
-            MockProduto.remover(idRemove);
-            modelCommercialProductDao.deleteProduct(idRemove);
-            request.setAttribute("response", "Produto Removido Com Sucesso!");
+            
+            if (modelCommercialProductDao.deleteProduct(idRemove)) {
+                request.setAttribute("response", "Produto Removido Com Sucesso!");
+            }else{
+                request.setAttribute("response", "ERRO!");
+            }
+            
         } catch (Exception e) {
             request.setAttribute("response", "ERRO!");
         }

@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
 public class ProductServlet extends HttpServlet {
 
     ModelCommercialProductDao modelCommercialProductDao = new ModelCommercialProductDao();
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -40,31 +40,30 @@ public class ProductServlet extends HttpServlet {
             throws ServletException, IOException {
 
         //ModelCommercialProduct produto = new ModelCommercialProduct(
-              //request.getParameter("nomeProd"),Double.parseDouble(request.getParameter("uniValue")),
-              //request.getParameter("filial"),Integer.parseInt(request.getParameter("qtdEstoque")));
-      //ModelCommercialProductDao produtoDao = new  ModelCommercialProductDao();
-      
-      //int id = produtoDao.insert(produto);
-      //request.getRequestDispatcher("WEB-INF/jsp/ProductForms/productForm.jsp").forward(request, response);
-      
-      try {
+        //request.getParameter("nomeProd"),Double.parseDouble(request.getParameter("uniValue")),
+        //request.getParameter("filial"),Integer.parseInt(request.getParameter("qtdEstoque")));
+        //ModelCommercialProductDao produtoDao = new  ModelCommercialProductDao();
+        //int id = produtoDao.insert(produto);
+        //request.getRequestDispatcher("WEB-INF/jsp/ProductForms/productForm.jsp").forward(request, response);
+        try {
             String nome = request.getParameter("nomeProd");
             double valueUni = Double.parseDouble(request.getParameter("uniValue"));
             String filial = request.getParameter("filial");
             int qtdEstoque = Integer.parseInt(request.getParameter("qtdEstoque"));
 
             ModelCommercialProduct prod1 = new ModelCommercialProduct(nome, valueUni, filial, qtdEstoque);
-            modelCommercialProductDao.insertProduct(prod1);
-            request.setAttribute("productResponse",  prod1.getNome()+"Cadastrado com sucesso!");
+            if (modelCommercialProductDao.insertProduct(prod1)) {
+                request.setAttribute("productResponse", prod1.getNome() + "Cadastrado com sucesso!");
+            } else {
+                request.setAttribute("productResponse", "ERRO!");
+            }
         } catch (Exception e) {
             request.setAttribute("productResponse", "ERRO!");
-        }finally{
+        } finally {
             request.getRequestDispatcher("WEB-INF/jsp/ProductForms/responseInsertProduct.jsp")
                     .forward(request, response);
         }
-      
-    }
-        
+
     }
 
-
+}
