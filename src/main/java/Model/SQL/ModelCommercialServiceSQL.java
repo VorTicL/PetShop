@@ -6,6 +6,7 @@
 package Model.SQL;
 
 import Model.Entity.ModelCommercialProduct;
+import Model.Entity.ModelCommercialService;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,47 +16,47 @@ import java.sql.SQLException;
  *
  * @author João
  */
-public class ModelCommercialProductSQL {
-    public void insert(Connection conexao, PreparedStatement pst, ModelCommercialProduct produto) throws SQLException {
+public class ModelCommercialServiceSQL {
+    public void insert(Connection conexao, PreparedStatement pst, ModelCommercialService servico) throws SQLException {
 
-         String sql = "insert into produto (nome,valor,filial,qtdProd) values (?,?,?,?)";
+         String sql = "insert into servicos (pet,valor,nome,filial) values (?,?,?,?)";
 
 
         pst = conexao.prepareStatement(sql);
 
-        pst.setString(1, produto.getNome());
-        pst.setDouble(2, produto.getValor());
-        pst.setString(3, produto.getFilial());
-        pst.setInt(4, produto.getQtdProd());
+        pst.setString(1, servico.getPet());
+        pst.setDouble(2, servico.getValor());
+        pst.setString(3, servico.getNome());
+        pst.setString(4, servico.getFilial());
         
         pst.execute();
 
     }
 
-    public void update(Connection conexao, PreparedStatement pst, ModelCommercialProduct produto) throws SQLException {
+    public void update(Connection conexao, PreparedStatement pst, ModelCommercialService servico) throws SQLException {
 
-        String sql = "update produto set nome = ? and valor = ? and  filial = ? and qtdProd = ? where id = ? and ativo = true";
+        String sql = "update servico set nome = ? and valor = ? and  filial = ? and pet = ? where id = ? and ativo = true";
 
         pst = conexao.prepareStatement(sql);
 
-       pst.setString(1, produto.getNome());
-       pst.setDouble(2, produto.getValor());
-       pst.setString(3, produto.getFilial());
-       pst.setInt(4, produto.getQtdProd());
-       pst.setInt(5, produto.getId());
+       pst.setString(1, servico.getNome());
+       pst.setDouble(2, servico.getValor());
+       pst.setString(3, servico.getFilial());
+       pst.setString(4, servico.getPet());
+       pst.setInt(5, servico.getId());
         
         pst.executeUpdate();
     }
 
     public ResultSet selectAll(Connection conexao, PreparedStatement pst) throws SQLException {
-        String sql = "select id,nome,valor,filial,qtdProd from produto where ativo = true";
+        String sql = "select * from servico where ativo = true";
         pst = conexao.prepareStatement(sql);
 
         return pst.executeQuery();
     }
 
     public ResultSet selectId(Connection conexao, PreparedStatement pst, int id) throws SQLException {
-        String sql = "select id,nome,valor,filial,qtdProd from produto where id = ? and ativo = true";
+        String sql = "select id,nome,valor,filial,pet from servico where id = ? and ativo = true";
         pst = conexao.prepareStatement(sql);
         pst.setInt(1, id);
 
@@ -63,7 +64,7 @@ public class ModelCommercialProductSQL {
     }
 
     public void delete(Connection conexao, PreparedStatement pst, int id) throws SQLException {
-        String sql = "update produto set ativo = false where id = ?";
+        String sql = "update servico set ativo = false where id = ?";
         pst = conexao.prepareStatement(sql);
         pst.setInt(1, id);
 
@@ -71,7 +72,7 @@ public class ModelCommercialProductSQL {
     }
     
     public ResultSet selectProduto(Connection conexao, PreparedStatement pst, String nome) throws SQLException {
-        String sql = "select * from produto where nome like ? and ativo = true";
+        String sql = "select * from servico where nome like ? and ativo = true";
 
         pst = conexao.prepareStatement(sql);
         pst.setString(1, nome);

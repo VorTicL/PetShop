@@ -6,7 +6,9 @@
 package Model.DAO;
 
 import Model.Entity.ModelCommercialProduct;
+import Model.Entity.ModelCommercialService;
 import Model.SQL.ModelCommercialProductSQL;
+import Model.SQL.ModelCommercialServiceSQL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,19 +20,19 @@ import java.util.List;
  *
  * @author Victor de Lucca
  */
-public class ModelCommercialProductDao extends ModelCommercialProductSQL{
+public class ModelCommercialServicosDao extends ModelCommercialServiceSQL{
 
     private Connection conexao; 
     private PreparedStatement pst; 
     private ResultSet rs;
     private boolean result = false;
 
-    public boolean insertProduct(ModelCommercialProduct produto) throws SQLException {
+    public boolean insertProduct(ModelCommercialService servico) throws SQLException {
         
         try {
             conexao = Model.Connect.Connect.connect();
 
-            insert(conexao, pst, produto);
+            insert(conexao, pst, servico);
             result = true;
                     
         } catch (Exception e) {
@@ -45,11 +47,11 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL{
         return result;
     }
 
-    public boolean updateProduct(ModelCommercialProduct produto) throws SQLException {
+    public boolean updateProduct(ModelCommercialService servico) throws SQLException {
         try {
             conexao = Model.Connect.Connect.connect();
 
-            update(conexao, pst, produto);
+            update(conexao, pst, servico);
 
             conexao.close();
 
@@ -64,9 +66,9 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL{
         return result;
     }
 
-    public List<ModelCommercialProduct> selectAllProducts()throws SQLException {
+    public List<ModelCommercialService> selectAllProducts()throws SQLException {
         
-        List<ModelCommercialProduct> produto = null;
+        List<ModelCommercialService> servico = null;
         
         try {
 
@@ -75,31 +77,31 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL{
             rs = selectAll(conexao, pst);
 
             if (rs.next()) {
-                produto = new ArrayList<>();
+                servico = new ArrayList<>();
 
                 while (rs.next()) {
-                    produto.add(new ModelCommercialProduct(rs.getString(1),
+                    servico.add(new ModelCommercialService(rs.getString(1),
                             rs.getDouble(2),
                             rs.getString(3),
-                            rs.getInt(4)));
+                            rs.getString(4)));
                                 
                 }
             }
             
         } catch (SQLException t) {
             
-            produto = null;
+            servico = null;
             
         }finally{
             conexao.close();
         }
         
-        return produto;
+        return servico;
     }
 
-    public ModelCommercialProduct selectIdProduct(int id) throws SQLException{
+    public ModelCommercialService selectIdProduct(int id) throws SQLException{
         
-        ModelCommercialProduct modelCommercialProduct = null;
+        ModelCommercialService modelCommercialServico = null;
         
         try {
 
@@ -109,20 +111,19 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL{
 
             if (rs.next()) {
                 
-                 modelCommercialProduct = new ModelCommercialProduct(
-                        rs.getString(1), rs.getDouble(2), rs.getString(3), rs.getInt(4));
+                 modelCommercialServico = new ModelCommercialService(
+                        rs.getString(1), rs.getDouble(2), rs.getString(3), rs.getString(4));
                  
             }
             
         } catch (Exception t) {
-            
+            modelCommercialServico = null;
         }finally{
-            modelCommercialProduct = null;
             conexao.close();
         
         }
         
-        return modelCommercialProduct;
+        return modelCommercialServico;
         
     }
 
@@ -145,9 +146,9 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL{
         }
     }
     
-    public List<ModelCommercialProduct> selectNameProducts(String nome) throws SQLException{
+    public List<ModelCommercialService> selectNameProducts(String nome) throws SQLException{
         
-        List<ModelCommercialProduct> produto = null;
+        List<ModelCommercialService> servico = null;
         
         try {
 
@@ -157,26 +158,25 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL{
 
             if (rs.next()) {
                 
-                produto = new ArrayList<>();
+                servico = new ArrayList<>();
 
                 while (rs.next()) {
                     
-                    produto.add(new ModelCommercialProduct(rs.getString(1),
+                    servico.add(new ModelCommercialService(rs.getString(1),
                             rs.getDouble(2),
                             rs.getString(3),
-                            rs.getInt(4)));
-                                
+                            rs.getString(4)));
                 }
             }
             
         } catch (SQLException t) {
             
-             produto = null;
+             servico = null;
             
         }finally{
             conexao.close();
         }
         
-        return produto;
+        return servico;
     }
 }
