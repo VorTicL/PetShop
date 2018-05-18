@@ -49,9 +49,10 @@ public class LoginServlet extends HttpServlet {
         IuserDAO iuserDAO = new IuserDAO();
 
         if (iuserDAO.login(iuser)) {
-            
+            HttpSession sessao = request.getSession();
+            sessao.setAttribute("usuario", iuser);
             response.sendRedirect(request.getContextPath() + "/home");
-        
+            
         } else {
             request.setAttribute("msgErro", "Usuário ou senha inválido");
             request.getRequestDispatcher("WEB-INF/jsp/erro-login.jsp")

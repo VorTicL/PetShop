@@ -27,7 +27,7 @@ public class ModelCommercialServicosDao extends ModelCommercialServiceSQL{
     private ResultSet rs;
     private boolean result = false;
 
-    public boolean insertProduct(ModelCommercialService servico) throws SQLException {
+    public boolean insertService(ModelCommercialService servico) throws SQLException {
         
         try {
             conexao = Model.Connect.Connect.connect();
@@ -47,7 +47,7 @@ public class ModelCommercialServicosDao extends ModelCommercialServiceSQL{
         return result;
     }
 
-    public boolean updateProduct(ModelCommercialService servico) throws SQLException {
+    public boolean updateServices(ModelCommercialService servico) throws SQLException {
         try {
             conexao = Model.Connect.Connect.connect();
 
@@ -66,7 +66,7 @@ public class ModelCommercialServicosDao extends ModelCommercialServiceSQL{
         return result;
     }
 
-    public List<ModelCommercialService> selectAllProducts()throws SQLException {
+    public List<ModelCommercialService> selectAllServices()throws SQLException {
         
         List<ModelCommercialService> servico = null;
         
@@ -99,7 +99,7 @@ public class ModelCommercialServicosDao extends ModelCommercialServiceSQL{
         return servico;
     }
 
-    public ModelCommercialService selectIdProduct(int id) throws SQLException{
+    public ModelCommercialService selectIdServices(int id) throws SQLException{
         
         ModelCommercialService modelCommercialServico = null;
         
@@ -127,7 +127,7 @@ public class ModelCommercialServicosDao extends ModelCommercialServiceSQL{
         
     }
 
-    public boolean deleteProduct(int a)throws SQLException {
+    public boolean deleteServices(int a)throws SQLException {
         try {
             conexao = Model.Connect.Connect.connect();
 
@@ -146,7 +146,7 @@ public class ModelCommercialServicosDao extends ModelCommercialServiceSQL{
         }
     }
     
-    public List<ModelCommercialService> selectNameProducts(String nome) throws SQLException{
+    public List<ModelCommercialService> selectNameServices(String nome) throws SQLException{
         
         List<ModelCommercialService> servico = null;
         

@@ -5,6 +5,7 @@
  */
 package Servlet;
 
+import Model.DAO.ModelCommercialServicosDao;
 import Model.Entity.ModelCommercialProduct;
 import Model.Entity.ModelCommercialService;
 import ServiceMock.MockProduto;
@@ -24,7 +25,9 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "serviceServlet", urlPatterns = {"/service"})
 public class ServiceServlet extends HttpServlet {
-
+    
+    ModelCommercialServicosDao ModelCommercialServicosDao = null;
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -45,7 +48,11 @@ public class ServiceServlet extends HttpServlet {
             String pet =request.getParameter("pet");
 
             ModelCommercialService serv1 = new ModelCommercialService(pet, valueUni, nome, filial);
-            MockService.inserirProduto(serv1);
+            if (ModelCommercialServicosDao.insertService(serv1)) {
+                request.setAttribute("productResponse", serv1.getNome() + "Cadastrado com sucesso!");
+            } else {
+                request.setAttribute("productResponse", "ERRO!");
+            }
             request.setAttribute("serviceResponse",  serv1.getNome()+"Cadastrado com sucesso!");
         } catch (Exception e) {
             request.setAttribute("productResponse", "ERRO!");
