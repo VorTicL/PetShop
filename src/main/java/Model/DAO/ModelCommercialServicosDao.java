@@ -33,6 +33,7 @@ public class ModelCommercialServicosDao extends ModelCommercialServiceSQL{
             conexao = Model.Connect.Connect.connect();
 
             insert(conexao, pst, servico);
+            
             result = true;
                     
         } catch (Exception e) {
@@ -77,6 +78,7 @@ public class ModelCommercialServicosDao extends ModelCommercialServiceSQL{
             rs = selectAll(conexao, pst);
 
             if (rs.next()) {
+                
                 servico = new ArrayList<>();
 
                 while (rs.next()) {

@@ -75,6 +75,8 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL{
 
             if (rs.next()) {
                 
+                produto = new ArrayList<ModelCommercialProduct>();
+                
                 while (rs.next()) {
                     ModelCommercialProduct modelCommercialProduct = new ModelCommercialProduct();
                     modelCommercialProduct.setId(rs.getInt(1));
@@ -157,7 +159,9 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL{
             rs = selectProduto(conexao, pst, nome);
 
             if (rs.next()) {
-                produto = new ArrayList<>();
+                
+                produto = new ArrayList<ModelCommercialProduct>();
+                
                 while (rs.next()) {
                     
                     ModelCommercialProduct modelCommercialProduct = new ModelCommercialProduct();

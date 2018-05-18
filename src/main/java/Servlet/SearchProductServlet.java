@@ -25,27 +25,31 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "searchProduct", urlPatterns = {"/searchProduct"})
 public class SearchProductServlet extends HttpServlet {
 
-    ModelCommercialProductDao modelCommercialProductDao = null;
-    List<ModelCommercialProduct> listCommercial = null;
+    ModelCommercialProductDao modelCommercialProductDao = new ModelCommercialProductDao();
+    List<ModelCommercialProduct> listCommercial = new ArrayList<ModelCommercialProduct>();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nomeProd = null;
-        nomeProd = request.getParameter("nomeProd");
+        String nomeProd = request.getParameter("nomeProd");
+        
         try {
-            if (nomeProd != null) {
-                if (nomeProd.compareToIgnoreCase("") != 0) {
-                    listCommercial = modelCommercialProductDao.selectNameProducts(nomeProd);
-                } else {
-                    listCommercial = modelCommercialProductDao.selectAllProducts();
-                }
+            if (nomeProd == null || nomeProd.compareToIgnoreCase("") == 0) {
+            
+                listCommercial = modelCommercialProductDao.selectNameProducts(nomeProd);
+            
+            } else {
+                
+                listCommercial = modelCommercialProductDao.selectAllProducts();
+            
             }
+            
             request.setAttribute("listCommercial", listCommercial);
             
         } catch (Exception e) {
-            listCommercial = null;
+            
             request.setAttribute("listCommercial", listCommercial);
+            
         }
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/ProductForms/searchProduct.jsp");
