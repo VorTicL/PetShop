@@ -18,7 +18,7 @@
             <div class="data-container">
                 <div>
                     <div>
-                        <input type="text" name="nomeProd"/> 
+                        <input type="text" name="nomeProd" value=""/> 
                     </div>
                     <div>
                         <button type="submit">Enviar</button>

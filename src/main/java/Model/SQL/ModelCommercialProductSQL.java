@@ -18,7 +18,7 @@ import java.sql.SQLException;
 public class ModelCommercialProductSQL {
     public void insert(Connection conexao, PreparedStatement pst, ModelCommercialProduct produto) throws SQLException {
 
-         String sql = "insert into produto (nome,valor,filial,qtdProd) values (?,?,?,?)";
+         String sql = "insert into produto (nome,valor,filial,estoque) values (?,?,?,?)";
 
 
         pst = conexao.prepareStatement(sql);
@@ -34,7 +34,7 @@ public class ModelCommercialProductSQL {
 
     public void update(Connection conexao, PreparedStatement pst, ModelCommercialProduct produto) throws SQLException {
 
-        String sql = "update produto set nome = ? and valor = ? and  filial = ? and qtdProd = ? where id = ? and ativo = true";
+        String sql = "update produto set nome = ?, valor = ?, filial = ?, estoque = ? where id = ? and ativo = true";
 
         pst = conexao.prepareStatement(sql);
 
@@ -48,14 +48,14 @@ public class ModelCommercialProductSQL {
     }
 
     public ResultSet selectAll(Connection conexao, PreparedStatement pst) throws SQLException {
-        String sql = "select id,nome,valor,filial,qtdProd from produto where ativo = true";
+        String sql = "select id,nome,valor,filial,estoque from produto where ativo = true";
         pst = conexao.prepareStatement(sql);
 
         return pst.executeQuery();
     }
 
     public ResultSet selectId(Connection conexao, PreparedStatement pst, int id) throws SQLException {
-        String sql = "select id,nome,valor,filial,qtdProd from produto where id = ? and ativo = true";
+        String sql = "select id,nome,valor,filial,estoque from produto where id = ? and ativo = true";
         pst = conexao.prepareStatement(sql);
         pst.setInt(1, id);
 
@@ -71,7 +71,7 @@ public class ModelCommercialProductSQL {
     }
     
     public ResultSet selectProduto(Connection conexao, PreparedStatement pst, String nome) throws SQLException {
-        String sql = "select * from produto where nome like ? and ativo = true";
+        String sql = "select id,nome,valor,filial,estoque from produto where nome like ? and ativo = true";
 
         pst = conexao.prepareStatement(sql);
         pst.setString(1, nome);

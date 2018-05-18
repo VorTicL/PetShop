@@ -31,6 +31,7 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL{
             conexao = Model.Connect.Connect.connect();
 
             insert(conexao, pst, produto);
+            
             result = true;
                     
         } catch (Exception e) {
@@ -38,9 +39,7 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL{
             result = false;
             
         }finally{
-            
             conexao.close();
-            
         }
         return result;
     }
@@ -75,14 +74,15 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL{
             rs = selectAll(conexao, pst);
 
             if (rs.next()) {
-                produto = new ArrayList<>();
-
+                
                 while (rs.next()) {
-                    produto.add(new ModelCommercialProduct(rs.getString(1),
-                            rs.getDouble(2),
-                            rs.getString(3),
-                            rs.getInt(4)));
-                                
+                    ModelCommercialProduct modelCommercialProduct = new ModelCommercialProduct();
+                    modelCommercialProduct.setId(rs.getInt(1));
+                    modelCommercialProduct.setNome(rs.getString(2));
+                    modelCommercialProduct.setValor(rs.getDouble(3));
+                    modelCommercialProduct.setFilial(rs.getString(4));
+                    modelCommercialProduct.setQtdProd(rs.getInt(5));
+                    produto.add(modelCommercialProduct);
                 }
             }
             
@@ -108,10 +108,11 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL{
             rs = selectId(conexao, pst, id);
 
             if (rs.next()) {
-                
-                 modelCommercialProduct = new ModelCommercialProduct(
-                        rs.getString(1), rs.getDouble(2), rs.getString(3), rs.getInt(4));
-                 
+                    modelCommercialProduct.setId(rs.getInt(1));
+                    modelCommercialProduct.setNome(rs.getString(2));
+                    modelCommercialProduct.setValor(rs.getDouble(3));
+                    modelCommercialProduct.setFilial(rs.getString(4));
+                    modelCommercialProduct.setQtdProd(rs.getInt(5));
             }
             
         } catch (Exception t) {
@@ -156,16 +157,17 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL{
             rs = selectProduto(conexao, pst, nome);
 
             if (rs.next()) {
-                
                 produto = new ArrayList<>();
-
                 while (rs.next()) {
                     
-                    produto.add(new ModelCommercialProduct(rs.getString(1),
-                            rs.getDouble(2),
-                            rs.getString(3),
-                            rs.getInt(4)));
-                                
+                    ModelCommercialProduct modelCommercialProduct = new ModelCommercialProduct();
+                    modelCommercialProduct.setId(rs.getInt(1));
+                    modelCommercialProduct.setNome(rs.getString(2));
+                    modelCommercialProduct.setValor(rs.getDouble(3));
+                    modelCommercialProduct.setFilial(rs.getString(4));
+                    modelCommercialProduct.setQtdProd(rs.getInt(5));
+                    produto.add(modelCommercialProduct);
+                    
                 }
             }
             
