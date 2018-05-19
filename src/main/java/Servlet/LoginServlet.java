@@ -43,20 +43,25 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         String username = request.getParameter("username");
         String senha = request.getParameter("senha");
-        
+
         Iuser iuser = new Iuser(0, username, senha, 0, null, null);
 
         IuserDAO iuserDAO = new IuserDAO();
+        try {
+            if (iuserDAO.login(iuser)) {
+                HttpSession sessao = request.getSession();
+                sessao.setAttribute("usuario", iuser);
+                response.sendRedirect(request.getContextPath() + "/home");
 
-        if (iuserDAO.login(iuser)) {
-            HttpSession sessao = request.getSession();
-            sessao.setAttribute("usuario", iuser);
-            response.sendRedirect(request.getContextPath() + "/home");
-            
-        } else {
+            } else {
+                request.setAttribute("msgErro", "Usuário ou senha inválido");
+                request.getRequestDispatcher("WEB-INF/jsp/erro-login.jsp")
+                        .forward(request, response);
+            }
+        } catch (Exception e) {
             request.setAttribute("msgErro", "Usuário ou senha inválido");
             request.getRequestDispatcher("WEB-INF/jsp/erro-login.jsp")
-                    .forward(request, response);
+                        .forward(request, response);
         }
 
     }

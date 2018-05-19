@@ -24,9 +24,9 @@ import java.util.logging.Logger;
  */
 public class IuserDAO extends IuserSQL {
 
-    private Connection conexao; 
-    private PreparedStatement pst; 
-    private ResultSet rs; 
+    private Connection conexao;
+    private PreparedStatement pst;
+    private ResultSet rs;
 
     public boolean insert(Iuser iuser) {
 
@@ -49,7 +49,6 @@ public class IuserDAO extends IuserSQL {
         }
     }
 
-    
     public boolean update(Iuser iuser) {
         try {
             conexao = Model.Connect.Connect.connect();
@@ -151,7 +150,8 @@ public class IuserDAO extends IuserSQL {
         }
     }
 
-    public boolean login(Iuser iuser) {
+    public boolean login(Iuser iuser) throws SQLException {
+        boolean retorno;
         try {
 
             conexao = Model.Connect.Connect.connect();
@@ -160,24 +160,19 @@ public class IuserDAO extends IuserSQL {
 
             if (rs.next()) {
 
-                    iuser.setId(rs.getInt(1));
-                    iuser.setIdfuncionario(rs.getInt(2));
-
-                conexao.close();
-
-                return true;
+                iuser.setId(rs.getInt(1));
+                iuser.setIdfuncionario(rs.getInt(2));
+                retorno = true;
+            } else {
+                retorno = false;
             }
 
-            conexao.close();
-
-            return false;
         } catch (SQLException t) {
-            try {
-                conexao.close();
-            } catch (SQLException ex) {
-            }
-            return false;
+            retorno = false;
+        } finally {
+            conexao.close();
         }
+        return retorno;
     }
 
 }
