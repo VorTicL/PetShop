@@ -5,11 +5,8 @@
  */
 package Servlet;
 
-import Model.Entity.Funcionario;
-import ServiceMock.MockFuncionario;
+import Model.Entity.Iuser;
 import java.io.IOException;
-import java.io.PrintWriter;
-import Model.DAO.FuncionarioDao;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,11 +43,8 @@ public class FuncionarioServlet extends HttpServlet {
       int id = funcionarioDao.insert(funcionario);
       request.getRequestDispatcher("WEB-INF/jsp/UserForms/funcionarioForm.jsp").forward(request, response);
       */
-      Funcionario funcionario = new Funcionario(
-              0, 0, request.getParameter("nomeFunc"),request.getParameter("dataNasc"),
-              request.getParameter("sexo"),request.getParameter("rg"),request.getParameter("cpf"),
-              null);
-      MockFuncionario.inserirFuncionario(funcionario);
+        Iuser funcionario = new Iuser();
+      //MockFuncionario.inserirFuncionario(funcionario);
       request.getRequestDispatcher("WEB-INF/jsp/UserForms/funcionarioForm.jsp").forward(request, response);
     }
 }

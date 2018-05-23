@@ -17,21 +17,19 @@ public class Cliente {
     private String sexo;
     private String rg;
     private String cpf;
-    private int endereco;
     private String dataCri;
     
     public Cliente(){
         
     }
 
-    public Cliente(int id, String nome, String dataNasc, String sexo, String rg, String cpf, int endereco, String dataCri) {
+    public Cliente(int id, String nome, String dataNasc, String sexo, String rg, String cpf, String dataCri) {
         this.id = id;
         this.nome = nome;
         this.dataNasc = dataNasc;
         this.sexo = sexo;
         this.rg = rg;
         this.cpf = cpf;
-        this.endereco = endereco;
         this.dataCri = dataCri;
     }
 
@@ -117,20 +115,6 @@ public class Cliente {
      */
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-
-    /**
-     * @return the endereco
-     */
-    public int getEndereco() {
-        return endereco;
-    }
-
-    /**
-     * @param endereco the endereco to set
-     */
-    public void setEndereco(int endereco) {
-        this.endereco = endereco;
     }
 
     /**

@@ -55,7 +55,8 @@ public class ModelCommercialProductSQL {
     }
 
     public ResultSet selectId(Connection conexao, PreparedStatement pst, int id) throws SQLException {
-        String sql = "select id,nome,valor,filial,estoque from produto where id = ? and ativo = true";
+        String sql = "select id,nome,valor,filial,"
+                + "estoque from produto where id = ? and ativo = 1";
         pst = conexao.prepareStatement(sql);
         pst.setInt(1, id);
 
@@ -71,7 +72,8 @@ public class ModelCommercialProductSQL {
     }
     
     public ResultSet selectProduto(Connection conexao, PreparedStatement pst, String nome) throws SQLException {
-        String sql = "select id,nome,valor,filial,estoque from produto where nome like ? and ativo = true";
+        String sql = "select id,nome,valor,filial,estoque "
+                + "from produto where nome like ? and ativo = 1";
 
         pst = conexao.prepareStatement(sql);
         pst.setString(1, nome);

@@ -14,30 +14,37 @@ public class Iuser {
     private int id;
     private String login;
     private String senha;
-    private int idfuncionario;
+    private int idFilial;
     private String email;
     private String dataCri;
+    private String nome;
+    private String dataNasc;
+    private String sexo;
+    private String rg;
+    private String cpf;
 
-    public Iuser(int id, String login, String senha, int idfuncionario, String email, String dataCri) {
+    public Iuser(int id, String login, String senha, int idFilial, String email, String dataCri, String nome, String dataNasc, String sexo, String rg, String cpf) {
         this.id = id;
         this.login = login;
         this.senha = senha;
-        this.idfuncionario = idfuncionario;
+        this.idFilial = idFilial;
         this.email = email;
         this.dataCri = dataCri;
+        this.nome = nome;
+        this.dataNasc = dataNasc;
+        this.sexo = sexo;
+        this.rg = rg;
+        this.cpf = cpf;
     }
 
     public Iuser() {
+        
     }
 
     public int getId() {
         return id;
     }
-    
-    public boolean validarSenha(String senha){
-        return this.senha.compareTo(senha)==0;
-    }
-    
+
     public void setId(int id) {
         this.id = id;
     }
@@ -58,12 +65,12 @@ public class Iuser {
         this.senha = senha;
     }
 
-    public int getIdfuncionario() {
-        return idfuncionario;
+    public int getIdFilial() {
+        return idFilial;
     }
 
-    public void setIdfuncionario(int idfuncionario) {
-        this.idfuncionario = idfuncionario;
+    public void setIdFilial(int idFilial) {
+        this.idFilial = idFilial;
     }
 
     public String getEmail() {
@@ -81,7 +88,45 @@ public class Iuser {
     public void setDataCri(String dataCri) {
         this.dataCri = dataCri;
     }
-    
-    
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getDataNasc() {
+        return dataNasc;
+    }
+
+    public void setDataNasc(String dataNasc) {
+        this.dataNasc = dataNasc;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
     
 }

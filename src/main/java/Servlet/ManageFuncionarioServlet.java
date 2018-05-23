@@ -5,8 +5,8 @@
  */
 package Servlet;
 
-import Model.Entity.Funcionario;
-import ServiceMock.MockFuncionario;
+
+import Model.Entity.Iuser;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,7 +28,7 @@ public class ManageFuncionarioServlet extends HttpServlet{
         try {
             
         
-        Funcionario func = new Funcionario();
+            Iuser func = new Iuser();
         func.setId(Integer.parseInt(request.getParameter("idFunc")));
         func.setNome(request.getParameter("nomeFunc"));
         func.setDataNasc(request.getParameter("dataNasc"));
@@ -36,7 +36,7 @@ public class ManageFuncionarioServlet extends HttpServlet{
        func.setRg(request.getParameter("rg"));
        func.setCpf(request.getParameter("cpf"));
         
-        MockFuncionario.alterar(func);
+        //MockFuncionario.alterar(func);
         
         request.setAttribute("response", "Funcionario Alterado Com Sucesso!");
         } catch (Exception e) {
@@ -52,7 +52,7 @@ public class ManageFuncionarioServlet extends HttpServlet{
         
          try {
         int idRemove = Integer.parseInt(request.getParameter("idFunc"));
-             MockFuncionario.remover(idRemove);
+             //MockFuncionario.remover(idRemove);
         request.setAttribute("response", "Funcionario Removido Com Sucesso!");
         } catch (Exception e) {
             request.setAttribute("response", "ERRO!");

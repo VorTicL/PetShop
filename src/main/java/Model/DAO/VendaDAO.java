@@ -5,7 +5,7 @@
  */
 package Model.DAO;
 
-import Model.AbstractDAO.AbstractVenda;
+
 import Model.Connect.Connect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,13 +19,12 @@ import java.util.List;
  *
  * @author João
  */
-public class VendaDAO extends AbstractVenda{
+public class VendaDAO{
     
     private Connection conexao;
     private PreparedStatement pst;
     private ResultSet rs;
     
-    @Override
     public boolean insert(Venda venda) {
 
         conexao = Connect.connect();
@@ -56,7 +55,6 @@ public class VendaDAO extends AbstractVenda{
         }
 
     }
-     @Override
     public List<Venda> selectAll() {
 
         ArrayList<Venda> venda= new ArrayList<>();
@@ -92,8 +90,6 @@ public class VendaDAO extends AbstractVenda{
         }
 
     }
-
-    @Override
     public Venda selectId(Venda venda) {
         
         conexao = Connect.connect();
@@ -127,7 +123,7 @@ public class VendaDAO extends AbstractVenda{
             return venda;
         }
     }
-    @Override
+    
     public boolean update(Venda venda) {
          conexao = Connect.connect();
 
@@ -156,7 +152,7 @@ public class VendaDAO extends AbstractVenda{
             return false;
         }
     }
-     @Override
+     
     public boolean delete(Venda venda) {
          conexao = Connect.connect();
 
@@ -183,7 +179,7 @@ public class VendaDAO extends AbstractVenda{
             return false;
         }
     }
-    @Override
+    
     public boolean venda(Venda venda) {
      
         conexao = Connect.connect();

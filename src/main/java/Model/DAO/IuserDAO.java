@@ -5,7 +5,6 @@
  */
 package Model.DAO;
 
-import Model.AbstractDAO.AbstractIuser;
 import Model.Connect.Connect;
 import Model.Entity.Iuser;
 import Model.SQL.IuserSQL;
@@ -81,13 +80,13 @@ public class IuserDAO extends IuserSQL {
                 iuser = new ArrayList<>();
 
                 while (rs.next()) {
-                    iuser.add(new Iuser(rs.getInt(1),
+                    /*iuser.add(new Iuser(rs.getInt(1),
                             rs.getString(2),
                             rs.getString(3),
                             rs.getInt(4),
                             rs.getString(5),
                             rs.getString(6)));
-                }
+                */}
             }
             conexao.close();
 
@@ -113,7 +112,7 @@ public class IuserDAO extends IuserSQL {
                 iuser.setId(rs.getInt(1));
                 iuser.setLogin(rs.getString(2));
                 iuser.setSenha(rs.getString(3));
-                iuser.setIdfuncionario(rs.getInt(4));
+                //iuser.setIdfuncionario(rs.getInt(4));
                 iuser.setEmail(rs.getString(5));
                 iuser.setDataCri(rs.getString(6));
             }
@@ -161,7 +160,7 @@ public class IuserDAO extends IuserSQL {
             if (rs.next()) {
 
                 iuser.setId(rs.getInt(1));
-                iuser.setIdfuncionario(rs.getInt(2));
+                //iuser.setIdfuncionario(rs.getInt(2));
                 retorno = true;
             } else {
                 retorno = false;

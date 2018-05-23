@@ -8,7 +8,6 @@ package Servlet;
 import Model.DAO.ModelCommercialServicosDao;
 import Model.Entity.ModelCommercialProduct;
 import Model.Entity.ModelCommercialService;
-import ServiceMock.MockFuncionario;
 import ServiceMock.MockProduto;
 import ServiceMock.MockService;
 import java.io.IOException;

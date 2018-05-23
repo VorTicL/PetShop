@@ -5,8 +5,6 @@
  */
 package Servlet;
 
-import Model.Entity.Funcionario;
-import ServiceMock.MockFuncionario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -31,8 +29,8 @@ public class SearchFuncionarioServlet extends HttpServlet {
         nome = request.getParameter("nomeFunc");
         
         if (nome != null) {
-            ArrayList<Funcionario> listFunc = MockFuncionario.buscarPorNome(nome);
-            request.setAttribute("listFunc", listFunc);
+            //ArrayList<Funcionario> listFunc = MockFuncionario.buscarPorNome(nome);
+            //request.setAttribute("listFunc", listFunc);
         }
             
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/UserForms/searchFuncionario.jsp");
@@ -47,9 +45,9 @@ public class SearchFuncionarioServlet extends HttpServlet {
           try {
         int idFunc = Integer.parseInt(request.getParameter("idFuncServ"));
             
-        Funcionario func1 = MockFuncionario.buscarPorId(idFunc);
+        //Funcionario func1 = MockFuncionario.buscarPorId(idFunc);
         
-        request.setAttribute("func", func1);
+        //request.setAttribute("func", func1);
         
         request.getRequestDispatcher("WEB-INF/jsp/UserForms/manageFuncionario.jsp")
                     .forward(request, response);

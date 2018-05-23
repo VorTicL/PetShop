@@ -7,7 +7,6 @@ package Servlet;
 
 import Model.DAO.IuserDAO;
 import Model.Entity.Iuser;
-import ServiceMock.MockUsuario;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,9 +43,12 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String senha = request.getParameter("senha");
 
-        Iuser iuser = new Iuser(0, username, senha, 0, null, null);
-
+        Iuser iuser = new Iuser();
+        iuser.setLogin(username);
+        iuser.setSenha(senha);
+        
         IuserDAO iuserDAO = new IuserDAO();
+        
         try {
             if (iuserDAO.login(iuser)) {
                 HttpSession sessao = request.getSession();

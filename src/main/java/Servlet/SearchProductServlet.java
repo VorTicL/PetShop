@@ -36,11 +36,11 @@ public class SearchProductServlet extends HttpServlet {
         try {
             if (nomeProd == null || nomeProd.compareToIgnoreCase("") == 0) {
             
-                listCommercial = modelCommercialProductDao.selectNameProducts(nomeProd);
+                listCommercial = modelCommercialProductDao.selectAllProducts();
             
             } else {
                 
-                listCommercial = modelCommercialProductDao.selectAllProducts();
+                listCommercial = modelCommercialProductDao.selectNameProducts(nomeProd);
             
             }
             

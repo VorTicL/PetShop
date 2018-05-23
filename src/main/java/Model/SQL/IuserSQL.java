@@ -25,7 +25,7 @@ public class IuserSQL {
         pst.setString(1, iuser.getLogin());
         pst.setString(2, iuser.getSenha());
         pst.setString(3, iuser.getEmail());
-        pst.setInt(4, iuser.getIdfuncionario());
+        //pst.setInt(4, iuser.getIdfuncionario());
         pst.execute();
 
     }
@@ -39,7 +39,7 @@ public class IuserSQL {
         pst.setString(1, iuser.getLogin());
         pst.setString(2, iuser.getSenha());
         pst.setString(3, iuser.getEmail());
-        pst.setInt(4, iuser.getIdfuncionario());
+        //pst.setInt(4, iuser.getIdfuncionario());
         pst.setInt(5, iuser.getId());
         
 

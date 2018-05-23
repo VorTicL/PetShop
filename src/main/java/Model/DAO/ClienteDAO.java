@@ -5,7 +5,7 @@
  */
 package Model.DAO;
 
-import Model.AbstractDAO.AbstractCliente;
+
 import Model.Entity.Cliente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,14 +18,14 @@ import java.util.List;
  *
  * @author João
  */
-public class ClienteDAO extends AbstractCliente{
+public class ClienteDAO{
     
     private Connection conexao;
     private PreparedStatement pst;
     private ResultSet rs;
     
     
-    @Override
+   
     public boolean insert(Cliente cliente) {
 
         conexao = Connect.connect();
@@ -43,7 +43,6 @@ public class ClienteDAO extends AbstractCliente{
             pst.setString(3, cliente.getSexo());
             pst.setString(4, cliente.getRg());
             pst.setString(5, cliente.getCpf());
-            pst.setInt(6, cliente.getEndereco());
             
             pst.execute();
 
@@ -59,8 +58,7 @@ public class ClienteDAO extends AbstractCliente{
         }
 
     }
-
-    @Override
+    
     public List<Cliente> selectAll() {
 
         ArrayList<Cliente> cliente = new ArrayList<>();
@@ -84,7 +82,6 @@ public class ClienteDAO extends AbstractCliente{
                         rs.getString(4),
                         rs.getString(5),
                         rs.getString(6),
-                        rs.getInt(7),
                         rs.getString(8)
                 ));
             }
@@ -101,7 +98,7 @@ public class ClienteDAO extends AbstractCliente{
         }
 
     }
-    @Override
+    
     public Cliente selectId(Cliente cliente) {
         
         conexao = Connect.connect();
@@ -124,7 +121,6 @@ public class ClienteDAO extends AbstractCliente{
                 cliente.setSexo(rs.getString(4));
                 cliente.setRg(rs.getString(5));
                 cliente.setCpf(rs.getString(6));
-                cliente.setEndereco(rs.getInt(7));
                 cliente.setDataCri(rs.getString(8));
             }
 
@@ -140,7 +136,7 @@ public class ClienteDAO extends AbstractCliente{
         }
     }
     
-    @Override
+    
     public boolean update(Cliente cliente) {
          conexao = Connect.connect();
 
@@ -157,7 +153,6 @@ public class ClienteDAO extends AbstractCliente{
             pst.setString(3, cliente.getSexo());
             pst.setString(4, cliente.getRg());
             pst.setString(5, cliente.getCpf());
-            pst.setInt(6, cliente.getEndereco());
             pst.setInt(7, cliente.getId());
 
             pst.executeUpdate();
@@ -174,7 +169,7 @@ public class ClienteDAO extends AbstractCliente{
         }
     }
     
-    @Override
+    
     public boolean delete(Cliente cliente) {
          conexao = Connect.connect();
 
@@ -201,7 +196,7 @@ public class ClienteDAO extends AbstractCliente{
             return false;
         }
     }
-    @Override
+    
     public boolean cliente(Cliente cliente) {
      
         conexao = Connect.connect();
@@ -224,7 +219,6 @@ public class ClienteDAO extends AbstractCliente{
             
             if(rs.next()){
                 cliente.setId(rs.getInt(1));
-                cliente.setEndereco(rs.getInt(7));
                 cliente.setDataCri(rs.getString(8));
             
                 return true;
