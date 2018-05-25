@@ -5,7 +5,7 @@
  */
 package ServiceMock;
 
-import Model.Entity.Iuser;
+import Model.Entity.User;
 import Model.Entity.ModelCommercialProduct;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

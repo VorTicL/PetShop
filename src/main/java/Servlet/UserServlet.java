@@ -5,7 +5,7 @@
  */
 package Servlet;
 
-import Model.Entity.Iuser;
+import Model.Entity.User;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author João
  */
-@WebServlet(name = "FuncionarioServlet", urlPatterns = {"/funcionario"})
-public class FuncionarioServlet extends HttpServlet {
+@WebServlet(name = "User", urlPatterns = {"/user"})
+public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -43,7 +43,7 @@ public class FuncionarioServlet extends HttpServlet {
       int id = funcionarioDao.insert(funcionario);
       request.getRequestDispatcher("WEB-INF/jsp/UserForms/funcionarioForm.jsp").forward(request, response);
       */
-        Iuser funcionario = new Iuser();
+        User funcionario = new User();
       //MockFuncionario.inserirFuncionario(funcionario);
       request.getRequestDispatcher("WEB-INF/jsp/UserForms/funcionarioForm.jsp").forward(request, response);
     }

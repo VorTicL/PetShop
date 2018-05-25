@@ -6,7 +6,7 @@
 package Servlet;
 
 
-import Model.Entity.Iuser;
+import Model.Entity.User;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author João
  */
-@WebServlet(name = "ManageFuncionario", urlPatterns = {"/manageFuncionario"})
-public class ManageFuncionarioServlet extends HttpServlet{
+@WebServlet(name = "ManageUser", urlPatterns = {"/manageUser"})
+public class ManageUserServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)
@@ -28,7 +28,7 @@ public class ManageFuncionarioServlet extends HttpServlet{
         try {
             
         
-            Iuser func = new Iuser();
+            User func = new User();
         func.setId(Integer.parseInt(request.getParameter("idFunc")));
         func.setNome(request.getParameter("nomeFunc"));
         func.setDataNasc(request.getParameter("dataNasc"));

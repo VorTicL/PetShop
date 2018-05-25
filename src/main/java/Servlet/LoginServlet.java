@@ -5,8 +5,8 @@
  */
 package Servlet;
 
-import Model.DAO.IuserDAO;
-import Model.Entity.Iuser;
+import Model.DAO.UserDAO;
+import Model.Entity.User;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,11 +43,11 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String senha = request.getParameter("senha");
 
-        Iuser iuser = new Iuser();
+        User iuser = new User();
         iuser.setLogin(username);
         iuser.setSenha(senha);
         
-        IuserDAO iuserDAO = new IuserDAO();
+        UserDAO iuserDAO = new UserDAO();
         
         try {
             if (iuserDAO.login(iuser)) {

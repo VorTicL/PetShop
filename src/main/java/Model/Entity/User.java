@@ -5,25 +5,28 @@
  */
 package Model.Entity;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author João
  */
-public class Iuser {
+public class User {
     
     private int id;
     private String login;
     private String senha;
     private int idFilial;
     private String email;
-    private String dataCri;
+    private Timestamp dataCri;
     private String nome;
-    private String dataNasc;
+    private Timestamp dataNasc;
     private String sexo;
     private String rg;
     private String cpf;
+    private String typeUser;
 
-    public Iuser(int id, String login, String senha, int idFilial, String email, String dataCri, String nome, String dataNasc, String sexo, String rg, String cpf) {
+    public User(int id, String login, String senha, int idFilial, String email, Timestamp dataCri, String nome, Timestamp dataNasc, String sexo, String rg, String cpf, String typeUser) {
         this.id = id;
         this.login = login;
         this.senha = senha;
@@ -35,14 +38,23 @@ public class Iuser {
         this.sexo = sexo;
         this.rg = rg;
         this.cpf = cpf;
+        this.typeUser = typeUser;
     }
 
-    public Iuser() {
+    public User() {
         
     }
 
     public int getId() {
         return id;
+    }
+
+    public String getType() {
+        return typeUser;
+    }
+
+    public void setType(String typeUser) {
+        this.typeUser = typeUser;
     }
 
     public void setId(int id) {
@@ -81,11 +93,11 @@ public class Iuser {
         this.email = email;
     }
 
-    public String getDataCri() {
+    public Timestamp getDataCri() {
         return dataCri;
     }
 
-    public void setDataCri(String dataCri) {
+    public void setDataCri(Timestamp dataCri) {
         this.dataCri = dataCri;
     }
 
@@ -97,11 +109,11 @@ public class Iuser {
         this.nome = nome;
     }
 
-    public String getDataNasc() {
+    public Timestamp getDataNasc() {
         return dataNasc;
     }
 
-    public void setDataNasc(String dataNasc) {
+    public void setDataNasc(Timestamp dataNasc) {
         this.dataNasc = dataNasc;
     }
 

@@ -6,8 +6,8 @@
 package Model.DAO;
 
 import Model.Connect.Connect;
-import Model.Entity.Iuser;
-import Model.SQL.IuserSQL;
+import Model.Entity.User;
+import Model.SQL.UserSQL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,87 +21,78 @@ import java.util.logging.Logger;
  *
  * @author João
  */
-public class IuserDAO extends IuserSQL {
+public class UserDAO extends UserSQL {
 
     private Connection conexao;
     private PreparedStatement pst;
     private ResultSet rs;
 
-    public boolean insert(Iuser iuser) {
-
+    public boolean insert(User iuser) throws SQLException {
+        boolean aux = false;
         try {
             conexao = Model.Connect.Connect.connect();
 
             insert(conexao, pst, iuser);
-
-            conexao.close();
-
-            return true;
+            
+            aux = true;
         } catch (SQLException t) {
-
-            try {
-                conexao.close();
-            } catch (SQLException ex) {
-            }
-
-            return false;
+            
+            aux = false;
+            
+        }finally{
+            
+            conexao.close();  
+            
         }
+        return aux;
     }
 
-    public boolean update(Iuser iuser) {
+    public boolean update(User iuser) throws SQLException{
+        boolean aux = false;
         try {
             conexao = Model.Connect.Connect.connect();
-
+            
             update(conexao, pst, iuser);
-
-            conexao.close();
-
-            return true;
+            
+            aux = true;
+            
         } catch (SQLException t) {
-
-            try {
-                conexao.close();
-            } catch (SQLException ex) {
-            }
-
-            return false;
+            
+            aux = false;
+        }finally{
+            
+            conexao.close();  
+            
         }
+        return aux;
     }
 
-    public List<Iuser> selectAll() {
+    public List<User> selectAll() throws SQLException {
+        
+        List<User> user = new ArrayList<>();
+        
         try {
-            List<Iuser> iuser = null;
 
             conexao = Model.Connect.Connect.connect();
 
             rs = selectAll(conexao, pst, null);
 
-            if (rs.next()) {
-                iuser = new ArrayList<>();
-
                 while (rs.next()) {
-                    /*iuser.add(new Iuser(rs.getInt(1),
-                            rs.getString(2),
-                            rs.getString(3),
-                            rs.getInt(4),
-                            rs.getString(5),
-                            rs.getString(6)));
-                */}
-            }
-            conexao.close();
+                
+                }
+            
 
-            return iuser;
+            
         } catch (SQLException t) {
-
-            try {
-                conexao.close();
-            } catch (SQLException ex) {
-            }
-            return null;
+            user = null;
+        }finally{
+            
+            conexao.close();
         }
+        return user;
     }
 
-    public Iuser selectId(Iuser iuser) {
+    public User selectId(User iuser) {
         try {
 
             conexao = Model.Connect.Connect.connect();
@@ -129,7 +120,7 @@ public class IuserDAO extends IuserSQL {
         }
     }
 
-    public boolean delete(Iuser iuser) {
+    public boolean delete(User iuser) {
         try {
             conexao = Model.Connect.Connect.connect();
 
@@ -149,7 +140,7 @@ public class IuserDAO extends IuserSQL {
         }
     }
 
-    public boolean login(Iuser iuser) throws SQLException {
+    public boolean login(User iuser) throws SQLException {
         boolean retorno;
         try {
 

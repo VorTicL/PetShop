@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author João
  */
 @WebServlet(name = "SearchFuncionario", urlPatterns = {"/searchFuncionario"})
-public class SearchFuncionarioServlet extends HttpServlet {
+public class SearchUserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

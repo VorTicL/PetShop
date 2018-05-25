@@ -9,19 +9,20 @@ CREATE TABLE cliente (
   dataCri date NOT NULL,
   PRIMARY KEY (id)
 )
-CREATE TABLE iuser (
+CREATE TABLE user1 (
   id int NOT NULL AUTO_INCREMENT,
   login varchar(100) NOT NULL,
   senha varchar(50) NOT NULL,
   filialId int(11) NOT NULL,
   dataCri date NOT NULL,
   email varchar(255) NOT NULL,
-  dataCri date not null,
   nome varchar(255) NOT NULL,
   dataNasc date not null,
   sexo varchar(255) NOT NULL,
   rg varchar(255) NOT NULL,
   cpf varchar(255) NOT NULL,
+  typeUser varchar(255) NOT NULL,
+  ativo boolean default true,  
 
   PRIMARY KEY (id),
   FOREIGN KEY (filialId) REFERENCES filial(idFilial)
