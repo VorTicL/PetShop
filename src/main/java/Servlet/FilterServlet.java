@@ -19,13 +19,14 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import Model.Entity.User;
 
 /**
  *
  * @author Victor de Lucca
  */
 @WebFilter(filterName = "filter", 
-	//urlPatterns = {"/*"})
+	urlPatterns = {"/UserForms","/ServiceForms", "ProductForms"},
 	servletNames = {"HomeServlet", "manageProduct", "manageService", "searchProduct",
         "searchService"})
 public class FilterServlet implements Filter {
@@ -54,35 +55,37 @@ public class FilterServlet implements Filter {
     }
     
     chain.doFilter(request, response);
-    /*
-    UsuarioSistema usuario = (UsuarioSistema) sessao.getAttribute("usuario");
+    
+    User user = (User) sessao.getAttribute("usuario");
 
     // 2) Usuario logado, verifica se tem autorizacao para acessar recurso
-    if (verificarAcesso(usuario, httpRequest, httpResponse)) {
+    if (verificarAcesso(user, httpRequest, httpResponse)) {
       // Acesso ao recurso está liberado
       chain.doFilter(request, response);
     } else {
       // Usuario nao tem autorizacao para acessar pagina
       httpResponse.sendRedirect(httpRequest.getContextPath() + "/erro-nao-autorizado.jsp");
     }
-    */
   }
-/*
-  private static boolean verificarAcesso(UsuarioSistema usuario,
+
+  private static boolean verificarAcesso(User user,
 	  HttpServletRequest request, HttpServletResponse response) {
     String paginaAcessada = request.getRequestURI();
     String pagina = paginaAcessada.replace(request.getContextPath(), "");
 
-    if (pagina.startsWith("/home")
-	    && usuario.verificarPapel("RALE")) {
+    if (pagina.endsWith("/ProductForms")
+	    && user.getType().compareToIgnoreCase("ESTOQUISTA") == 0) {
       return true;
-    } else if (pagina.startsWith("/admin/")
-	    && usuario.verificarPapel("FODA")) {
+    } else if (pagina.endsWith("/ServiceForms")
+	    && user.getType().compareToIgnoreCase("Gerente") == 0) {
+      return true;
+    } else if(pagina.endsWith("/UserForm")
+	    && user.getType().compareToIgnoreCase("TI") == 0) {
       return true;
     }
     return false;
   }
-*/    
+
   @Override
   public void destroy() {
 

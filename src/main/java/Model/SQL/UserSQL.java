@@ -65,32 +65,40 @@ public class UserSQL {
     public ResultSet selectAll(Connection conexao, PreparedStatement pst, User iuser) throws SQLException {
         String sql = "select * from user1 where ativo = 1";
         pst = conexao.prepareStatement(sql);
-
+        
         return pst.executeQuery();
     }
 
-    public ResultSet selectId(Connection conexao, PreparedStatement pst, User user) throws SQLException {
+    public ResultSet selectId(Connection conexao, PreparedStatement pst, int id) throws SQLException {
         String sql = "select * from user1 where id = ? and ativo = 1";
         pst = conexao.prepareStatement(sql);
-        pst.setInt(1, user.getId());
+        pst.setInt(1, id);
 
         return pst.executeQuery();
     }
 
  
-    public void delete(Connection conexao, PreparedStatement pst, User user) throws SQLException {
+    public void delete(Connection conexao, PreparedStatement pst, int id) throws SQLException {
         String sql = "update user1 set ativo = 0 where id = ?";
         pst = conexao.prepareStatement(sql);
-        pst.setInt(1, user.getId());
+        pst.setInt(1, id);
 
         pst.execute();
     }
 
-    public ResultSet login(Connection conexao, PreparedStatement pst, User user) throws SQLException {
+    public ResultSet login(Connection conexao, PreparedStatement pst, String login, String senha) throws SQLException {
         String sql = "select * from user1 where login = ? and senha = ? and ativo = 1";
         pst = conexao.prepareStatement(sql);
-        pst.setString(1, user.getLogin());
-        pst.setString(2, user.getSenha());
+        pst.setString(1, login);
+        pst.setString(2, senha);
+
+        return pst.executeQuery();
+    }
+    
+    public ResultSet selectName(Connection conexao, PreparedStatement pst, String nome) throws SQLException {
+        String sql = "select * from user1 where nome like ? and ativo = 1";
+        pst = conexao.prepareStatement(sql);
+        pst.setString(1, nome);
 
         return pst.executeQuery();
     }

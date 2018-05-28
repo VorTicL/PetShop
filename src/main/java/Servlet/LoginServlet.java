@@ -43,16 +43,17 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String senha = request.getParameter("senha");
 
-        User iuser = new User();
-        iuser.setLogin(username);
-        iuser.setSenha(senha);
+        User user;
         
-        UserDAO iuserDAO = new UserDAO();
+        UserDAO userDAO = new UserDAO();
         
         try {
-            if (iuserDAO.login(iuser)) {
+            
+            user = userDAO.login(username, senha);
+            
+            if (user != null) {
                 HttpSession sessao = request.getSession();
-                sessao.setAttribute("usuario", iuser);
+                sessao.setAttribute("usuario", user);
                 response.sendRedirect(request.getContextPath() + "/home");
 
             } else {

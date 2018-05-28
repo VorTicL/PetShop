@@ -5,9 +5,10 @@
  */
 package Servlet;
 
-
+import Model.DAO.UserDAO;
 import Model.Entity.User;
 import java.io.IOException;
+import java.sql.Timestamp;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,46 +20,60 @@ import javax.servlet.http.HttpServletResponse;
  * @author João
  */
 @WebServlet(name = "ManageUser", urlPatterns = {"/manageUser"})
-public class ManageUserServlet extends HttpServlet{
+public class ManageUserServlet extends HttpServlet {
+
+    UserDAO userDAO = new UserDAO();
+    
     @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         try {
+
+            User user = new User();
             
-        
-            User func = new User();
-        func.setId(Integer.parseInt(request.getParameter("idFunc")));
-        func.setNome(request.getParameter("nomeFunc"));
-        func.setDataNasc(request.getParameter("dataNasc"));
-        func.setSexo(request.getParameter("sexo"));
-       func.setRg(request.getParameter("rg"));
-       func.setCpf(request.getParameter("cpf"));
-        
-        //MockFuncionario.alterar(func);
-        
-        request.setAttribute("response", "Funcionario Alterado Com Sucesso!");
+            user.setLogin(request.getParameter("login"));
+            user.setSenha(request.getParameter("senha"));
+            user.setIdFilial(Integer.parseInt(request.getParameter("filialId")));
+            user.setEmail(request.getParameter("email"));
+            user.setDataCri(new Timestamp(System.currentTimeMillis()));
+            user.setCpf(request.getParameter("cpf"));
+            user.setDataNasc(Timestamp.valueOf(request.getParameter("dataNasc")));
+            user.setNome(request.getParameter("nome"));
+            user.setSobrenome(request.getParameter("sobrenome"));
+            user.setSexo(request.getParameter("sexo"));
+            user.setRg(request.getParameter("rg"));
+            user.setType(request.getParameter("typeUser"));
+            
+            if (userDAO.update(user)) {
+                request.setAttribute("response", "Usuario Alterado Com Sucesso!");
+            }else{
+                request.setAttribute("response", "ERRO!");
+            }
+            
         } catch (Exception e) {
             request.setAttribute("response", "ERRO!");
         }
-        request.getRequestDispatcher("WEB-INF/jsp/UserForms/responseManageFuncionario.jsp")
-                    .forward(request, response);
+        request.getRequestDispatcher("WEB-INF/jsp/UserForms/ResponseManageUser.jsp")
+                .forward(request, response);
     }
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-         try {
-        int idRemove = Integer.parseInt(request.getParameter("idFunc"));
-             //MockFuncionario.remover(idRemove);
-        request.setAttribute("response", "Funcionario Removido Com Sucesso!");
+
+        try {
+            int idRemove = Integer.parseInt(request.getParameter("idUser"));
+            if (userDAO.delete(idRemove)) {
+                request.setAttribute("response", "Funcionario Removido Com Sucesso!");
+            }else{
+                request.setAttribute("response", "ERRO!");
+            }
         } catch (Exception e) {
             request.setAttribute("response", "ERRO!");
         }
-        request.getRequestDispatcher("WEB-INF/jsp/UserForms/responseManageFuncionario.jsp")
-                    .forward(request, response);
-        
+        request.getRequestDispatcher("WEB-INF/jsp/UserForms/ResponseManageUser.jsp")
+                .forward(request, response);
     }
 }

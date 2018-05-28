@@ -25,8 +25,10 @@ public class User {
     private String rg;
     private String cpf;
     private String typeUser;
+    private String sobrenome; 
 
-    public User(int id, String login, String senha, int idFilial, String email, Timestamp dataCri, String nome, Timestamp dataNasc, String sexo, String rg, String cpf, String typeUser) {
+    public User(int id, String login, String senha, int idFilial, String email, Timestamp dataCri, 
+            String nome, Timestamp dataNasc, String sexo, String rg, String cpf, String typeUser, String sobrenome) {
         this.id = id;
         this.login = login;
         this.senha = senha;
@@ -39,6 +41,7 @@ public class User {
         this.rg = rg;
         this.cpf = cpf;
         this.typeUser = typeUser;
+        this.sobrenome = sobrenome;
     }
 
     public User() {
@@ -47,6 +50,14 @@ public class User {
 
     public int getId() {
         return id;
+    }
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
     }
 
     public String getType() {

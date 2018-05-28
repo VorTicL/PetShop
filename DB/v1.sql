@@ -9,6 +9,7 @@ CREATE TABLE cliente (
   dataCri date NOT NULL,
   PRIMARY KEY (id)
 )
+
 CREATE TABLE user1 (
   id int NOT NULL AUTO_INCREMENT,
   login varchar(100) NOT NULL,
@@ -17,6 +18,7 @@ CREATE TABLE user1 (
   dataCri date NOT NULL,
   email varchar(255) NOT NULL,
   nome varchar(255) NOT NULL,
+  sobrenome varchar(255) NOT NULL,  
   dataNasc date not null,
   sexo varchar(255) NOT NULL,
   rg varchar(255) NOT NULL,
@@ -33,14 +35,20 @@ CREATE TABLE servico (
   preco double,
   animal int(11),
   dataCri date NOT NULL,
+  filialId int(11) NOT NULL,
+
   PRIMARY KEY (id)
+  FOREIGN KEY (filialId) REFERENCES filial(idFilial)  
 )
 CREATE TABLE venda (
   id int(11) NOT NULL AUTO_INCREMENT,
   idservico int(11) DEFAULT NULL,
   idcliente int(11) DEFAULT NULL,
   dataCri date NOT NULL,
+  filialId int(11) NOT NULL,
+  
   PRIMARY KEY (id),
+  FOREIGN KEY (filialId) REFERENCES filial(idFilial)  
 )
 CREATE TABLE produto (
     id int not null auto_increment,
