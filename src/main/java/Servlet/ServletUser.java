@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author João
  */
 @WebServlet(name = "User", urlPatterns = {"/user"})
-public class UserServlet extends HttpServlet {
+public class ServletUser extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

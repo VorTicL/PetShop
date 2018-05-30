@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  * @author victor.rslucca
  */
 @WebServlet(name = "CommercialProductServlet", urlPatterns = {"/product"})
-public class ProductServlet extends HttpServlet {
+public class ServletProduct extends HttpServlet {
 
     ModelCommercialProductDao modelCommercialProductDao = new ModelCommercialProductDao();
 

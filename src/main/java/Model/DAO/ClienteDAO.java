@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import Model.Connect.Connect;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -24,155 +25,143 @@ public class ClienteDAO{
     private PreparedStatement pst;
     private ResultSet rs;
     
-    
-   
-    public boolean insert(Cliente cliente) {
-
+    public boolean insert(Cliente cliente) throws SQLException {
+        boolean aux = false;
         conexao = Connect.connect();
 
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("insert into cliente(nome,dataNasc,sexo,rg,cpf,endereco,dataCri)");
-            sql.append(" values (?,?,?,?,?,?,date(now()))");
+            sql.append("insert into cliente(nome,dataNasc,sexo,rg,cpf,endereco,dataCri) values (?,?,?,?,?,?,?)");
 
             pst = conexao.prepareStatement(sql.toString());
 
             pst.setString(1, cliente.getNome());
-            pst.setString(2, cliente.getDataNasc());
+            pst.setTimestamp(2, cliente.getDataNasc());
             pst.setString(3, cliente.getSexo());
             pst.setString(4, cliente.getRg());
             pst.setString(5, cliente.getCpf());
-            
+            pst.setString(6, cliente.getEndereco());
+            pst.setTimestamp(7, new Timestamp(System.currentTimeMillis()));
             pst.execute();
 
-            return true;
+            aux = true;
         } catch (SQLException e) {
-
-            try {
-                conexao.close();
-            } catch (SQLException ex) {
-            }
-            
-            return false;
+            aux = false;
+        }finally{
+            conexao.close();
         }
-
+        return aux;
     }
     
-    public List<Cliente> selectAll() {
+    public List<Cliente> selectAll() throws SQLException {
 
-        ArrayList<Cliente> cliente = new ArrayList<>();
+        List<Cliente> cliente = new ArrayList<>();
         
         conexao = Connect.connect();
 
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("select id,nome,dataNasc,sexo,rg,cpf,endereco,dataCri");
-            sql.append(" from cliente and ativo = true");
+            sql.append("select * from cliente where ativo = 1");
 
             pst = conexao.prepareStatement(sql.toString());
 
             rs = pst.executeQuery();
             
             while(rs.next()){
-                cliente.add(new Cliente(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3), 
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(8)
-                ));
-            }
-
-            return cliente;
-        } catch (SQLException e) {
-
-            try {
-                conexao.close();
-            } catch (SQLException ex) {
+                Cliente cli = new Cliente();
+                cli.setCpf(rs.getString("cpf"));
+                cli.setDataCri(rs.getTimestamp("dataCri"));
+                cli.setDataNasc(rs.getTimestamp("dataNasc"));
+                cli.setEndereco(rs.getString("endereco"));
+                cli.setId(rs.getInt("id"));
+                cli.setNome(rs.getString("nome"));
+                cli.setRg(rs.getString("rg"));
+                cli.setSexo(rs.getString("sexo"));
+                
+                cliente.add(cli);
             }
             
-            return cliente;
+        } catch (SQLException e) {
+            cliente = null;
+        }finally{
+            conexao.close();
         }
-
+        return cliente;
     }
     
-    public Cliente selectId(Cliente cliente) {
+    public Cliente selectId(int id) throws SQLException {
         
         conexao = Connect.connect();
-
+        Cliente cli = new Cliente();
+        
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("select id,nome,dataNasc,sexo,rg,cpf,endereco,dataCri");
-            sql.append(" from cliente where id = ? and ativo = true");
+            sql.append("select * from cliente where id = ? and ativo = 1");
 
             pst = conexao.prepareStatement(sql.toString());
             
-            pst.setInt(1, cliente.getId());
+            pst.setInt(1, id);
 
             rs = pst.executeQuery();
             
             if(rs.next()){
-                cliente.setNome(rs.getString(2));
-                cliente.setDataNasc(rs.getString(3));
-                cliente.setSexo(rs.getString(4));
-                cliente.setRg(rs.getString(5));
-                cliente.setCpf(rs.getString(6));
-                cliente.setDataCri(rs.getString(8));
+                cli.setNome(rs.getString("nome"));
+                cli.setDataNasc(rs.getTimestamp("dataNasc"));
+                cli.setSexo(rs.getString("sexo"));
+                cli.setRg(rs.getString("rg"));
+                cli.setCpf(rs.getString("cpf"));
+                cli.setDataCri(rs.getTimestamp("dataCri"));
+                cli.setEndereco(rs.getString("endereco"));
+                cli.setId(rs.getInt("id"));
             }
-
-            return cliente;
         } catch (SQLException e) {
-
-            try {
-                conexao.close();
-            } catch (SQLException ex) {
-            }
-            
-            return cliente;
+            cli = null;
+        }finally{
+            conexao.close();
         }
+        return cli;
     }
     
     
-    public boolean update(Cliente cliente) {
+    public boolean update(Cliente cliente) throws SQLException {
          conexao = Connect.connect();
-
+         boolean aux = false;
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("update cliente set nome = ? , dataNasc = ? , sexo = ? , rg = ? , cpf = ? , endereco = ?");
-            sql.append(" where id = ? and ativo = true");
+            sql.append("update cliente set nome = ? , dataNasc = ? "
+                    + ", sexo = ? , rg = ? , cpf = ? , endereco = ?, dataCri = ?");
+            sql.append(" where id = ? and ativo = 1");
 
             pst = conexao.prepareStatement(sql.toString());
 
             pst.setString(1, cliente.getNome());
-            pst.setString(2, cliente.getDataNasc());
+            pst.setTimestamp(2, cliente.getDataNasc());
             pst.setString(3, cliente.getSexo());
             pst.setString(4, cliente.getRg());
             pst.setString(5, cliente.getCpf());
-            pst.setInt(7, cliente.getId());
+            pst.setString(6, cliente.getEndereco());
+            pst.setTimestamp(7, cliente.getDataCri());
+            pst.setInt(8, cliente.getId());
 
             pst.executeUpdate();
 
-            return true;
+            aux = true;
         } catch (SQLException e) {
-
-            try {
-                conexao.close();
-            } catch (SQLException ex) {
-            }
-            
-            return false;
+            aux = false;
+        }finally{
+            conexao.close();
         }
+        return aux;
     }
     
     
-    public boolean delete(Cliente cliente) {
+    public boolean delete(int id) throws SQLException {
          conexao = Connect.connect();
-
+         boolean aux = false;
         try {
 
             StringBuilder sql = new StringBuilder();
@@ -181,60 +170,52 @@ public class ClienteDAO{
 
             pst = conexao.prepareStatement(sql.toString());
             
-            pst.setInt(1, cliente.getId());
+            pst.setInt(1, id);
 
             pst.execute();
 
-            return true;
+            aux = true;
         } catch (SQLException e) {
-
-            try {
-                conexao.close();
-            } catch (SQLException ex) {
-            }
-            
-            return false;
+            aux = false;
+        }finally{
+            conexao.close();
         }
+        return aux;
     }
     
-    public boolean cliente(Cliente cliente) {
-     
+    public List<Cliente> buscaNome(String nome) throws SQLException {
+        Cliente cli = new Cliente();
         conexao = Connect.connect();
-
+        List<Cliente> listCliente = new ArrayList<>();
         try {
 
             StringBuilder sql = new StringBuilder();
-            sql.append("select id,nome,dataNasc,sexo,rg,cpf,endereco,dataCri");
-            sql.append(" from cliente where nome = ? and dataNasc = ? and sexo = ? and rg = ? and cpf = ? and ativo = true");
+            sql.append("select * from cliente "
+                    + "where nome like ? and ativo = 1");
 
             pst = conexao.prepareStatement(sql.toString());
             
-            pst.setString(1, cliente.getNome());
-            pst.setString(2, cliente.getDataNasc());
-            pst.setString(3, cliente.getSexo());
-            pst.setString(4, cliente.getRg());
-            pst.setString(5, cliente.getCpf());
+            pst.setString(1, nome);
 
             rs = pst.executeQuery();
             
-            if(rs.next()){
-                cliente.setId(rs.getInt(1));
-                cliente.setDataCri(rs.getString(8));
-            
-                return true;
+            while(rs.next()){
+                cli.setNome(rs.getString("nome"));
+                cli.setDataNasc(rs.getTimestamp("dataNasc"));
+                cli.setSexo(rs.getString("sexo"));
+                cli.setRg(rs.getString("rg"));
+                cli.setCpf(rs.getString("cpf"));
+                cli.setDataCri(rs.getTimestamp("dataCri"));
+                cli.setEndereco(rs.getString("endereco"));
+                cli.setId(rs.getInt("id"));
+                listCliente.add(cli);
             }
-
-            return false;
+            
         } catch (SQLException e) {
-
-            try {
-                conexao.close();
-            } catch (SQLException ex) {
-            }
-            
-            return false;
+            listCliente = null;
+        }finally{
+            conexao.close();
         }
+        return listCliente;
     }
-
-    
 }

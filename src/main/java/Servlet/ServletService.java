@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
  * @author victor.rslucca
  */
 @WebServlet(name = "serviceServlet", urlPatterns = {"/service"})
-public class ServiceServlet extends HttpServlet {
+public class ServletService extends HttpServlet {
     
     ModelCommercialServicosDao ModelCommercialServicosDao = null;
     

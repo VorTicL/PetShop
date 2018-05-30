@@ -5,6 +5,8 @@
  */
 package Model.Entity;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author João
@@ -13,17 +15,18 @@ public class Cliente {
     
     private int id;
     private String nome;
-    private String dataNasc;
+    private Timestamp dataNasc;
     private String sexo;
     private String rg;
     private String cpf;
-    private String dataCri;
+    private Timestamp dataCri;
+    private String endereco;
     
     public Cliente(){
         
     }
 
-    public Cliente(int id, String nome, String dataNasc, String sexo, String rg, String cpf, String dataCri) {
+    public Cliente(int id, String nome, Timestamp dataNasc, String sexo, String rg, String cpf, Timestamp dataCri, String endereco) {
         this.id = id;
         this.nome = nome;
         this.dataNasc = dataNasc;
@@ -31,6 +34,15 @@ public class Cliente {
         this.rg = rg;
         this.cpf = cpf;
         this.dataCri = dataCri;
+        this.endereco = endereco;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
     /**
@@ -64,14 +76,14 @@ public class Cliente {
     /**
      * @return the datanasc
      */
-    public String getDataNasc() {
+    public Timestamp getDataNasc() {
         return dataNasc;
     }
 
     /**
      * @param dataNasc the datanasc to set
      */
-    public void setDataNasc(String dataNasc) {
+    public void setDataNasc(Timestamp dataNasc) {
         this.dataNasc = dataNasc;
     }
 
@@ -120,14 +132,14 @@ public class Cliente {
     /**
      * @return the datacri
      */
-    public String getDataCri() {
+    public Timestamp getDataCri() {
         return dataCri;
     }
 
     /**
      * @param dataCri the datacri to set
      */
-    public void setDataCri(String dataCri) {
+    public void setDataCri(Timestamp dataCri) {
         this.dataCri = dataCri;
     }
     

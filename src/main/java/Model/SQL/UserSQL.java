@@ -29,7 +29,7 @@ public class UserSQL {
         pst.setString(2, user.getSenha());
         pst.setInt(3, user.getIdFilial());
         pst.setString(4, user.getEmail());
-        pst.setTimestamp(5, user.getDataCri());
+        pst.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
         pst.setString(6, user.getNome());
         pst.setTimestamp(7, user.getDataNasc());
         pst.setString(8, user.getSexo());
@@ -42,7 +42,7 @@ public class UserSQL {
 
     public void update(Connection conexao, PreparedStatement pst, User user) throws SQLException {
 
-        String sql = "update user1 set login = ?,senha = ?,filialId = ?,email = ?,dataCri = ?,nome = ?,dataNasc = ?,"
+        String sql = "update user1 set login = ?,senha = ?,filialId = ?,email = ?,nome = ?,dataNasc = ?,"
                 + "sexo = ?,rg = ?,cpf = ?,typeUser = ? where id = ? and ativo = 1";
 
         pst = conexao.prepareStatement(sql);
@@ -51,14 +51,13 @@ public class UserSQL {
         pst.setString(2, user.getSenha());
         pst.setInt(3, user.getIdFilial());
         pst.setString(4, user.getEmail());
-        pst.setTimestamp(5, user.getDataCri());
-        pst.setString(6, user.getNome());
-        pst.setTimestamp(7, user.getDataNasc());
-        pst.setString(8, user.getSexo());
-        pst.setString(9, user.getRg());
-        pst.setString(10, user.getCpf());
-        pst.setString(11, user.getType());
-        pst.setInt(12, user.getId());
+        pst.setString(5, user.getNome());
+        pst.setTimestamp(6, user.getDataNasc());
+        pst.setString(7, user.getSexo());
+        pst.setString(8, user.getRg());
+        pst.setString(9, user.getCpf());
+        pst.setString(10, user.getType());
+        pst.setInt(11, user.getId());
         pst.executeUpdate();
     }
 
