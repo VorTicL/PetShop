@@ -27,8 +27,9 @@ CREATE TABLE user1 (
   ativo boolean default true,  
 
   PRIMARY KEY (id),
-  FOREIGN KEY (filialId) REFERENCES filial(idFilial)
+  FOREIGN KEY (filialId) REFERENCES filial(id)
 )
+
 CREATE TABLE servico (
   id int(11) NOT NULL AUTO_INCREMENT,
   nome varchar(100),
@@ -38,18 +39,40 @@ CREATE TABLE servico (
   filialId int(11) NOT NULL,
 
   PRIMARY KEY (id)
-  FOREIGN KEY (filialId) REFERENCES filial(idFilial)  
+  FOREIGN KEY (filialId) REFERENCES filial(id)  
 )
 CREATE TABLE venda (
   id int(11) NOT NULL AUTO_INCREMENT,
-  idservico int(11) DEFAULT NULL,
-  idcliente int(11) DEFAULT NULL,
+  clienteId int(11) not null,
   dataCri date NOT NULL,
   filialId int(11) NOT NULL,
+  valorTotal double,  
   
   PRIMARY KEY (id),
-  FOREIGN KEY (filialId) REFERENCES filial(idFilial)  
+  FOREIGN KEY (filialId) REFERENCES filial(id),
+  FOREIGN KEY (clienteId) REFERENCES cliente(id)
 )
+
+CREATE TABLE itensVenda(
+    vendaId int(11) not null,
+    prodId int(11) not null,
+    quantidade int (11) not null,
+    valorUni double,
+
+    FOREIGN KEY (vendaId) REFERENCES venda(id),
+    FOREIGN KEY (prodId) REFERENCES produto(id)
+)
+
+CREATE TABLE itensServico(
+    vendaId int(11) not null,
+    servId int(11) not null,
+    quantidade int (11) not null,
+    valorUni double,
+
+    FOREIGN KEY (vendaID) REFERENCES venda(id),
+    FOREIGN KEY (servID) REFERENCES servico(id)
+)
+
 CREATE TABLE produto (
     id int not null auto_increment,
     nome varchar(255),
@@ -59,13 +82,14 @@ CREATE TABLE produto (
     ativo boolean default true,
     
     primary key(id),
-    FOREIGN KEY (filialId) REFERENCES filial(idFilial)
+    FOREIGN KEY (filialId) REFERENCES filial(id)
     )
 CREATE TABLE filial(
-    idFilial int not null auto_increment,
+    id int not null auto_increment,
     nome varchar(255) not null,
-    endereço varchar(255) not null,
+    endereco varchar(255) not null,
     numeroEnd int not null,
+    dataCri date not null,
     
-    primary key(idFilial)
+    primary key(id)
 );

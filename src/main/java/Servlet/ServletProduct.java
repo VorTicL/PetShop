@@ -7,7 +7,6 @@ package Servlet;
 
 import Model.DAO.ModelCommercialProductDao;
 import Model.Entity.ModelCommercialProduct;
-import ServiceMock.MockProduto;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,7 +14,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -45,7 +43,7 @@ public class ServletProduct extends HttpServlet {
             String filial = request.getParameter("filial");
             int qtdEstoque = Integer.parseInt(request.getParameter("qtdEstoque"));
 
-            ModelCommercialProduct prod1 = new ModelCommercialProduct(nome, valueUni, filial, qtdEstoque);
+            ModelCommercialProduct prod1 = new ModelCommercialProduct(nome, valueUni, Integer.parseInt(filial), qtdEstoque);
             if (modelCommercialProductDao.insertProduct(prod1)) {
                 request.setAttribute("productResponse", prod1.getNome() + "Cadastrado com sucesso!");
             } else {

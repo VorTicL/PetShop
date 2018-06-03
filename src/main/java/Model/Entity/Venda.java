@@ -5,6 +5,9 @@
  */
 package Model.Entity;
 
+import java.sql.Timestamp;
+import java.util.List;
+
 /**
  *
  * @author João
@@ -12,19 +15,46 @@ package Model.Entity;
 public class Venda {
     
     private int id;
-    private int idservico;
     private int idcliente;
-    private String dataCri;
+    private Timestamp dataCri;
+    private double valorTotal;
+    private List<ItensVenda> itens;
+    private List<ServicosList> servList;
+    private int filialID;
     
     public Venda(){
         
     }
 
-    public Venda(int id, int idservico, int idcliente, String dataCri) {
+    public Venda(int id, int idcliente, Timestamp dataCri, int filialID) {
         this.id = id;
-        this.idservico = idservico;
         this.idcliente = idcliente;
         this.dataCri = dataCri;
+        this.filialID = filialID;
+    }
+
+    public int getFilialID() {
+        return filialID;
+    }
+
+    public void setFilialID(int filialID) {
+        this.filialID = filialID;
+    }
+
+    public List<ItensVenda> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItensVenda> itens) {
+        this.itens = itens;
+    }
+    
+    public double getValorTotal(){
+        valorTotal = 0;
+        for (int i = 0; i < itens.size(); i++) {
+            valorTotal += itens.get(i).getValorUni()*itens.get(i).getQuantidade();
+        }
+        return valorTotal;
     }
 
     public int getId() {
@@ -35,12 +65,12 @@ public class Venda {
         this.id = id;
     }
 
-    public int getIdservico() {
-        return idservico;
+    public List<ServicosList> getServList() {
+        return servList;
     }
 
-    public void setIdservico(int idservico) {
-        this.idservico = idservico;
+    public void setServList(List<ServicosList> servList) {
+        this.servList = servList;
     }
 
     public int getIdcliente() {
@@ -51,11 +81,11 @@ public class Venda {
         this.idcliente = idcliente;
     }
 
-    public String getDataCri() {
+    public Timestamp getDataCri() {
         return dataCri;
     }
 
-    public void setDataCri(String dataCri) {
+    public void setDataCri(Timestamp dataCri) {
         this.dataCri = dataCri;
     }
     

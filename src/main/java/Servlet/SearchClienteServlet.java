@@ -6,14 +6,8 @@
 package Servlet;
 
 import Model.DAO.ClienteDAO;
-import Model.DAO.ModelCommercialServicosDao;
 import Model.Entity.Cliente;
-import Model.Entity.ModelCommercialProduct;
-import Model.Entity.ModelCommercialService;
-import ServiceMock.MockProduto;
-import ServiceMock.MockService;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

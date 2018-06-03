@@ -6,10 +6,7 @@
 package Servlet;
 
 import Model.DAO.ClienteDAO;
-import Model.DAO.ModelCommercialProductDao;
 import Model.Entity.Cliente;
-import Model.Entity.ModelCommercialProduct;
-import ServiceMock.MockProduto;
 import java.io.IOException;
 import java.sql.Timestamp;
 import javax.servlet.RequestDispatcher;
@@ -18,7 +15,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *

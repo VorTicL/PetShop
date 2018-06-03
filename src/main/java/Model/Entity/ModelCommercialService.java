@@ -15,7 +15,7 @@ public class ModelCommercialService extends ModelCommercial{
     
     private String pet;
 
-    public ModelCommercialService(String pet, double valor, String nome, String filial) {
+    public ModelCommercialService(String pet, double valor, String nome, int filial) {
         super(valor, nome, filial);
         this.pet = pet;
     }

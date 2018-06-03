@@ -5,9 +5,12 @@
  */
 package Servlet;
 
+import Model.DAO.FilialDAO;
 import Model.DAO.UserDAO;
+import Model.Entity.Filial;
 import Model.Entity.User;
 import java.io.IOException;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -44,16 +47,19 @@ public class LoginServlet extends HttpServlet {
         String senha = request.getParameter("senha");
 
         User user;
+        Map<Integer, Filial> filial;
         
         UserDAO userDAO = new UserDAO();
-        
+        FilialDAO filialDAO = new FilialDAO();
         try {
             
             user = userDAO.login(username, senha);
             
             if (user != null) {
                 HttpSession sessao = request.getSession();
+                filial = filialDAO.selectAll();
                 sessao.setAttribute("usuario", user);
+                sessao.setAttribute("filiais", filial);
                 response.sendRedirect(request.getContextPath() + "/home");
 
             } else {

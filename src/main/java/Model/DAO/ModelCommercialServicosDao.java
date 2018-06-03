@@ -85,7 +85,7 @@ public class ModelCommercialServicosDao extends ModelCommercialServiceSQL{
                     servico.add(new ModelCommercialService(rs.getString(1),
                             rs.getDouble(2),
                             rs.getString(3),
-                            rs.getString(4)));
+                            rs.getInt(4)));
                                 
                 }
             }
@@ -114,7 +114,7 @@ public class ModelCommercialServicosDao extends ModelCommercialServiceSQL{
             if (rs.next()) {
                 
                  modelCommercialServico = new ModelCommercialService(
-                        rs.getString(1), rs.getDouble(2), rs.getString(3), rs.getString(4));
+                        rs.getString(1), rs.getDouble(2), rs.getString(3), rs.getInt(4));
                  
             }
             
@@ -167,7 +167,7 @@ public class ModelCommercialServicosDao extends ModelCommercialServiceSQL{
                     servico.add(new ModelCommercialService(rs.getString(1),
                             rs.getDouble(2),
                             rs.getString(3),
-                            rs.getString(4)));
+                            rs.getInt(4)));
                 }
             }
             

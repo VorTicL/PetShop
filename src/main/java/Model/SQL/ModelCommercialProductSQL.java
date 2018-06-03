@@ -25,7 +25,7 @@ public class ModelCommercialProductSQL {
 
         pst.setString(1, produto.getNome());
         pst.setDouble(2, produto.getValor());
-        pst.setString(3, produto.getFilial());
+        pst.setInt(3, produto.getFilial());
         pst.setInt(4, produto.getQtdProd());
         
         pst.execute();
@@ -40,7 +40,7 @@ public class ModelCommercialProductSQL {
 
        pst.setString(1, produto.getNome());
        pst.setDouble(2, produto.getValor());
-       pst.setString(3, produto.getFilial());
+       pst.setInt(3, produto.getFilial());
        pst.setInt(4, produto.getQtdProd());
        pst.setInt(5, produto.getId());
         

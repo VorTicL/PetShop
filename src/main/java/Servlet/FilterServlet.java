@@ -64,7 +64,7 @@ public class FilterServlet implements Filter {
       chain.doFilter(request, response);
     } else {
       // Usuario nao tem autorizacao para acessar pagina
-      httpResponse.sendRedirect(httpRequest.getContextPath() + "/erro-nao-autorizado.jsp");
+      httpResponse.sendRedirect(httpRequest.getContextPath() + "/erro-autorizado.jsp");
     }
   }
 
@@ -74,16 +74,17 @@ public class FilterServlet implements Filter {
     String pagina = paginaAcessada.replace(request.getContextPath(), "");
 
     if (pagina.endsWith("/ProductForms")
-	    && user.getType().compareToIgnoreCase("ESTOQUISTA") == 0) {
-      return true;
-    } else if (pagina.endsWith("/ServiceForms")
-	    && user.getType().compareToIgnoreCase("Gerente") == 0) {
-      return true;
+	    && user.getType().compareToIgnoreCase("ESTOQUISTA") != 0) {
+      return false;
+    } else if (pagina.endsWith("/ServiceForms") || pagina.endsWith("/ClienteForm")
+	    && (user.getType().compareToIgnoreCase("GERENTE") !=0 || user.getType().compareToIgnoreCase("VENDEDOR") != 0)) {
+      return false;
     } else if(pagina.endsWith("/UserForm")
-	    && user.getType().compareToIgnoreCase("TI") == 0) {
-      return true;
+	    && user.getType().compareToIgnoreCase("TI") != 0) {
+      return false;
     }
-    return false;
+    
+    return true;
   }
 
   @Override

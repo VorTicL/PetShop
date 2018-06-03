@@ -6,18 +6,13 @@
 package Servlet;
 
 import Model.DAO.ModelCommercialServicosDao;
-import Model.Entity.ModelCommercialProduct;
 import Model.Entity.ModelCommercialService;
-import ServiceMock.MockProduto;
-import ServiceMock.MockService;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -37,7 +32,7 @@ public class ManageServiceServlet extends HttpServlet {
 
             ModelCommercialService modelCommercialService = new ModelCommercialService();
             modelCommercialService.setId(Integer.parseInt(request.getParameter("idProd")));
-            modelCommercialService.setFilial(request.getParameter("filial"));
+            modelCommercialService.setFilial(Integer.parseInt(request.getParameter("filial")));
             modelCommercialService.setNome(request.getParameter("nomeServ"));
             modelCommercialService.setPet(request.getParameter("pet"));
             modelCommercialService.setValor(Double.parseDouble(request.getParameter("uniValue")));

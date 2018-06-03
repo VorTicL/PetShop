@@ -80,7 +80,7 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL {
                 modelCommercialProduct.setId(rs.getInt("id"));
                 modelCommercialProduct.setNome(rs.getString("nome"));
                 modelCommercialProduct.setValor(rs.getDouble("valor"));
-                modelCommercialProduct.setFilial(rs.getString("filial"));
+                modelCommercialProduct.setFilial(rs.getInt("filial"));
                 modelCommercialProduct.setQtdProd(rs.getInt("estoque"));
                 produto.add(modelCommercialProduct);
 
@@ -111,7 +111,7 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL {
                 modelCommercialProduct.setId(rs.getInt("id"));
                 modelCommercialProduct.setNome(rs.getString("nome"));
                 modelCommercialProduct.setValor(rs.getDouble("valor"));
-                modelCommercialProduct.setFilial(rs.getString("filial"));
+                modelCommercialProduct.setFilial(rs.getInt("filial"));
                 modelCommercialProduct.setQtdProd(rs.getInt("estoque"));
             }
 
@@ -164,7 +164,7 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL {
                 modelCommercialProduct.setId(rs.getInt(1));
                 modelCommercialProduct.setNome(rs.getString(2));
                 modelCommercialProduct.setValor(rs.getDouble(3));
-                modelCommercialProduct.setFilial(rs.getString(4));
+                modelCommercialProduct.setFilial(rs.getInt(4));
                 modelCommercialProduct.setQtdProd(rs.getInt(5));
                 produto.add(modelCommercialProduct);
             }

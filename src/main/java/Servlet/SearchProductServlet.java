@@ -7,7 +7,6 @@ package Servlet;
 
 import Model.DAO.ModelCommercialProductDao;
 import Model.Entity.ModelCommercialProduct;
-import ServiceMock.MockProduto;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

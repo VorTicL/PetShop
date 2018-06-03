@@ -14,10 +14,10 @@ import java.util.Date;
 public class ModelCommercial {
     protected double valor;
     protected String nome;
-    protected String filial;
+    protected int filial;
     protected int id;
 
-    public ModelCommercial(double valor, String nome, String filial) {
+    public ModelCommercial(double valor, String nome, int filial) {
         this.nome = nome;
         this.valor = valor;
         this.filial = filial;
@@ -43,11 +43,11 @@ public class ModelCommercial {
         this.id = id;
     }
 
-    public String getFilial() {
+    public int getFilial() {
         return filial;
     }
 
-    public void setFilial(String filial) {
+    public void setFilial(int filial) {
         this.filial = filial;
     }
 

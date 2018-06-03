@@ -27,7 +27,7 @@ public class ModelCommercialServiceSQL {
         pst.setString(1, servico.getPet());
         pst.setDouble(2, servico.getValor());
         pst.setString(3, servico.getNome());
-        pst.setString(4, servico.getFilial());
+        pst.setInt(4, servico.getFilial());
         
         pst.execute();
 
@@ -41,7 +41,7 @@ public class ModelCommercialServiceSQL {
 
        pst.setString(1, servico.getNome());
        pst.setDouble(2, servico.getValor());
-       pst.setString(3, servico.getFilial());
+       pst.setInt(3, servico.getFilial());
        pst.setString(4, servico.getPet());
        pst.setInt(5, servico.getId());
         
