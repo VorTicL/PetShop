@@ -121,7 +121,7 @@
                                     <c:out value="${item.nome}"></c:out>
                                     </td>
                                     <td>
-                                        <button type="button" onclick="hdnID(${item.id})">selecionar</button>
+                                        <button class="btn" type="button" onclick="hdnID(${item.id})">selecionar</button>
                                 </td>
                             </c:forEach>
                         </tr>

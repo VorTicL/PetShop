@@ -35,6 +35,7 @@
 
     </head>
     <body>
+        <!-- Navigation -->
         <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
             <div class="container">
                 <a class="navbar-brand js-scroll-trigger" href="${pageContext.request.contextPath}/home">Pet Shop</a>
@@ -85,6 +86,16 @@
 
                         </li>
 
+                        <li class="nav-item mx-0 mx-lg-1 dropdown show">
+                            <a class="nav-link py-3 px-0 px-lg-3 dropdown-toggled dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuarios</a>
+
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a  class="dropdown-item" href="${pageContext.request.contextPath}/user">Cadastrar Usuario</a>
+                                <a class="dropdown-item" href="${pageContext.request.contextPath}/searchUser">Gerenciar Usuarios</a>               
+                            </div>
+
+                        </li>
+
                         <li class="nav-item mx-0 mx-lg-1">
                             <a class="dropdown nav-link py-3 px-0 px-lg-3 rounded " href="#page-top">Unidades</a>
                         </li>
@@ -97,29 +108,45 @@
                 </div>
             </div>
         </nav>
-        <form action="${pageContext.request.contextPath}/funcionario" method="post">
-            <div>
-                <div>
-                    <div>
-                        Nome do Funcionario: <input type="text" name="nomeFunc"/> 
-                    </div>
-                    <div>
-                        Data de Nascimento: <input type="number" name="dataNasc"/>
-                    </div>
-                    <div>
-                        Sexo: <input type="text" name="sexo"/>
-                    </div>
-                    <div>
-                        R.G.: <input type="text" name="rg"/>
-                    </div> 
-                    <div>
-                        CPF: <input type="text" name="cpf"/>
-                    </div> 
-                    <div>
-                        <button type="submit">Enviar</button>
+
+        <section class="col-md-12">
+            <div class="container" style="margin-top: 150px">
+                <div class="row" style="margin-bottom: 50px" >
+                    <h1 style="text-align: center; margin:  0 auto;">Cadastro usuario</h1>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" style="margin: 0 auto;">
+                        <form>
+                            <div class="form-group">
+                              <label for="formGroupExampleInput">Nome</label>
+                              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
+                            </div>
+                            <div class="form-group">
+                              <label for="formGroupExampleInput2">Email</label>
+                              <input type="text" class="form-control" id="formGroupExampleInput2"  placeholder="Another input">
+                            </div>
+                            <div class="form-group">
+                              <label for="formGroupExampleInput2">telefone</label>
+                              <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+                            </div>
+                          </form>
                     </div>
                 </div>
             </div>
-        </form>
+        </section>
+                        <!-- Bootstrap core JavaScript -->
+    <script src="tools/vendor/jquery/jquery.min.js"></script>
+    <script src="tools/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="tools/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="tools/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="tools/js/jqBootstrapValidation.js"></script>
+    <script src="tools/js/contact_me.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="tools/js/freelancer.min.js"></script>
     </body>
 </html>
