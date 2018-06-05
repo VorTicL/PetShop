@@ -73,10 +73,10 @@ public class FilialDAO{
             rs = pst.executeQuery();
             
             while(rs.next()){
-                Filial fili = new Filial(rs.getInt("idFilial"), rs.getString("nome"), 
+                Filial fili = new Filial(rs.getInt("id"), rs.getString("nome"), 
                         rs.getTimestamp("dataCri"), rs.getString("endereco"), rs.getInt("numeroEnd"));
                 
-                filial.put(rs.getInt("idFilial"), fili);
+                filial.put(rs.getInt("id"), fili);
             }
             
         } catch (SQLException e) {

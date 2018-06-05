@@ -103,7 +103,7 @@
                 <div class="data-container">
                     <div>
                         <div>
-                            <input type="number" name="nomeFunc"/> 
+                            <input type="text" name="nomeUser"/> 
                         </div>
                         <div>
                             <button type="submit">Enviar</button>

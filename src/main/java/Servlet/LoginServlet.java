@@ -10,6 +10,8 @@ import Model.DAO.UserDAO;
 import Model.Entity.Filial;
 import Model.Entity.User;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -58,8 +60,14 @@ public class LoginServlet extends HttpServlet {
             if (user != null) {
                 HttpSession sessao = request.getSession();
                 filial = filialDAO.selectAll();
+                List<String> types = new ArrayList<>();
+                types.add("GERENTE");
+                types.add("ESTOQUISTA");
+                types.add("VENDEDOR");
+                types.add("DIRETOR");
                 sessao.setAttribute("usuario", user);
                 sessao.setAttribute("filiais", filial);
+                sessao.setAttribute("type", types);
                 response.sendRedirect(request.getContextPath() + "/home");
 
             } else {

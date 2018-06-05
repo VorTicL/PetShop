@@ -37,9 +37,9 @@ public class ServletUser extends HttpServlet {
 
         User user = new User();
         try{
-        user.setLogin(request.getParameter("login"));
+        user.setLogin(request.getParameter("user"));
         user.setSenha(request.getParameter("senha"));
-        user.setIdFilial(Integer.parseInt(request.getParameter("filialId")));
+        user.setIdFilial(Integer.parseInt(request.getParameter("filial")));
         user.setEmail(request.getParameter("email"));
         user.setDataCri(new Timestamp(System.currentTimeMillis()));
         user.setCpf(request.getParameter("cpf"));

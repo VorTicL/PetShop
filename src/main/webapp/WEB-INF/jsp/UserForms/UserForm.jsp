@@ -5,7 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -116,19 +117,66 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4" style="margin: 0 auto;">
-                        <form>
+                        <form name="send" action="${pageContext.request.contextPath}/user" method="post">
                             <div class="form-group">
-                              <label for="formGroupExampleInput">Nome</label>
-                              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
+                              <label for="formGroupExampleInput">Usuario</label>
+                              <input type="text" class="form-control" id="user" name="user" placeholder="USER">
                             </div>
                             <div class="form-group">
+                              <label for="formGroupExampleInput2">Senha</label>
+                              <input type="password" class="form-control" id="senha" name="senha"  placeholder="SENHA">
+                            </div>
+                            <div class="form-group">
+                              <label for="formGroupExampleInput2">Filial</label>
+                              <select class="custom-select my-1 mr-sm-2" id="filial" name="filial">
+                                <option selected>Selecionar</option>
+                                <c:forEach var="item" items="${filiais}">
+                                     <option value="${item.key}"><c:out value="${item.value.nome}"></c:out></option>
+                                </c:forEach>
+                              </select>
+                            </div>
+                                <div class="form-group">
                               <label for="formGroupExampleInput2">Email</label>
-                              <input type="text" class="form-control" id="formGroupExampleInput2"  placeholder="Another input">
+                              <input type="email" class="form-control" id="email" name="email"  placeholder="email@email.com.br">
+                            </div>
+                                <div class="form-group">
+                              <label for="formGroupExampleInput2">CPF</label>
+                              <input type="text" class="form-control" id="cpf" name="cpf"  placeholder="11122233344">
+                            </div>
+                                <div class="form-group">
+                              <label for="formGroupExampleInput2">Nome</label>
+                              <input type="text" class="form-control" id="nome" name="nome"  placeholder="Nome">
+                            </div>
+                                <div class="form-group">
+                              <label for="formGroupExampleInput2">Sobrenome</label>
+                              <input type="text" class="form-control" id="sobrenome" name="sobrenome"  placeholder="Sobrenome">
+                            </div>
+                                <div class="form-group">
+                              <label for="formGroupExampleInput2">Sexo</label>
+                              <select class="custom-select my-1 mr-sm-2" id="sexo" name="sexo">
+                                <option selected>Selecionar</option>
+                                <option value="1">H</option>
+                                <option value="1">M</option>
+                              </select>  
                             </div>
                             <div class="form-group">
-                              <label for="formGroupExampleInput2">telefone</label>
-                              <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+                              <label for="formGroupExampleInput2">RG</label>
+                              <input type="text" class="form-control" id="rg" name="rg" placeholder="112223334">
                             </div>
+                            <div class="form-group">
+                              <label for="formGroupExampleInput2">Data de Nascimento</label>
+                              <input type="datetime" class="form-control" id="dataNasc" name="dataNasc" placeholder="112223334">
+                            </div>
+                            <div class="form-group">
+                              <label for="formGroupExampleInput2">Função</label>
+                              <select class="custom-select my-1 mr-sm-2" id="typeUser" name="typeUser">
+                                <option selected>Selecionar</option>
+                                <c:forEach var="value" items="${type}">
+                                     <option value="${value}"><c:out value="${value}"></c:out></option>
+                                </c:forEach>
+                              </select>
+                            </div>
+                             <button class="btn btn-lg btn-primary btn-block" type="submit">Cadastrar</button>
                           </form>
                     </div>
                 </div>
