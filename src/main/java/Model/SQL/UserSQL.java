@@ -21,7 +21,7 @@ public class UserSQL {
     public void insert(Connection conexao, PreparedStatement pst, User user) throws SQLException {
 
         String sql = "insert into user1(login,senha,filialId,email,dataCri,nome,dataNasc,"
-                + "sexo,rg,cpf,typeUser) values (?,?,?,?,?,?,?,?,?,?,?)";
+                + "sexo,rg,cpf,typeUser,sobrenome) values (?,?,?,?,?,?,?,?,?,?,?,?)";
 
         pst = conexao.prepareStatement(sql);
 
@@ -36,6 +36,7 @@ public class UserSQL {
         pst.setString(9, user.getRg());
         pst.setString(10, user.getCpf());
         pst.setString(11, user.getType());
+        pst.setString(12, user.getSobrenome());
         pst.execute();
 
     }

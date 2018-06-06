@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author João
  */
-@WebServlet(name = "ManageUser", urlPatterns = {"/manageUser"})
+@WebServlet(name = "ManageUser", urlPatterns = {"/UserForm/manageUser"})
 public class ManageUserServlet extends HttpServlet {
 
     UserDAO userDAO = new UserDAO();

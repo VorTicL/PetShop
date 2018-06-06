@@ -91,8 +91,8 @@
                             <a class="nav-link py-3 px-0 px-lg-3 dropdown-toggled dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuarios</a>
 
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a  class="dropdown-item" href="${pageContext.request.contextPath}/user">Cadastrar Usuario</a>
-                                <a class="dropdown-item" href="${pageContext.request.contextPath}/searchUser">Gerenciar Usuarios</a>               
+                                <a  class="dropdown-item" href="${pageContext.request.contextPath}/User/user">Cadastrar Usuario</a>
+                                <a class="dropdown-item" href="${pageContext.request.contextPath}/UserForm/searchUser">Gerenciar Usuarios</a>               
                             </div>
 
                         </li>
@@ -165,7 +165,7 @@
                             </div>
                             <div class="form-group">
                               <label for="formGroupExampleInput2">Data de Nascimento</label>
-                              <input type="datetime" class="form-control" id="dataNasc" name="dataNasc" placeholder="112223334">
+                              <input type="date" class="form-control" id="dataNasc" name="dataNasc" placeholder="112223334">
                             </div>
                             <div class="form-group">
                               <label for="formGroupExampleInput2">Função</label>

@@ -92,7 +92,20 @@
             </div>
         </nav>
       
-    <h1><c:out value="${funcionarioResponse}" /></h1>
-    <a href="${pageContext.request.contextPath}/funcionario">Voltar para tela de cadastro de Funcionarios</a>
+    <h1><c:out value="${response}" /></h1>
+    <a href="${pageContext.request.contextPath}/UserForm/user">Voltar para tela de cadastro de Funcionarios</a>
+    <script src="tools/vendor/jquery/jquery.min.js"></script>
+    <script src="tools/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="tools/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="tools/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="tools/js/jqBootstrapValidation.js"></script>
+    <script src="tools/js/contact_me.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="tools/js/freelancer.min.js"></script>
   </body>
 </html>

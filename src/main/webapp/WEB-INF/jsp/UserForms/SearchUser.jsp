@@ -99,24 +99,17 @@
             </div>
         </nav>
         <div class="container">    
-            <form action="${pageContext.request.contextPath}/searchFuncionario" method="get">
-                <div class="data-container">
-                    <div>
-                        <div>
-                            <input type="text" name="nomeUser"/> 
-                        </div>
-                        <div>
-                            <button type="submit">Enviar</button>
-                        </div>
-                    </div>
+            <form action="${pageContext.request.contextPath}/searchUser" method="get">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="nomeUser" name="nomeUser"  placeholder="PESQUISA">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Pesquisar</button>
                 </div>
             </form>
-            <form name="send" action="${pageContext.request.contextPath}/searchFuncionario" method="post">
+            <form name="send" action="${pageContext.request.contextPath}/searchUser" method="post">
                 <table>     
-
-                    <c:if test="${not empty listFunc}" >
+                    <c:if test="${not empty listUser}" >
                         <tr>
-                            <c:forEach var="item" items="${listFunc}">
+                            <c:forEach var="item" items="${listUser}">
                                 <td>
                                     <c:out value="${item.nome}"></c:out>
                                     </td>
@@ -136,5 +129,18 @@
                 </script>    
             </form>
         </div>
+        <script src="tools/vendor/jquery/jquery.min.js"></script>
+        <script src="tools/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Plugin JavaScript -->
+        <script src="tools/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="tools/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+        <!-- Contact Form JavaScript -->
+        <script src="tools/js/jqBootstrapValidation.js"></script>
+        <script src="tools/js/contact_me.js"></script>
+
+        <!-- Custom scripts for this template -->
+        <script src="tools/js/freelancer.min.js"></script>
     </body>
 </html>

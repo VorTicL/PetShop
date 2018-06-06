@@ -98,6 +98,6 @@
             </div>
         </nav>
     <h1><c:out value="${response}" /></h1>
-    <a href="${pageContext.request.contextPath}/searchProduct">Voltar para tela pesquisa de funcionários</a>
+    <a href="${pageContext.request.contextPath}/UserForm/searchUser">Voltar para tela pesquisa de funcionários</a>
   </body>
 </html>

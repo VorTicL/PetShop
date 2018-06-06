@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author João
  */
-@WebServlet(name = "SearchFuncionario", urlPatterns = {"/searchFuncionario"})
+@WebServlet(name = "SearchFuncionario", urlPatterns = {"/UserForm/searchUser"})
 public class SearchUserServlet extends HttpServlet {
 
     UserDAO userDAO = new UserDAO();
@@ -34,7 +34,7 @@ public class SearchUserServlet extends HttpServlet {
         String nome = "";
         nome = request.getParameter("nomeUser");
         try {
-            if (nome != null && nome.compareToIgnoreCase("") == 0) {
+            if (nome == null || nome.compareToIgnoreCase("") == 0) {
                 userList = userDAO.selectAll();
             }else{
                 userList = userDAO.selectNome(nome);

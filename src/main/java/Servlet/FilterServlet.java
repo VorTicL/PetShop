@@ -26,7 +26,7 @@ import Model.Entity.User;
  * @author Victor de Lucca
  */
 @WebFilter(filterName = "filter", 
-	urlPatterns = {"/UserForms","/ServiceForms", "ProductForms"},
+	urlPatterns = {"/User/*","/ServiceForms", "ProductForms"},
 	servletNames = {"HomeServlet", "manageProduct", "manageService", "searchProduct",
         "searchService"})
 public class FilterServlet implements Filter {
@@ -54,8 +54,6 @@ public class FilterServlet implements Filter {
       return;
     }
     
-    chain.doFilter(request, response);
-    
     User user = (User) sessao.getAttribute("usuario");
 
     // 2) Usuario logado, verifica se tem autorizacao para acessar recurso
@@ -74,14 +72,16 @@ public class FilterServlet implements Filter {
     String pagina = paginaAcessada.replace(request.getContextPath(), "");
 
     if (pagina.endsWith("/ProductForms")
-	    && user.getType().compareToIgnoreCase("ESTOQUISTA") != 0) {
+	    && user.getType().compareToIgnoreCase("ESTOQUISTA") != 0
+            || user.getType().compareToIgnoreCase("admin") != 0) {
       return false;
     } else if (pagina.endsWith("/ServiceForms") || pagina.endsWith("/ClienteForm")
-	    && (user.getType().compareToIgnoreCase("GERENTE") !=0 || user.getType().compareToIgnoreCase("VENDEDOR") != 0)) {
+	    && (user.getType().compareToIgnoreCase("GERENTE") !=0 || user.getType().compareToIgnoreCase("VENDEDOR") != 0
+            || user.getType().compareToIgnoreCase("admin") != 0)) {
       return false;
-    } else if(pagina.endsWith("/UserForm")
-	    && user.getType().compareToIgnoreCase("TI") != 0) {
-      return false;
+    } else if(pagina.startsWith("/User")
+	    && (user.getType().compareToIgnoreCase("TI") == 0 || user.getType().compareToIgnoreCase("admin") == 0)) {
+      return true;
     }
     
     return true;
