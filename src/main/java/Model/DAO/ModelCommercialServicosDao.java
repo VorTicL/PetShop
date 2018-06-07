@@ -20,30 +20,30 @@ import java.util.List;
  *
  * @author Victor de Lucca
  */
-public class ModelCommercialServicosDao extends ModelCommercialServiceSQL{
+public class ModelCommercialServicosDao extends ModelCommercialServiceSQL {
 
-    private Connection conexao; 
-    private PreparedStatement pst; 
+    private Connection conexao;
+    private PreparedStatement pst;
     private ResultSet rs;
     private boolean result = false;
 
     public boolean insertService(ModelCommercialService servico) throws SQLException {
-        
+
         try {
             conexao = Model.Connect.Connect.connect();
 
             insert(conexao, pst, servico);
-            
+
             result = true;
-                    
+
         } catch (Exception e) {
-            
+
             result = false;
-            
-        }finally{
-            
+
+        } finally {
+
             conexao.close();
-            
+
         }
         return result;
     }
@@ -58,53 +58,50 @@ public class ModelCommercialServicosDao extends ModelCommercialServiceSQL{
 
             result = true;
         } catch (SQLException t) {
-            
+
             result = false;
-            
-        }finally{
+
+        } finally {
             conexao.close();
         }
         return result;
     }
 
-    public List<ModelCommercialService> selectAllServices()throws SQLException {
-        
-        List<ModelCommercialService> servico = null;
-        
+    public List<ModelCommercialService> selectAllServices() throws SQLException {
+
+        List<ModelCommercialService> servico = new ArrayList<>();
+
         try {
 
             conexao = Model.Connect.Connect.connect();
 
             rs = selectAll(conexao, pst);
 
-            if (rs.next()) {
-                
-                servico = new ArrayList<>();
+            while (rs.next()) {
+                ModelCommercialService modelCommercialService = new ModelCommercialService(rs.getString("pet"),
+                        rs.getDouble("preco"),
+                        rs.getString("nome"),
+                        rs.getInt("filialId"));
+                modelCommercialService.setId(rs.getInt("id"));
+                servico.add(modelCommercialService);
 
-                while (rs.next()) {
-                    servico.add(new ModelCommercialService(rs.getString(1),
-                            rs.getDouble(2),
-                            rs.getString(3),
-                            rs.getInt(4)));
-                                
-                }
             }
-            
+
         } catch (SQLException t) {
-            
+
             servico = null;
-            
-        }finally{
+
+        } finally {
             conexao.close();
         }
-        
+
         return servico;
     }
 
-    public ModelCommercialService selectIdServices(int id) throws SQLException{
-        
-        ModelCommercialService modelCommercialServico = null;
-        
+    public ModelCommercialService selectIdServices(int id) throws SQLException {
+
+        ModelCommercialService modelCommercialService = new ModelCommercialService();
+
         try {
 
             conexao = Model.Connect.Connect.connect();
@@ -112,24 +109,26 @@ public class ModelCommercialServicosDao extends ModelCommercialServiceSQL{
             rs = selectId(conexao, pst, id);
 
             if (rs.next()) {
-                
-                 modelCommercialServico = new ModelCommercialService(
-                        rs.getString(1), rs.getDouble(2), rs.getString(3), rs.getInt(4));
-                 
+                modelCommercialService = new ModelCommercialService(rs.getString("pet"),
+                        rs.getDouble("preco"),
+                        rs.getString("nome"),
+                        rs.getInt("filialId"));
+                modelCommercialService.setId(rs.getInt("id"));
+
             }
-            
+
         } catch (Exception t) {
-            modelCommercialServico = null;
-        }finally{
+            modelCommercialService = null;
+        } finally {
             conexao.close();
-        
         }
-        
-        return modelCommercialServico;
-        
+
+        return modelCommercialService;
+
     }
 
-    public boolean deleteServices(int a)throws SQLException {
+    public boolean deleteServices(int a) throws SQLException {
+        boolean aux = false;
         try {
             conexao = Model.Connect.Connect.connect();
 
@@ -137,19 +136,20 @@ public class ModelCommercialServicosDao extends ModelCommercialServiceSQL{
 
             conexao.close();
 
-            return true;
+            aux = true;
         } catch (SQLException t) {
-            
-            return false;
-            
-        }finally{
-            
+
+            aux = false;
+
+        } finally {
+
             conexao.close();
         }
+        return aux;
     }
-    
-    public List<ModelCommercialService> selectNameServices(String nome) throws SQLException{
-        
+
+    public List<ModelCommercialService> selectNameServices(String nome) throws SQLException {
+
         List<ModelCommercialService> servico = null;
         
         try {
@@ -158,27 +158,23 @@ public class ModelCommercialServicosDao extends ModelCommercialServiceSQL{
 
             rs = selectProduto(conexao, pst, nome);
 
-            if (rs.next()) {
-                
-                servico = new ArrayList<>();
-
-                while (rs.next()) {
-                    
-                    servico.add(new ModelCommercialService(rs.getString(1),
-                            rs.getDouble(2),
-                            rs.getString(3),
-                            rs.getInt(4)));
-                }
+            while (rs.next()) {
+                ModelCommercialService modelCommercialService = new ModelCommercialService(rs.getString("pet"),
+                        rs.getDouble("preco"),
+                        rs.getString("nome"),
+                        rs.getInt("filialId"));
+                modelCommercialService.setId(rs.getInt("id"));
+                servico.add(modelCommercialService);
             }
-            
+
         } catch (SQLException t) {
-            
-             servico = null;
-            
-        }finally{
+
+            servico = null;
+
+        } finally {
             conexao.close();
         }
-        
+
         return servico;
     }
 }

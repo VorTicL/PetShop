@@ -19,7 +19,7 @@ import java.sql.SQLException;
 public class ModelCommercialServiceSQL {
     public void insert(Connection conexao, PreparedStatement pst, ModelCommercialService servico) throws SQLException {
 
-         String sql = "insert into servicos (pet,valor,nome,filial) values (?,?,?,?)";
+         String sql = "insert into servico (pet,preco,nome,filialId) values (?,?,?,?)";
 
 
         pst = conexao.prepareStatement(sql);
@@ -35,7 +35,7 @@ public class ModelCommercialServiceSQL {
 
     public void update(Connection conexao, PreparedStatement pst, ModelCommercialService servico) throws SQLException {
 
-        String sql = "update servico set nome = ? and valor = ? and  filial = ? and pet = ? where id = ? and ativo = true";
+        String sql = "update servico set nome = ?, preco = ?, filialId = ?, pet = ? where id = ? and ativo = 1";
 
         pst = conexao.prepareStatement(sql);
 
@@ -49,14 +49,14 @@ public class ModelCommercialServiceSQL {
     }
 
     public ResultSet selectAll(Connection conexao, PreparedStatement pst) throws SQLException {
-        String sql = "select * from servico where ativo = true";
+        String sql = "select * from servico where ativo = 1";
         pst = conexao.prepareStatement(sql);
 
         return pst.executeQuery();
     }
 
     public ResultSet selectId(Connection conexao, PreparedStatement pst, int id) throws SQLException {
-        String sql = "select id,nome,valor,filial,pet from servico where id = ? and ativo = true";
+        String sql = "select * from servico where id = ? and ativo = 1";
         pst = conexao.prepareStatement(sql);
         pst.setInt(1, id);
 
@@ -64,7 +64,7 @@ public class ModelCommercialServiceSQL {
     }
 
     public void delete(Connection conexao, PreparedStatement pst, int id) throws SQLException {
-        String sql = "update servico set ativo = false where id = ?";
+        String sql = "update servico set ativo = 0 where id = ?";
         pst = conexao.prepareStatement(sql);
         pst.setInt(1, id);
 
@@ -72,7 +72,7 @@ public class ModelCommercialServiceSQL {
     }
     
     public ResultSet selectProduto(Connection conexao, PreparedStatement pst, String nome) throws SQLException {
-        String sql = "select * from servico where nome like ? and ativo = true";
+        String sql = "select * from servico where nome like ? and ativo = 1";
 
         pst = conexao.prepareStatement(sql);
         pst.setString(1, nome);

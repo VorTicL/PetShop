@@ -31,11 +31,11 @@ public class ManageServiceServlet extends HttpServlet {
         try {
 
             ModelCommercialService modelCommercialService = new ModelCommercialService();
-            modelCommercialService.setId(Integer.parseInt(request.getParameter("idProd")));
+            modelCommercialService.setId(Integer.parseInt(request.getParameter("idServ")));
             modelCommercialService.setFilial(Integer.parseInt(request.getParameter("filial")));
-            modelCommercialService.setNome(request.getParameter("nomeServ"));
+            modelCommercialService.setNome(request.getParameter("nome"));
             modelCommercialService.setPet(request.getParameter("pet"));
-            modelCommercialService.setValor(Double.parseDouble(request.getParameter("uniValue")));
+            modelCommercialService.setValor(Double.parseDouble(request.getParameter("valor")));
 
             
             if (modelCommercialServicosDao.updateServices(modelCommercialService)) {

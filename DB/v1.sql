@@ -44,9 +44,9 @@ CREATE TABLE servico (
   id int(11) NOT NULL AUTO_INCREMENT,
   nome varchar(100),
   preco double,
-  animal int(11),
-  dataCri timestamp NOT NULL,
+  pet varchar(100),
   filialId int(11) NOT NULL,
+  ativo boolean default true,
 
   PRIMARY KEY (id),
   FOREIGN KEY (filialId) REFERENCES filial(id)  

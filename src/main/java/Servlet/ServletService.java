@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "serviceServlet", urlPatterns = {"/service"})
 public class ServletService extends HttpServlet {
     
-    ModelCommercialServicosDao ModelCommercialServicosDao = null;
+    ModelCommercialServicosDao ModelCommercialServicosDao = new ModelCommercialServicosDao();
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -38,20 +38,20 @@ public class ServletService extends HttpServlet {
             throws ServletException, IOException {
 
         try {
-            String nome = request.getParameter("nomeServ");
-            double valueUni = Double.parseDouble(request.getParameter("uniValue"));
+            String nome = request.getParameter("nome");
+            double valueUni = Double.parseDouble(request.getParameter("valor"));
             String filial = request.getParameter("filial");
             String pet =request.getParameter("pet");
 
             ModelCommercialService serv1 = new ModelCommercialService(pet, valueUni, nome, Integer.parseInt(filial));
             if (ModelCommercialServicosDao.insertService(serv1)) {
-                request.setAttribute("productResponse", serv1.getNome() + "Cadastrado com sucesso!");
+                request.setAttribute("response", serv1.getNome() + " Cadastrado com sucesso!");
             } else {
-                request.setAttribute("productResponse", "ERRO!");
+                request.setAttribute("response", "ERRO!");
             }
-            request.setAttribute("serviceResponse",  serv1.getNome()+"Cadastrado com sucesso!");
+            request.setAttribute("response",  serv1.getNome()+" Cadastrado com sucesso!");
         } catch (Exception e) {
-            request.setAttribute("productResponse", "ERRO!");
+            request.setAttribute("response", "ERRO!");
         }finally{
             request.getRequestDispatcher("WEB-INF/jsp/ServiceForms/responseInsertService.jsp")
                     .forward(request, response);

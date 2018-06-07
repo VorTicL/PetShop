@@ -23,26 +23,22 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "searchService", urlPatterns = {"/searchService"})
 public class SearchServiceServlet extends HttpServlet {
 
-    ModelCommercialServicosDao modelCommercialServicosDao = null;
+    ModelCommercialServicosDao modelCommercialServicosDao = new ModelCommercialServicosDao();
     List<ModelCommercialService> listCommercial = null;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String nomeServ = null;
+        String nomeServ = "";
         nomeServ = request.getParameter("nomeServ");
         try {
-
-            if (nomeServ != null) {
-                if (nomeServ.compareToIgnoreCase("") != 0) {
-                    listCommercial = modelCommercialServicosDao.selectNameServices(nomeServ);
-                } else {
-                    listCommercial = modelCommercialServicosDao.selectAllServices();
-                }
-
+            if (nomeServ == null || nomeServ.compareToIgnoreCase("") == 0) {
+                listCommercial = modelCommercialServicosDao.selectAllServices();
+            } else {
+                listCommercial = modelCommercialServicosDao.selectNameServices(nomeServ);
             }
-            
+
             request.setAttribute("listCommercial", listCommercial);
 
         } catch (Exception e) {
@@ -58,11 +54,11 @@ public class SearchServiceServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            int idServ = Integer.parseInt(request.getParameter("idServ"));
+            int idServ = Integer.parseInt(request.getParameter("idServ1"));
 
-            ModelCommercialService serv1 = modelCommercialServicosDao.selectIdServices(idServ);
+            ModelCommercialService serv = modelCommercialServicosDao.selectIdServices(idServ);
 
-            request.setAttribute("serv", serv1);
+            request.setAttribute("serv", serv);
 
             request.getRequestDispatcher("WEB-INF/jsp/ServiceForms/manageService.jsp")
                     .forward(request, response);
