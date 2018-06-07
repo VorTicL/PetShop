@@ -57,7 +57,7 @@ public class ServletUser extends HttpServlet {
 
             UserDAO userDAO = new UserDAO();
             if (userDAO.insert(user)) {
-                request.setAttribute("response", "Funcionario adicionado com sucesso");
+                request.setAttribute("response", "Usuario Adicionado Com Sucesso");
             } else {
                 request.setAttribute("response", "ERRO!");
             }

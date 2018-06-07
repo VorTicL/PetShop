@@ -5,10 +5,11 @@
 --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-  <head>
+    <head>
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -34,8 +35,8 @@
         <link rel="stylesheet" type="text/css" href="tools/css/modificacao.css">
 
     </head>
-  <body>
-      <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
+    <body>
+        <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
             <div class="container">
                 <a class="navbar-brand js-scroll-trigger" href="${pageContext.request.contextPath}/home">Pet Shop</a>
                 <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -84,6 +85,16 @@
                             </div>
 
                         </li>
+                        
+                        <li class="nav-item mx-0 mx-lg-1 dropdown show">
+                            <a class="nav-link py-3 px-0 px-lg-3 dropdown-toggled dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuarios</a>
+
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a  class="dropdown-item" href="${pageContext.request.contextPath}user">Cadastrar Usuario</a>
+                                <a class="dropdown-item" href="${pageContext.request.contextPath}/searchUser">Gerenciar Usuarios</a>               
+                            </div>
+
+                        </li>
 
                         <li class="nav-item mx-0 mx-lg-1">
                             <a class="dropdown nav-link py-3 px-0 px-lg-3 rounded " href="#page-top">Unidades</a>
@@ -97,7 +108,33 @@
                 </div>
             </div>
         </nav>
-    <h1><c:out value="${response}" /></h1>
-    <a href="${pageContext.request.contextPath}/UserForm/searchUser">Voltar para tela pesquisa de funcionários</a>
-  </body>
+        <section class="col-md-12">
+            <div class="container" style="margin-top: 150px">
+                <div class="row" style="margin-bottom: 50px" >
+                    <h1 style="text-align: center; margin:  0 auto;"><c:out value="${response}" /></h1>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" style="margin: 0 auto;">
+                        <div class="form-group">
+                            <a href="${pageContext.request.contextPath}/searchUser">Voltar</a>
+                        </div>                            
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Bootstrap core JavaScript -->
+        <script src="tools/vendor/jquery/jquery.min.js"></script>
+        <script src="tools/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Plugin JavaScript -->
+        <script src="tools/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="tools/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+        <!-- Contact Form JavaScript -->
+        <script src="tools/js/jqBootstrapValidation.js"></script>
+        <script src="tools/js/contact_me.js"></script>
+
+        <!-- Custom scripts for this template -->
+        <script src="tools/js/freelancer.min.js"></script>
+    </body>
 </html>

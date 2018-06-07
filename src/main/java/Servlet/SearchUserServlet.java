@@ -33,6 +33,7 @@ public class SearchUserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession sessao = request.getSession();
         String nome = "";
         nome = request.getParameter("nomeUser");
         try {
