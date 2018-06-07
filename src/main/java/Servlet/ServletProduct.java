@@ -37,24 +37,23 @@ public class ServletProduct extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        ModelCommercialProduct prod = new ModelCommercialProduct();
         try {
-            String nome = request.getParameter("nomeProd");
-            double valueUni = Double.parseDouble(request.getParameter("uniValue"));
-            String filial = request.getParameter("filial");
-            int qtdEstoque = Integer.parseInt(request.getParameter("qtdEstoque"));
+            prod.setNome(request.getParameter("nomeProd"));
+            prod.setValor(Double.parseDouble(request.getParameter("uniValue")));
+            prod.setFilial(Integer.parseInt(request.getParameter("filial")));
+            prod.setQtdProd(Integer.parseInt(request.getParameter("qtdEstoque")));
 
-            ModelCommercialProduct prod1 = new ModelCommercialProduct(nome, valueUni, Integer.parseInt(filial), qtdEstoque);
-            if (modelCommercialProductDao.insertProduct(prod1)) {
-                request.setAttribute("productResponse", prod1.getNome() + "Cadastrado com sucesso!");
+          ModelCommercialProductDao productDAO = new ModelCommercialProductDao();
+            if (productDAO.insertProduct(prod)) {
+                request.setAttribute("response", "Produto Adicionado Com Sucesso");
             } else {
-                request.setAttribute("productResponse", "ERRO!");
+                request.setAttribute("response", "ERRO!");
             }
         } catch (Exception e) {
-            request.setAttribute("productResponse", "ERRO!");
-        } finally {
-            request.getRequestDispatcher("WEB-INF/jsp/ProductForms/responseInsertProduct.jsp")
-                    .forward(request, response);
+            request.setAttribute("response", "ERRO!");
         }
+        request.getRequestDispatcher("WEB-INF/jsp/ProductForms/responseInsertProduct.jsp").forward(request, response);
 
     }
 
