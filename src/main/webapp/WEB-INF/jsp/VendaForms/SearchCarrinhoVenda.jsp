@@ -117,15 +117,15 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4" style="margin: 0 auto;">
-                            <button class="btn btn-lg btn-primary btn-block" onclick="productShow" type="submit">PRODUTO</button>
-                            <button class="btn btn-lg btn-primary btn-block" onclick="serviceShow"type="submit">SERVIÇO</button>
+                            <button class="btn btn-lg btn-primary btn-block" onclick="productShow()" type="button">PRODUTO</button>
+                            <button class="btn btn-lg btn-primary btn-block" onclick="serviceShow()"type="button">SERVIÇO</button>
                         </div>
                     </div>    
                     <div class="row" id="product" style="display:${statusProd}">
                         <div class="col-md-4" style="margin: 0 auto;">
                             <form action="${pageContext.request.contextPath}/searchProductVenda" method="get">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="nomeProd" name="nomeProd"  placeholder="PESQUISA PRODUTO">
+                                    <input type="text" class="form-control" id="nomeProd" name="nomeProd"  placeholder="Pesquisa Produto">
                                     <button class="btn btn-lg btn-primary btn-block" type="submit">Pesquisar</button>
                                 </div>
                             </form>
@@ -150,15 +150,15 @@
                         <div class="col-md-4" style="margin: 0 auto;">
                             <form action="${pageContext.request.contextPath}/searchServiceVenda" method="get">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="nomeServ" name="nomeServ"  placeholder="PESQUISA">
+                                    <input type="text" class="form-control" id="nomeServ" name="nomeServ"  placeholder="Pesquisa Serviço">
                                     <button class="btn btn-lg btn-primary btn-block" type="submit">Pesquisar</button>
                                 </div>
                             </form>
                             <form name="send" action="${pageContext.request.contextPath}/searchServiceVenda" method="post">
                                 <table>     
-                                    <c:if test="${not empty listCommercial}" >
+                                    <c:if test="${not empty listCommercialServ}" >
                                         <tr>
-                                            <c:forEach var="item" items="${listCommercial}">
+                                            <c:forEach var="item" items="${listCommercialServ}">
                                                 <td>
                                                     <c:out value="${item.nome}"></c:out>
                                                     <button class="btn" type="button" onclick="hdnIDServ(${item.id})">selecionar</button>

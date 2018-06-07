@@ -27,7 +27,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Victor de Lucca
  */
-@WebServlet(name = "searchService", urlPatterns = {"/searchService"})
+@WebServlet(name = "searchService", urlPatterns = {"/searchServiceVenda"})
 public class SearchServiceVenda extends HttpServlet {
 
     ModelCommercialServicosDao modelCommercialServicosDao = new ModelCommercialServicosDao();
@@ -46,11 +46,11 @@ public class SearchServiceVenda extends HttpServlet {
                 listCommercialServ = modelCommercialServicosDao.selectNameServices(nomeServ);
             }
 
-            request.setAttribute("listCommercial", listCommercialServ);
+            request.setAttribute("listCommercialServ", listCommercialServ);
 
         } catch (Exception e) {
             listCommercialServ = null;
-            request.setAttribute("listCommercial", listCommercialServ);
+            request.setAttribute("listCommercialServ", listCommercialServ);
         }
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/VendaForms/SearchCarrinhoVenda.jsp");
         dispatcher.forward(request, response);

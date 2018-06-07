@@ -36,7 +36,7 @@ public class SearchClienteVenda extends HttpServlet {
         HttpSession sessao = request.getSession();
         Venda venda = (Venda) sessao.getAttribute("venda");
         if (venda != null && venda.getIdcliente() != 0) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/VendaForms/ManageVenda.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/VendaForms/SearchClienteVenda.jsp");
             dispatcher.forward(request, response);
             return;
         }
@@ -67,13 +67,17 @@ public class SearchClienteVenda extends HttpServlet {
         HttpSession sessao = request.getSession();
         try {
             Venda venda = new Venda();
-            venda.setIdcliente(Integer.parseInt(request.getParameter("idCliente1")));
+            venda.setIdcliente(Integer.parseInt(request.getParameter("idCli1")));
+            cli = clienteDAO.selectId(Integer.parseInt(request.getParameter("idCli1")));
             sessao.setAttribute("venda", venda);
-
-            request.getRequestDispatcher("WEB-INF/jsp/VendaForms/ManageVenda.jsp")
+            sessao.setAttribute("clienteV", cli);
+            sessao.setAttribute("statusProd", "none");
+            sessao.setAttribute("statusServ", "none");
+            request.getRequestDispatcher("WEB-INF/jsp/VendaForms/SearchCarrinhoVenda.jsp")
                     .forward(request, response);
         } catch (Exception e) {
             sessao.removeAttribute("venda");
+            sessao.removeAttribute("clienteV");
             request.getRequestDispatcher("WEB-INF/jsp/VendaForms/ManageVenda.jsp")
                     .forward(request, response);
         }
