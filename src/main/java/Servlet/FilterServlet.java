@@ -57,13 +57,13 @@ public class FilterServlet implements Filter {
     User user = (User) sessao.getAttribute("usuario");
 
     // 2) Usuario logado, verifica se tem autorizacao para acessar recurso
-    if (verificarAcesso(user, httpRequest, httpResponse)) {
+    /*if (verificarAcesso(user, httpRequest, httpResponse)) {
       // Acesso ao recurso está liberado
       chain.doFilter(request, response);
     } else {
       // Usuario nao tem autorizacao para acessar pagina
       httpResponse.sendRedirect(httpRequest.getContextPath() + "/erro-autorizado.jsp");
-    }
+    }*/
   }
 
   private static boolean verificarAcesso(User user,

@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author João
  */
-@WebServlet(name = "SearchFuncionario", urlPatterns = {"/UserForm/searchUser"})
+@WebServlet(name = "SearchFuncionario", urlPatterns = {"/searchUser"})
 public class SearchUserServlet extends HttpServlet {
 
     UserDAO userDAO = new UserDAO();
