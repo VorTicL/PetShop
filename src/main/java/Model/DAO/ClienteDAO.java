@@ -195,7 +195,7 @@ public class ClienteDAO{
 
             pst = conexao.prepareStatement(sql.toString());
             
-            pst.setString(1, nome);
+            pst.setString(1, "%" + nome + "%");
 
             rs = pst.executeQuery();
             

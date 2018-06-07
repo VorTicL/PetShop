@@ -76,7 +76,7 @@ public class ModelCommercialProductSQL {
                 + "from produto where nome like ? and ativo = 1";
 
         pst = conexao.prepareStatement(sql);
-        pst.setString(1, nome);
+        pst.setString(1, "%" + nome + "%");
         
         return pst.executeQuery();
     }

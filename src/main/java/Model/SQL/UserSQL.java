@@ -98,7 +98,7 @@ public class UserSQL {
     public ResultSet selectName(Connection conexao, PreparedStatement pst, String nome) throws SQLException {
         String sql = "select * from user1 where nome like ? and ativo = 1";
         pst = conexao.prepareStatement(sql);
-        pst.setString(1, nome);
+        pst.setString(1, "%" + nome + "%");
 
         return pst.executeQuery();
     }

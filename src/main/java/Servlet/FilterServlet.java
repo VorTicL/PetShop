@@ -26,15 +26,14 @@ import Model.Entity.User;
  * @author Victor de Lucca
  */
 @WebFilter(filterName = "filter", 
-	urlPatterns = {"/User/*","/ServiceForms", "ProductForms"},
-	servletNames = {"HomeServlet", "manageProduct", "manageService", "searchProduct",
-        "searchService"})
+	urlPatterns = {"/User","/ServiceForms", "ProductForms"},
+	servletNames = {"HomeServlet", "manageProduct", "manageService", "manageUser", "manageCliente", "searchProduct",
+        "searchService", "searchUser", "searchCliente", "user", "service", "product", "cliente"})
 public class FilterServlet implements Filter {
 
   @Override
   public void init(FilterConfig filterConfig)
 	  throws ServletException {
-
   }
 
   @Override
