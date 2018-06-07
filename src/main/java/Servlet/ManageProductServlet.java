@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -28,21 +29,18 @@ public class ManageProductServlet extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
 
-        try {
-            int id = Integer.parseInt(request.getParameter("idProd"));
-            String filial = request.getParameter("filial");
-            String nome = request.getParameter("nomeProd");
-            int qtd = Integer.parseInt(request.getParameter("qtdEstoque"));
-            double valor = Double.parseDouble(request.getParameter("uniValue"));
+       try {
+            HttpSession sessao = request.getSession();
+
+            ModelCommercialProduct prod = (ModelCommercialProduct) sessao.getAttribute("manageProduct");
             
-            ModelCommercialProduct modelCommercialProduct = new ModelCommercialProduct();
-            modelCommercialProduct.setId(id);
-            modelCommercialProduct.setFilial(Integer.parseInt(filial));
-            modelCommercialProduct.setNome(nome);
-            modelCommercialProduct.setQtdProd(qtd);
-            modelCommercialProduct.setValor(valor);
+            prod.setNome(request.getParameter("nomeProd"));
+            prod.setValor(Double.parseDouble(request.getParameter("uniValue")));
+            prod.setFilial(Integer.parseInt(request.getParameter("filial")));
+            prod.setQtdProd(Integer.parseInt(request.getParameter("qtdEstoque")));
+
             
-            if (modelCommercialProductDao.updateProduct(modelCommercialProduct)) {
+            if (modelCommercialProductDao.updateProduct(prod)) {
                 request.setAttribute("response", "Produto Alterado Com Sucesso!");
             }else{
                 request.setAttribute("response", "ERRO!");
@@ -58,16 +56,13 @@ public class ManageProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        try {
+       try {
             int idRemove = Integer.parseInt(request.getParameter("idProd"));
-            
             if (modelCommercialProductDao.deleteProduct(idRemove)) {
                 request.setAttribute("response", "Produto Removido Com Sucesso!");
             }else{
                 request.setAttribute("response", "ERRO!");
             }
-            
         } catch (Exception e) {
             request.setAttribute("response", "ERRO!");
         }
