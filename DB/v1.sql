@@ -12,11 +12,13 @@ CREATE TABLE cliente (
   id int(11) NOT NULL AUTO_INCREMENT,
   nome varchar(100) NOT NULL,
   dataNasc timestamp NOT NULL,
-  sexo varchar(1) NOT NULL,
-  rg varchar(18) NOT NULL,
-  cpf varchar(15) NOT NULL,
-  endereco int(11) DEFAULT NULL,
+  sexo varchar(255) NOT NULL,
+  rg varchar(255) NOT NULL,
+  cpf varchar(255) NOT NULL,
+  endereco varchar(255) DEFAULT NULL,
   dataCri timestamp NOT NULL,
+  ativo boolean default true,
+  
   PRIMARY KEY (id)
 );
 

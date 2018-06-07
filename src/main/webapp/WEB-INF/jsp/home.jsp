@@ -74,7 +74,7 @@
                         <a class="nav-link py-3 px-0 px-lg-3 dropdown-toggled dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Venda</a>
 
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a  class="dropdown-item" href="#">Vendas</a>
+                            <a  class="dropdown-item" href="${pageContext.request.contextPath}/searchCliente">Vendas</a>
                             <a class="dropdown-item" href="#">Relatório</a>               
                         </div>
 

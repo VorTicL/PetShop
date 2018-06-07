@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Victor de Lucca
  */
-@WebServlet(name = "SearchCliente", urlPatterns = {"/searchCliente"})
+@WebServlet(name = "SearchCliente", urlPatterns = {"/searchClienteVenda"})
 public class SearchClienteVenda extends HttpServlet {
 
     ClienteDAO clienteDAO = new ClienteDAO();
@@ -36,7 +36,9 @@ public class SearchClienteVenda extends HttpServlet {
         HttpSession sessao = request.getSession();
         Venda venda = (Venda) sessao.getAttribute("venda");
         if (venda != null && venda.getIdcliente() != 0) {
-
+            RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/VendaForms/ManageVenda.jsp");
+            dispatcher.forward(request, response);
+            return;
         }
 
         String nomeCli = null;

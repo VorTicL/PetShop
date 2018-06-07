@@ -31,10 +31,10 @@ public class ClienteDAO{
 
         try {
 
-            StringBuilder sql = new StringBuilder();
-            sql.append("insert into cliente(nome,dataNasc,sexo,rg,cpf,endereco,dataCri) values (?,?,?,?,?,?,?)");
+            String sql = "insert into cliente(nome,dataNasc,sexo,rg,cpf,endereco,dataCri) "
+                    + "values (?,?,?,?,?,?,?)";
 
-            pst = conexao.prepareStatement(sql.toString());
+            pst = conexao.prepareStatement(sql);
 
             pst.setString(1, cliente.getNome());
             pst.setTimestamp(2, cliente.getDataNasc());

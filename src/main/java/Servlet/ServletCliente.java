@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "ClienteServlet", urlPatterns = {"/cliente"})
 public class ServletCliente extends HttpServlet {
+
     ClienteDAO clienteDAO = new ClienteDAO();
     Cliente cli = new Cliente();
 
@@ -40,8 +41,7 @@ public class ServletCliente extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-      Cliente cli = new Cliente();
-      try {
+        try {
             cli.setNome(request.getParameter("nomeCli"));
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date parsedDate = dateFormat.parse(request.getParameter("dataNascCli"));
@@ -50,11 +50,9 @@ public class ServletCliente extends HttpServlet {
             cli.setSexo(request.getParameter("sexoCli"));
             cli.setRg(request.getParameter("rgCli"));
             cli.setDataCri(new Timestamp(System.currentTimeMillis()));
-            cli.setCpf(request.getParameter("cpf"));
+            cli.setCpf(request.getParameter("cpfCli"));
             cli.setEndereco(request.getParameter("enderecoCli"));
-            
 
-            ClienteDAO clienteDAO = new ClienteDAO();
             if (clienteDAO.insert(cli)) {
                 request.setAttribute("response", "Cliente adicionado com sucesso");
             } else {
@@ -65,8 +63,5 @@ public class ServletCliente extends HttpServlet {
         }
         request.getRequestDispatcher("WEB-INF/jsp/ClienteForms/ResponseInsertCliente.jsp").forward(request, response);
     }
-      
 
-    }
-
-
+}
