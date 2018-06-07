@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,42 +31,33 @@ public class SearchProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nomeProd = request.getParameter("nomeProd");
-        
+        HttpSession sessao = request.getSession();
+        String nome = "";
+        nome = request.getParameter("nomeProd");
         try {
-            if (nomeProd == null || nomeProd.compareToIgnoreCase("") == 0) {
-            
+            if (nome == null || nome.compareToIgnoreCase("") == 0) {
                 listCommercial = modelCommercialProductDao.selectAllProducts();
-            
-            } else {
-                
-                listCommercial = modelCommercialProductDao.selectNameProducts(nomeProd);
-            
+            }else{
+                listCommercial = modelCommercialProductDao.selectNameProducts(nome);
             }
-            
-            request.setAttribute("listCommercial", listCommercial);
-            
         } catch (Exception e) {
-            
-            request.setAttribute("listCommercial", listCommercial);
-            
+            listCommercial = null;
         }
-
+        request.setAttribute("listProd", listCommercial);
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/ProductForms/searchProduct.jsp");
+        
         dispatcher.forward(request, response);
-
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            int idProd = Integer.parseInt(request.getParameter("idProdServ"));
-
-            ModelCommercialProduct prod1 = modelCommercialProductDao.selectIdProduct(idProd);
-
-            request.setAttribute("prod", prod1);
-
+            ModelCommercialProduct prod = modelCommercialProductDao.selectIdProduct(Integer.parseInt(request.getParameter("idProd1")));
+            HttpSession sessao = request.getSession();
+            sessao.setAttribute("manageProduct", prod);
+            request.setAttribute("prod", prod);
+            
             request.getRequestDispatcher("WEB-INF/jsp/ProductForms/manageProduct.jsp")
                     .forward(request, response);
         } catch (Exception e) {
