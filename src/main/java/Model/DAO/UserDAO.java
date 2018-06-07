@@ -71,7 +71,7 @@ public class UserDAO extends UserSQL {
     public List<User> selectAll() throws SQLException {
 
         List<User> userList = new ArrayList<>();
-        
+
         try {
 
             conexao = Model.Connect.Connect.connect();
@@ -79,21 +79,23 @@ public class UserDAO extends UserSQL {
             rs = selectAll(conexao, pst, null);
 
             while (rs.next()) {
-                User user = new User();
-                user.setId(rs.getInt("id"));
-                user.setLogin(rs.getString("login"));
-                user.setSenha(rs.getString("senha"));
-                user.setIdFilial(rs.getInt("filialId"));
-                user.setEmail(rs.getString("email"));
-                user.setDataCri(rs.getTimestamp("dataCri"));
-                user.setCpf(rs.getString("cpf"));
-                user.setDataNasc(rs.getTimestamp("dataNasc"));
-                user.setNome(rs.getString("nome"));
-                user.setSobrenome(rs.getString("sobrenome"));
-                user.setSexo(rs.getString("sexo"));
-                user.setRg(rs.getString("rg"));
-                user.setType(rs.getString("typeUser"));
-                userList.add(user);
+                if (rs.getString("typeUser").compareToIgnoreCase("admin") != 0) {
+                    User user = new User();
+                    user.setId(rs.getInt("id"));
+                    user.setLogin(rs.getString("login"));
+                    user.setSenha(rs.getString("senha"));
+                    user.setIdFilial(rs.getInt("filialId"));
+                    user.setEmail(rs.getString("email"));
+                    user.setDataCri(rs.getTimestamp("dataCri"));
+                    user.setCpf(rs.getString("cpf"));
+                    user.setDataNasc(rs.getTimestamp("dataNasc"));
+                    user.setNome(rs.getString("nome"));
+                    user.setSobrenome(rs.getString("sobrenome"));
+                    user.setSexo(rs.getString("sexo"));
+                    user.setRg(rs.getString("rg"));
+                    user.setType(rs.getString("typeUser"));
+                    userList.add(user);
+                }
             }
 
         } catch (SQLException t) {
@@ -106,16 +108,16 @@ public class UserDAO extends UserSQL {
     }
 
     public User selectId(int id) throws SQLException {
-        
+
         User user = new User();
-        
+
         try {
 
             conexao = Model.Connect.Connect.connect();
 
             rs = selectId(conexao, pst, id);
 
-            if(rs.next()) {
+            if (rs.next()) {
                 user.setId(rs.getInt("id"));
                 user.setLogin(rs.getString("login"));
                 user.setSenha(rs.getString("senha"));
@@ -129,22 +131,22 @@ public class UserDAO extends UserSQL {
                 user.setSexo(rs.getString("sexo"));
                 user.setRg(rs.getString("rg"));
                 user.setType(rs.getString("typeUser"));
-            }else{
+            } else {
                 user = null;
             }
-            
+
         } catch (SQLException t) {
-            user = null;            
-        }finally{
+            user = null;
+        } finally {
             conexao.close();
         }
         return user;
     }
 
     public boolean delete(int id) throws SQLException {
-        
+
         boolean aux = false;
-        
+
         try {
             conexao = Model.Connect.Connect.connect();
 
@@ -152,10 +154,10 @@ public class UserDAO extends UserSQL {
 
             aux = true;
         } catch (SQLException t) {
-            
+
             aux = false;
-            
-        }finally{
+
+        } finally {
             conexao.close();
         }
         return aux;
@@ -190,43 +192,45 @@ public class UserDAO extends UserSQL {
         } catch (SQLException t) {
             user = null;
         } finally {
-            
+
             conexao.close();
-        
+
         }
         return user;
     }
-    
-     public List<User> selectNome(String nome) throws SQLException {
+
+    public List<User> selectNome(String nome) throws SQLException {
         List<User> listUser = null;
         User user = new User();
-        
+
         try {
 
             conexao = Model.Connect.Connect.connect();
 
             rs = selectName(conexao, pst, nome);
             listUser = new ArrayList<>();
-            while(rs.next()) {
-                user.setId(rs.getInt("id"));
-                user.setLogin(rs.getString("login"));
-                user.setSenha(rs.getString("senha"));
-                user.setIdFilial(rs.getInt("filialId"));
-                user.setEmail(rs.getString("email"));
-                user.setDataCri(rs.getTimestamp("dataCri"));
-                user.setCpf(rs.getString("cpf"));
-                user.setDataNasc(rs.getTimestamp("dataNasc"));
-                user.setNome(rs.getString("nome"));
-                user.setSobrenome(rs.getString("sobrenome"));
-                user.setSexo(rs.getString("sexo"));
-                user.setRg(rs.getString("rg"));
-                user.setType(rs.getString("typeUser"));
-                listUser.add(user);
+            while (rs.next()) {
+                if (rs.getString("typeUser").compareToIgnoreCase("admin") != 0) {
+                    user.setId(rs.getInt("id"));
+                    user.setLogin(rs.getString("login"));
+                    user.setSenha(rs.getString("senha"));
+                    user.setIdFilial(rs.getInt("filialId"));
+                    user.setEmail(rs.getString("email"));
+                    user.setDataCri(rs.getTimestamp("dataCri"));
+                    user.setCpf(rs.getString("cpf"));
+                    user.setDataNasc(rs.getTimestamp("dataNasc"));
+                    user.setNome(rs.getString("nome"));
+                    user.setSobrenome(rs.getString("sobrenome"));
+                    user.setSexo(rs.getString("sexo"));
+                    user.setRg(rs.getString("rg"));
+                    user.setType(rs.getString("typeUser"));
+                    listUser.add(user);
+                }
             }
-            
+
         } catch (SQLException t) {
-            user = null;            
-        }finally{
+            user = null;
+        } finally {
             conexao.close();
         }
         return listUser;
