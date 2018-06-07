@@ -85,8 +85,8 @@
                             </div>
 
                         </li>
-                        
-                         <li class="nav-item mx-0 mx-lg-1 dropdown show">
+
+                        <li class="nav-item mx-0 mx-lg-1 dropdown show">
                             <a class="nav-link py-3 px-0 px-lg-3 dropdown-toggled dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuarios</a>
 
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -108,37 +108,45 @@
                 </div>
             </div>
         </nav>
-        <div class="container">    
-            <form action="${pageContext.request.contextPath}/searchUser" method="get">
-                <div class="form-group">
-                    <input type="text" class="form-control" id="nomeUser" name="nomeUser"  placeholder="PESQUISA">
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Pesquisar</button>
+                        
+        <section class="col-md-12">
+            <div class="container" style="margin-top: 150px">
+                <div class="row" style="margin-bottom: 50px" >
+                    <h1 style="text-align: center; margin:  0 auto;">PESQUISA</h1>
                 </div>
-            </form>
-            <form name="send" action="${pageContext.request.contextPath}/searchUser" method="post">
-                <table>     
-                    <c:if test="${not empty listUser}" >
-                        <tr>
-                            <c:forEach var="item" items="${listUser}">
-                                <td>
-                                    <c:out value="${item.nome}"></c:out>
-                                    </td>
-                                    <td>
-                                        <button class="btn" type="button" onclick="hdnID(${item.id})">selecionar</button>
-                                </td>
-                            </c:forEach>
-                        </tr>
-                    </c:if>  
-                </table>
-                <input type="text" id="idFunc"  name="idFuncServ" value="" style="visibility: hidden">
-                <script>
-                    function hdnID(a) {
-                        document.getElementById("idFunc").value = a;
-                        document.send.submit();
-                    }
-                </script>    
-            </form>
-        </div>
+                <div class="row">
+                    <div class="col-md-4" style="margin: 0 auto;">
+                        <form action="${pageContext.request.contextPath}/searchUser" method="get">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="nomeUser" name="nomeUser"  placeholder="PESQUISA">
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">Pesquisar</button>
+                            </div>
+                        </form>
+                        <form name="send" action="${pageContext.request.contextPath}/searchUser" method="post">
+                            <table>     
+                                <c:if test="${not empty listUser}" >
+                                    <tr>
+                                        <c:forEach var="item" items="${listUser}">
+                                            <td>
+                                                <c:out value="${item.nome}"></c:out>
+                                                <button class="btn" type="button" onclick="hdnID(${item.id})">selecionar</button>
+                                            </td>
+                                        </c:forEach>
+                                    </tr>
+                                </c:if>  
+                            </table>
+                            <input type="text" id="idUser"  name="idUser1" value="" style="visibility: hidden">
+                            <script>
+                                function hdnID(a) {
+                                    document.getElementById("idUser").value = a;
+                                    document.send.submit();
+                                }
+                            </script>    
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
         <script src="tools/vendor/jquery/jquery.min.js"></script>
         <script src="tools/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 

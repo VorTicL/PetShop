@@ -55,6 +55,8 @@ public class FilterServlet implements Filter {
     }
     
     User user = (User) sessao.getAttribute("usuario");
+    
+    chain.doFilter(request, response);
 
     // 2) Usuario logado, verifica se tem autorizacao para acessar recurso
     /*if (verificarAcesso(user, httpRequest, httpResponse)) {

@@ -17,6 +17,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 /**
  *
@@ -51,16 +53,17 @@ public class SearchUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
         try {
-            User user = (User) request.getAttribute("idUser");
-            
+            User user = userDAO.selectId(Integer.parseInt(request.getParameter("idUser1")));
+            HttpSession sessao = request.getSession();
+            sessao.setAttribute("manageUser", user);
             request.setAttribute("user", user);
             
-            request.getRequestDispatcher("WEB-INF/jsp/UserForms/manageFuncionario.jsp")
+            request.getRequestDispatcher("WEB-INF/jsp/UserForms/ManageUser.jsp")
                     .forward(request, response);
         } catch (Exception e) {
-            request.getRequestDispatcher("WEB-INF/jsp/UserForms/searchFuncionario.jsp")
+            request.getRequestDispatcher("WEB-INF/jsp/UserForms/SearchUser.jsp")
                     .forward(request, response);
         }
     }

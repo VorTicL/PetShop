@@ -71,7 +71,7 @@ public class UserDAO extends UserSQL {
     public List<User> selectAll() throws SQLException {
 
         List<User> userList = new ArrayList<>();
-
+        
         try {
 
             conexao = Model.Connect.Connect.connect();
@@ -79,7 +79,21 @@ public class UserDAO extends UserSQL {
             rs = selectAll(conexao, pst, null);
 
             while (rs.next()) {
-
+                User user = new User();
+                user.setId(rs.getInt("id"));
+                user.setLogin(rs.getString("login"));
+                user.setSenha(rs.getString("senha"));
+                user.setIdFilial(rs.getInt("filialId"));
+                user.setEmail(rs.getString("email"));
+                user.setDataCri(rs.getTimestamp("dataCri"));
+                user.setCpf(rs.getString("cpf"));
+                user.setDataNasc(rs.getTimestamp("dataNasc"));
+                user.setNome(rs.getString("nome"));
+                user.setSobrenome(rs.getString("sobrenome"));
+                user.setSexo(rs.getString("sexo"));
+                user.setRg(rs.getString("rg"));
+                user.setType(rs.getString("typeUser"));
+                userList.add(user);
             }
 
         } catch (SQLException t) {

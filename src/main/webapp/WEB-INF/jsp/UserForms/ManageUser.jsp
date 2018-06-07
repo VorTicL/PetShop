@@ -86,6 +86,16 @@
 
                         </li>
 
+                        <li class="nav-item mx-0 mx-lg-1 dropdown show">
+                            <a class="nav-link py-3 px-0 px-lg-3 dropdown-toggled dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuarios</a>
+
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a  class="dropdown-item" href="${pageContext.request.contextPath}user">Cadastrar Usuario</a>
+                                <a class="dropdown-item" href="${pageContext.request.contextPath}/searchUser">Gerenciar Usuarios</a>               
+                            </div>
+
+                        </li>
+
                         <li class="nav-item mx-0 mx-lg-1">
                             <a class="dropdown nav-link py-3 px-0 px-lg-3 rounded " href="#page-top">Unidades</a>
                         </li>
@@ -98,44 +108,93 @@
                 </div>
             </div>
         </nav>
-
         <section class="col-md-12">
-            <div class="container">
+            <div class="container" style="margin-top: 150px">
+                <div class="row" style="margin-bottom: 50px" >
+                    <h1 style="text-align: center; margin:  0 auto;">Alteração de Usuario</h1>
+                </div>
                 <div class="row">
-                    <div class="col-md-4" style="margin: 0 auto;">                
-                        <form>
-                            <div>
-                                <div>
-                                    <input type="number" name="idFunc" value="${func.nome}" style="visibility: hidden">
-                                    <div>
-                                        Nome do Funcionario: <input type="text" name="nomeFunc" value="${func.nome}"/> 
-                                    </div>
-                                    <div>
-                                        Data de Nascimento: <input type="number" name="dataNasc" value="${prod.dataNasc}"/>
-                                    </div>
-                                    <div>
-                                        Sexo: <input type="text" name="sexo" value="${func.sexo}"/>
-                                    </div>
-                                    <div>
-                                        RG: <input type="number" name="rg" value="${func.rg}"/>
-                                    </div> 
-                                    <div>
-                                        CPF: <input type="number" name="cpf" value="${func.cpf}"/>
-                                    </div> 
-                                    <div>
-                                        <button type="submit"  action="${pageContext.request.contextPath}/manageFuncionario" method="get">
-                                            Alterar
-                                        </button>
-                                        <button type="submit"  action="${pageContext.request.contextPath}/manageFuncionario" method="post">
-                                            Excluir
-                                        </button>
-                                    </div>
-                                </div>
+                    <div class="col-md-4" style="margin: 0 auto;">
+                        <form name="send" action="${pageContext.request.contextPath}/manageUser" method="get">
+                            <input type="number" name="idUser" value="${user.id}" style="visibility: hidden">
+                            <div class="form-group">
+                                <label for="formGroupExampleInput">Usuario</label>
+                                <input type="text" class="form-control" value="${user.login}" id="user" name="user" placeholder="USER">
                             </div>
+                            <div class="form-group">
+                                <label for="formGroupExampleInput2">Senha</label>
+                                <input type="password" value="${user.senha}" class="form-control" id="senha" name="senha"  placeholder="SENHA">
+                            </div>
+                            <div class="form-group">
+                                <label for="formGroupExampleInput2">Filial</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filial" name="filial">
+                                    <option selected>Selecionar</option>
+                                    <c:forEach var="item" items="${filiais}">
+                                        <option value="${item.key}"><c:out value="${item.value.nome}"></c:out></option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="formGroupExampleInput2">Email</label>
+                                <input type="email" class="form-control" id="email" name="email"  placeholder="email@email.com.br">
+                            </div>
+                            <div class="form-group">
+                                <label for="formGroupExampleInput2">CPF</label>
+                                <input type="text" class="form-control" value="${user.cpf}" id="cpf" name="cpf"  placeholder="11122233344">
+                            </div>
+                            <div class="form-group">
+                                <label for="formGroupExampleInput2">Nome</label>
+                                <input type="text" class="form-control" id="nome" value="${user.nome}" name="nome"  placeholder="Nome">
+                            </div>
+                            <div class="form-group">
+                                <label for="formGroupExampleInput2">Sobrenome</label>
+                                <input type="text" class="form-control" id="sobrenome" value="${user.sobrenome}" name="sobrenome"  placeholder="Sobrenome">
+                            </div>
+                            <div class="form-group">
+                                <label for="formGroupExampleInput2">Sexo</label>
+                                <select class="custom-select my-1 mr-sm-2" id="sexo" name="sexo">
+                                    <option selected>Selecionar</option>
+                                    <option value="1">H</option>
+                                    <option value="1">M</option>
+                                </select>  
+                            </div>
+                            <div class="form-group">
+                                <label for="formGroupExampleInput2">RG</label>
+                                <input type="text" class="form-control" value="${user.rg}" id="rg" name="rg" placeholder="112223334">
+                            </div>
+                            <!--<div class="form-group">
+                                <label for="formGroupExampleInput2">Data de Nascimento</label>
+                                <input type="date" class="form-control" id="dataNasc" name="dataNasc" value="${user.dataNasc}" placeholder="112223334">
+                            </div>-->
+                            <div class="form-group">
+                                <label for="formGroupExampleInput2">Função</label>
+                                <select class="custom-select my-1 mr-sm-2" id="typeUser" name="typeUser">
+                                    <option selected>Selecionar</option>
+                                    <c:forEach var="value" items="${type}">
+                                        <option value="${value}"><c:out value="${value}"></c:out></option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">Alterar</button>
+                            <button class="btn btn-lg btn-primary btn-block" type="submit" formmethod="post">Excluir</button>
                         </form>
                     </div>
                 </div>
             </div>
         </section>
+
+        <script src="tools/vendor/jquery/jquery.min.js"></script>
+        <script src="tools/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Plugin JavaScript -->
+        <script src="tools/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="tools/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+        <!-- Contact Form JavaScript -->
+        <script src="tools/js/jqBootstrapValidation.js"></script>
+        <script src="tools/js/contact_me.js"></script>
+
+        <!-- Custom scripts for this template -->
+        <script src="tools/js/freelancer.min.js"></script>
     </body>
 </html>
