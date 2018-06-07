@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -53,21 +54,18 @@ public class SearchClienteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            int idCli = Integer.parseInt(request.getParameter("idCli"));
+         try {
+            Cliente cliente = clienteDAO.selectId(Integer.parseInt(request.getParameter("idCliente1")));
+            HttpSession sessao = request.getSession();
+            sessao.setAttribute("manageCliente", cliente);
+            request.setAttribute("cliente", cliente);
             
-            cli = clienteDAO.selectId(idCli);
-
-            request.setAttribute("cliente", cli);
-
-            request.getRequestDispatcher("WEB-INF/jsp/ClienteForm/ManageCliente.jsp")
+            request.getRequestDispatcher("WEB-INF/jsp/ClienteForms/ManageCliente.jsp")
                     .forward(request, response);
         } catch (Exception e) {
-            request.getRequestDispatcher("WEB-INF/jsp/ClienteForm/SearchCliente.jsp")
+            request.getRequestDispatcher("WEB-INF/jsp/ClienteForms/SearchCliente.jsp")
                     .forward(request, response);
         }
-        request.getRequestDispatcher("WEB-INF/jsp/ClienteForm/SearchCliente.jsp")
-                    .forward(request, response);
         
     }
 

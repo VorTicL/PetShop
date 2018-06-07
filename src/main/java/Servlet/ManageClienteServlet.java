@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -29,33 +30,28 @@ public class ManageClienteServlet extends HttpServlet {
             throws ServletException, IOException {
 
         try {
-            int id = Integer.parseInt(request.getParameter("id"));
-            String nome = request.getParameter("nomeCli");
-            String dataNasc = request.getParameter("dataNasc");
-            String sexo = request.getParameter("sexo");
-            String rg = request.getParameter("rg");
-            String cpf = request.getParameter("cpf");
-            String endereco = request.getParameter("endereco");
+            HttpSession sessao = request.getSession();
 
-            Cliente cli = new Cliente();
-            cli.setNome(nome);
-            cli.setDataNasc(Timestamp.valueOf(dataNasc));
-            cli.setSexo(sexo);
-            cli.setRg(rg);
-            cli.setCpf(cpf);
-            cli.setEndereco(endereco);
-            cli.setId(id);
+            Cliente cliente = (Cliente) sessao.getAttribute("manageCliente");
+            
+            cliente.setNome(request.getParameter("nomeCli"));
+            cliente.setSexo(request.getParameter("sexoCli"));
+            cliente.setRg(request.getParameter("rgCli"));
+            cliente.setCpf(request.getParameter("cpfCli"));
+            cliente.setEndereco(request.getParameter("enderecoCli"));
+            
 
-            if (clienteDAO.update(cli)) {
-                request.setAttribute("response", "Produto Alterado Com Sucesso!");
-            } else {
+            
+            if (clienteDAO.update(cliente)) {
+                request.setAttribute("response", "Cliente Alterado Com Sucesso!");
+            }else{
                 request.setAttribute("response", "ERRO!");
             }
-
+            
         } catch (Exception e) {
             request.setAttribute("response", "ERRO!");
         }
-        request.getRequestDispatcher("WEB-INF/jsp/ClienteForm/ResponseManageCliente.jsp")
+        request.getRequestDispatcher("WEB-INF/jsp/ClienteForms/ResponseManageCliente.jsp")
                 .forward(request, response);
     }
 
@@ -64,18 +60,16 @@ public class ManageClienteServlet extends HttpServlet {
             throws ServletException, IOException {
 
         try {
-            int idRemove = Integer.parseInt(request.getParameter("id"));
-
+            int idRemove = Integer.parseInt(request.getParameter("idCliente"));
             if (clienteDAO.delete(idRemove)) {
-                request.setAttribute("response", "Produto Removido Com Sucesso!");
-            } else {
+                request.setAttribute("response", "Cliente Removido Com Sucesso!");
+            }else{
                 request.setAttribute("response", "ERRO!");
             }
-
         } catch (Exception e) {
             request.setAttribute("response", "ERRO!");
         }
-        request.getRequestDispatcher("WEB-INF/jsp/ClienteForm/ResponseManageCliente.jsp")
+        request.getRequestDispatcher("WEB-INF/jsp/ClienteForms/ResponseManageCliente.jsp")
                 .forward(request, response);
 
     }

@@ -9,6 +9,8 @@ import Model.DAO.ClienteDAO;
 import Model.Entity.Cliente;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,35 +40,33 @@ public class ServletCliente extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        try {
-            int id = Integer.parseInt(request.getParameter("id"));
-            String nome = request.getParameter("nomeCli");
-            String dataNasc = request.getParameter("dataNasc");
-            String sexo = request.getParameter("sexo");
-            String rg = request.getParameter("rg");
-            String cpf = request.getParameter("cpf");
-            String endereco = request.getParameter("endereco");
+      Cliente cli = new Cliente();
+      try {
+            cli.setNome(request.getParameter("nomeCli"));
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date parsedDate = dateFormat.parse(request.getParameter("dataNascCli"));
+            Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+            cli.setDataNasc(timestamp);
+            cli.setSexo(request.getParameter("sexoCli"));
+            cli.setRg(request.getParameter("rgCli"));
+            cli.setDataCri(new Timestamp(System.currentTimeMillis()));
+            cli.setCpf(request.getParameter("cpf"));
+            cli.setEndereco(request.getParameter("enderecoCli"));
+            
 
-            cli = new Cliente();
-            cli.setNome(nome);
-            cli.setDataNasc(Timestamp.valueOf(dataNasc));
-            cli.setSexo(sexo);
-            cli.setRg(rg);
-            cli.setCpf(cpf);
-            cli.setEndereco(endereco);
-            cli.setId(id);
+            ClienteDAO clienteDAO = new ClienteDAO();
             if (clienteDAO.insert(cli)) {
-                request.setAttribute("response", cli.getNome() + "Cadastrado com sucesso!");
+                request.setAttribute("response", "Cliente adicionado com sucesso");
             } else {
                 request.setAttribute("response", "ERRO!");
             }
         } catch (Exception e) {
             request.setAttribute("response", "ERRO!");
-        } finally {
-            request.getRequestDispatcher("WEB-INF/jsp/ClienteForm/ResponseInsertCliente.jsp")
-                    .forward(request, response);
         }
+        request.getRequestDispatcher("WEB-INF/jsp/ClienteForms/ResponseInsertCliente.jsp").forward(request, response);
+    }
+      
 
     }
 
-}
+
