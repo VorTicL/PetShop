@@ -45,7 +45,8 @@ public class SearchServiceVenda extends HttpServlet {
             } else {
                 listCommercialServ = modelCommercialServicosDao.selectNameServices(nomeServ);
             }
-
+            request.setAttribute("statusProd", "none");
+            request.setAttribute("statusServ", "block");
             request.setAttribute("listCommercialServ", listCommercialServ);
 
         } catch (Exception e) {
@@ -70,7 +71,7 @@ public class SearchServiceVenda extends HttpServlet {
 
             ModelCommercialService serv = modelCommercialServicosDao.selectIdServices(idServ);
             ServicosList itensV = new ServicosList();
-            itensV.setService(serv);
+            itensV.setServico(serv);
             itensV.setValorUni(serv.getValor());
             if (venda.getServList() == null) {
                 itens = new ArrayList<>();
@@ -83,14 +84,12 @@ public class SearchServiceVenda extends HttpServlet {
             venda.setServList(itens);
             sessao.removeAttribute("venda");
             sessao.setAttribute("venda", venda);
-
-            request.getRequestDispatcher("WEB-INF/jsp/VendaForms/Managevenda.jsp")
-                    .forward(request, response);
         } catch (Exception e) {
-            request.getRequestDispatcher("WEB-INF/jsp/VendaForms/SearchCarrinhoVenda.jsp")
-                    .forward(request, response);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/VendaForms/SearchCarrinhoVenda.jsp");
+            dispatcher.forward(request, response);
         }
-
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/VendaForms/VendaManage.jsp");
+            dispatcher.forward(request, response);
     }
 
 }

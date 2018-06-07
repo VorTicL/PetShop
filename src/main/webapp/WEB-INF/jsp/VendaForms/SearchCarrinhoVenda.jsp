@@ -154,14 +154,14 @@
                                     <button class="btn btn-lg btn-primary btn-block" type="submit">Pesquisar</button>
                                 </div>
                             </form>
-                            <form name="send" action="${pageContext.request.contextPath}/searchServiceVenda" method="post">
+                            <form name="send1" action="${pageContext.request.contextPath}/searchServiceVenda" method="post">
                                 <table>     
                                     <c:if test="${not empty listCommercialServ}" >
                                         <tr>
-                                            <c:forEach var="item" items="${listCommercialServ}">
+                                            <c:forEach var="item1" items="${listCommercialServ}">
                                                 <td>
-                                                    <c:out value="${item.nome}"></c:out>
-                                                    <button class="btn" type="button" onclick="hdnIDServ(${item.id})">selecionar</button>
+                                                    <c:out value="${item1.nome}"></c:out>
+                                                    <button class="btn" type="button" onclick="hdnIDServ(${item1.id})">selecionar</button>
                                                 </td>
                                             </c:forEach>
                                         </tr>
@@ -177,7 +177,7 @@
         <script>
             function hdnIDServ(a) {
                 document.getElementById("idServ").value = a;
-                document.send.submit();
+                document.send1.submit();
             }
             function hdnIDProd(a) {
                 document.getElementById("idProd").value = a;

@@ -141,13 +141,13 @@
                         </div>
                         <div class="col-md-4" style="margin: 0 auto;">
                             <h3 style="text-align: center; margin:  0 auto;"> Serviços</h3>
-                            <c:forEach var="item" items="${venda.servList}">
+                            <c:forEach var="item1" items="${venda.servList}">
                                 <div class="form-group">
                                     <form name="send" action="${pageContext.request.contextPath}/manageServicoVenda" method="post">
                                         <label for="formGroupExampleInput">Nome:</label>
-                                        <input readonly="true" type="text" class="form-control" value="${item.serv.nome}" id="nomeCli" name="nomeCli">
+                                        <input readonly="true" type="text" class="form-control" value="${item1.servico.nome}" id="nomeCli" name="nomeCli">
                                         <label for="formGroupExampleInput">QUANTIDADE:</label>
-                                        <input type="number" class="form-control" value="${item.quantidade}" id="nomeCli" name="nomeCli">
+                                        <input type="number" class="form-control" value="${item1.quantidade}" id="nomeCli" name="nomeCli">
                                         <button type="submit">X</button>
                                     </form>
                                 </div>

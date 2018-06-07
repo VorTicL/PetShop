@@ -11,7 +11,7 @@ package Model.Entity;
  */
 public class ServicosList {
     
-    private ModelCommercialService serv;
+    private ModelCommercialService servico;
     private int quantidade;
     private double valorUni;
     
@@ -19,18 +19,18 @@ public class ServicosList {
         
     }
 
-    public ServicosList(ModelCommercialService serv, int quantidade, double valorUni) {
-        this.serv = serv;
+    public ServicosList(ModelCommercialService servico, int quantidade, double valorUni) {
+        this.servico = servico;
         this.quantidade = quantidade;
         this.valorUni = valorUni;
     }
 
-    public ModelCommercialService getService() {
-        return serv;
+    public ModelCommercialService getServico() {
+        return servico;
     }
 
-    public void setService(ModelCommercialService prod) {
-        this.serv = serv;
+    public void setServico(ModelCommercialService servico) {
+        this.servico = servico;
     }
 
     public int getQuantidade() {
