@@ -115,16 +115,20 @@
                     <h1 style="text-align: center; margin:  0 auto;">VENDA - RESUMO</h1>
                 </div>
                 <div class="row">
-                    <form name="send" action="${pageContext.request.contextPath}/manageVenda" method="post">
-                        <div class="col-md-4" style="margin: 0 auto;">
+                    <form name="send" style="display: flex;" action="${pageContext.request.contextPath}/manageVenda" method="post">
+                        <div class="conteudo-cli">
+                             <div class="col-md-4" style="margin: 0 auto;">
                             <h3 style="text-align: center; margin:  0 auto;"> Cliente</h3>
                             <div class="form-group">
                                 <label for="formGroupExampleInput">Nome: </label>
                                 <input readonly="true" type="text" class="form-control" value="${clienteV.nome}" id="nomeCli" name="nomeCli">
                             </div>
                         </div>
-                        <div class="col-md-4" style="margin: 0 auto;">
-                            <h3 style="text-align: center; margin:  0 auto;"> Produtos</h3>
+                        </div>
+                       
+                            <div class="conteudo-prod">
+                                <div class="col-md-4" style="margin: 0 auto;">
+                                 <h3 style="text-align: center; margin:  0 auto;"> Produtos</h3>
                             <c:forEach var="item" items="${venda.itens}">
                                 <div class="form-group">
                                     <form name="send" action="${pageContext.request.contextPath}/manageProductVenda" method="get">
@@ -139,13 +143,16 @@
                                 </div>
                             </c:forEach>
                         </div>
-                        <div class="col-md-4" style="margin: 0 auto;">
+                            </div>
+                        
+                            <div class="conteudo-serv">
+                                <div class="col-md-4" style="margin: 0 auto;">
                             <h3 style="text-align: center; margin:  0 auto;"> Serviços</h3>
                             <c:forEach var="item" items="${venda.servList}">
                                 <div class="form-group">
                                     <form name="send" action="${pageContext.request.contextPath}/manageServicoVenda" method="post">
                                         <label for="formGroupExampleInput">Nome:</label>
-                                        <input readonly="true" type="text" class="form-control" value="${item.serv.nome}" id="nomeCli" name="nomeCli">
+                                        <input readonly="true" type="text" class="form-control" value="${item.servico.nome}" id="nomeCli" name="nomeCli">
                                         <label for="formGroupExampleInput">QUANTIDADE:</label>
                                         <input type="number" class="form-control" value="${item.quantidade}" id="nomeCli" name="nomeCli">
                                         <button type="submit">X</button>
@@ -153,6 +160,8 @@
                                 </div>
                             </c:forEach>
                         </div>
+                            </div>
+                        
                         <button class="btn btn-lg btn-primary btn-block" type="submit">EFETUAR VENDA</button>
                         <button class="btn btn-lg btn-primary btn-block" type="submit" formmethod="post">CARRINHO</button>    
                     </form>

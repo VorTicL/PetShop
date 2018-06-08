@@ -70,7 +70,7 @@ public class SearchServiceVenda extends HttpServlet {
 
             ModelCommercialService serv = modelCommercialServicosDao.selectIdServices(idServ);
             ServicosList itensV = new ServicosList();
-            itensV.setService(serv);
+            itensV.setServico(serv);
             itensV.setValorUni(serv.getValor());
             if (venda.getServList() == null) {
                 itens = new ArrayList<>();
@@ -84,7 +84,7 @@ public class SearchServiceVenda extends HttpServlet {
             sessao.removeAttribute("venda");
             sessao.setAttribute("venda", venda);
 
-            request.getRequestDispatcher("WEB-INF/jsp/VendaForms/Managevenda.jsp")
+            request.getRequestDispatcher("WEB-INF/jsp/VendaForms/ManageVenda.jsp")
                     .forward(request, response);
         } catch (Exception e) {
             request.getRequestDispatcher("WEB-INF/jsp/VendaForms/SearchCarrinhoVenda.jsp")

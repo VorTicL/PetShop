@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Victor de Lucca
  */
-@WebServlet(name = "SearchCliente", urlPatterns = {"/searchClienteVenda"})
+@WebServlet(name = "SearchClienteVenda", urlPatterns = {"/searchClienteVenda"})
 public class SearchClienteVenda extends HttpServlet {
 
     ClienteDAO clienteDAO = new ClienteDAO();

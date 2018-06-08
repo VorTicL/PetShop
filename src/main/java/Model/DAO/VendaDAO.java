@@ -73,7 +73,7 @@ public class VendaDAO {
                     pst = conexao.prepareStatement(sql.toString());
 
                     pst.setInt(1, id);
-                    pst.setInt(2, venda.getServList().get(i).getService().getId());
+                    pst.setInt(2, venda.getServList().get(i).getServico().getId());
                     pst.setInt(3, venda.getServList().get(i).getQuantidade());
                     pst.setDouble(4, venda.getServList().get(i).getQuantidade());
 
@@ -88,7 +88,7 @@ public class VendaDAO {
                     pst = conexao.prepareStatement(sql.toString());
 
                     pst.setInt(1, id);
-                    pst.setInt(2, venda.getServList().get(i).getService().getId());
+                    pst.setInt(2, venda.getServList().get(i).getServico().getId());
                     pst.setInt(3, venda.getServList().get(i).getQuantidade());
                     pst.setDouble(4, venda.getServList().get(i).getValorUni());
 
@@ -200,7 +200,7 @@ public class VendaDAO {
                                 rs.getDouble("itensVenda.valorUni"),
                                 rs.getString("servico.nome"),
                                 rs.getInt("servico.filialId"));
-                        servicosList.setService(modelCommercialService);
+                        servicosList.setServico(modelCommercialService);
 
                         listServ.add(servicosList);
                     }
