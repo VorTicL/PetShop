@@ -51,7 +51,7 @@ public class ManageClienteServlet extends HttpServlet {
         } catch (Exception e) {
             request.setAttribute("response", "ERRO!");
         }
-        request.getRequestDispatcher("WEB-INF/jsp/ClienteForms/ResponseManageCliente.jsp")
+        request.getRequestDispatcher("WEB-INF/jsp/ClienteForm/ResponseManageCliente.jsp")
                 .forward(request, response);
     }
 
@@ -69,7 +69,7 @@ public class ManageClienteServlet extends HttpServlet {
         } catch (Exception e) {
             request.setAttribute("response", "ERRO!");
         }
-        request.getRequestDispatcher("WEB-INF/jsp/ClienteForms/ResponseManageCliente.jsp")
+        request.getRequestDispatcher("WEB-INF/jsp/ClienteForm/ResponseManageCliente.jsp")
                 .forward(request, response);
 
     }

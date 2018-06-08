@@ -41,7 +41,7 @@ public class ManageServiceVenda extends HttpServlet {
                 Venda venda = (Venda) sessao.getAttribute("venda");
 
                 for (int i = 0; i < venda.getItens().size(); i++) {
-                    if (venda.getItens().get(i).getIdProd().getId() == Integer.parseInt(request.getParameter("idProd"))) {
+                    if (venda.getItens().get(i).getProduto().getId() == Integer.parseInt(request.getParameter("idProd"))) {
                         venda.getItens().remove(i);
                         request.getRequestDispatcher("WEB-INF/jsp/VendaForms/VendaManage.jsp")
                                 .forward(request, response);
@@ -80,7 +80,7 @@ public class ManageServiceVenda extends HttpServlet {
                 Venda venda = (Venda) sessao.getAttribute("venda");
 
                 for (int i = 0; i < venda.getItens().size(); i++) {
-                    if (venda.getItens().get(i).getIdProd().getId() == Integer.parseInt(request.getParameter("obj"))) {
+                    if (venda.getItens().get(i).getProduto().getId() == Integer.parseInt(request.getParameter("obj"))) {
                         venda.getItens().get(i).setQuantidade(Integer.parseInt(request.getParameter("qtd")));
                         request.getRequestDispatcher("WEB-INF/jsp/VendaForms/VendaManage.jsp")
                                 .forward(request, response);

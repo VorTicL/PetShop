@@ -61,8 +61,8 @@ public class SearchProductServlet extends HttpServlet {
             request.getRequestDispatcher("WEB-INF/jsp/ProductForms/manageProduct.jsp")
                     .forward(request, response);
         } catch (Exception e) {
-            request.getRequestDispatcher("WEB-INF/jsp/ProductForms/searchProduct.jsp")
-                    .forward(request, response);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/ProductForms/searchProduct.jsp");
+                    dispatcher.forward(request, response);
         }
 
     }

@@ -61,7 +61,7 @@ public class ServletCliente extends HttpServlet {
         } catch (Exception e) {
             request.setAttribute("response", "ERRO!");
         }
-        request.getRequestDispatcher("WEB-INF/jsp/ClienteForms/ResponseInsertCliente.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/jsp/ClienteForm/ResponseInsertCliente.jsp").forward(request, response);
     }
 
 }

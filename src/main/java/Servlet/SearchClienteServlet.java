@@ -60,10 +60,10 @@ public class SearchClienteServlet extends HttpServlet {
             sessao.setAttribute("manageCliente", cliente);
             request.setAttribute("cliente", cliente);
             
-            request.getRequestDispatcher("WEB-INF/jsp/ClienteForms/ManageCliente.jsp")
+            request.getRequestDispatcher("WEB-INF/jsp/ClienteForm/ManageCliente.jsp")
                     .forward(request, response);
         } catch (Exception e) {
-            request.getRequestDispatcher("WEB-INF/jsp/ClienteForms/SearchCliente.jsp")
+            request.getRequestDispatcher("WEB-INF/jsp/ClienteForm/SearchCliente.jsp")
                     .forward(request, response);
         }
         

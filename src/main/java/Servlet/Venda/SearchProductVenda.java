@@ -34,6 +34,7 @@ public class SearchProductVenda extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         String nomeProd = request.getParameter("nomeProd");
 
         try {
@@ -47,11 +48,11 @@ public class SearchProductVenda extends HttpServlet {
 
             }
 
-            request.setAttribute("listCommercial", listCommercialProd);
+            request.setAttribute("listCommercialProduct", listCommercialProd);
 
         } catch (Exception e) {
 
-            request.setAttribute("listCommercial", listCommercialProd);
+            request.setAttribute("listCommercialProduct", listCommercialProd);
 
         }
 
@@ -68,11 +69,11 @@ public class SearchProductVenda extends HttpServlet {
         List<ItensVenda> itens = null;
         try {
             
-            int idProd = Integer.parseInt(request.getParameter("idProdServ"));
+            int idProd = Integer.parseInt(request.getParameter("idProd1"));
 
             ModelCommercialProduct prod1 = modelCommercialProductDao.selectIdProduct(idProd);
             ItensVenda itensV = new ItensVenda();
-            itensV.setIdProd(prod1);
+            itensV.setProduto(prod1);
             itensV.setValorUni(prod1.getValor());
             itensV.setQuantidade(itensV.getQuantidade()+1);
             if (venda.getItens() == null) {
@@ -87,12 +88,13 @@ public class SearchProductVenda extends HttpServlet {
             sessao.removeAttribute("venda");
             sessao.setAttribute("venda", venda);
 
-            request.getRequestDispatcher("WEB-INF/jsp/VendaForms/Managevenda.jsp")
-                    .forward(request, response);
+            
         } catch (Exception e) {
-            request.getRequestDispatcher("WEB-INF/jsp/VendaForms/SearchCarrinhoVenda.jsp")
-                    .forward(request, response);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/VendaForms/SearchCarrinhoVenda.jsp");
+                    dispatcher.forward(request, response);
         }
+        request.getRequestDispatcher("WEB-INF/jsp/VendaForms/VendaManage.jsp")
+                    .forward(request, response);
 
     }
 

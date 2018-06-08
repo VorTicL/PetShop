@@ -80,7 +80,7 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL {
                 modelCommercialProduct.setId(rs.getInt("id"));
                 modelCommercialProduct.setNome(rs.getString("nome"));
                 modelCommercialProduct.setValor(rs.getDouble("valor"));
-                modelCommercialProduct.setFilial(rs.getInt("filial"));
+                modelCommercialProduct.setFilial(rs.getInt("filialId"));
                 modelCommercialProduct.setQtdProd(rs.getInt("estoque"));
                 produto.add(modelCommercialProduct);
 
@@ -111,14 +111,14 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL {
                 modelCommercialProduct.setId(rs.getInt("id"));
                 modelCommercialProduct.setNome(rs.getString("nome"));
                 modelCommercialProduct.setValor(rs.getDouble("valor"));
-                modelCommercialProduct.setFilial(rs.getInt("filial"));
+                modelCommercialProduct.setFilial(rs.getInt("filialId"));
                 modelCommercialProduct.setQtdProd(rs.getInt("estoque"));
             }
 
         } catch (Exception t) {
-
-        } finally {
             modelCommercialProduct = null;
+        } finally {
+            
             conexao.close();
 
         }
@@ -161,11 +161,11 @@ public class ModelCommercialProductDao extends ModelCommercialProductSQL {
             while (rs.next()) {
 
                 ModelCommercialProduct modelCommercialProduct = new ModelCommercialProduct();
-                modelCommercialProduct.setId(rs.getInt(1));
-                modelCommercialProduct.setNome(rs.getString(2));
-                modelCommercialProduct.setValor(rs.getDouble(3));
-                modelCommercialProduct.setFilial(rs.getInt(4));
-                modelCommercialProduct.setQtdProd(rs.getInt(5));
+                modelCommercialProduct.setId(rs.getInt("id"));
+                modelCommercialProduct.setNome(rs.getString("nome"));
+                modelCommercialProduct.setValor(rs.getDouble("valor"));
+                modelCommercialProduct.setFilial(rs.getInt("filialId"));
+                modelCommercialProduct.setQtdProd(rs.getInt("estoque"));
                 produto.add(modelCommercialProduct);
             }
 

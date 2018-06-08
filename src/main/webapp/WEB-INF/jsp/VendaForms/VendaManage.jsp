@@ -130,15 +130,15 @@
                         <h3 style="text-align: center; margin:  0 auto;"> Produtos</h3>
                         <div class="form-group" style="display: flex">
                             <form action="${pageContext.request.contextPath}/manageVenda" method="get">
-                                <input type="text" id="command" style="display: none" name="command" value="-prod" style="visibility: hidden">
+                                <input type="text" id="command2" style="display: none" name="command" value="-prod" style="visibility: hidden">
                                 <c:forEach var="item" items="${venda.itens}">
-                                    <input type="text" id="idProd" style="display: none" name="idProd" value="${item.prod.id}" style="visibility: hidden">
+                                    <input type="text" id="idProd" style="display: none" name="idProd" value="${item.produto.id}" style="visibility: hidden">
                                     <label for="formGroupExampleInput">Nome:</label>
-                                    <input readonly="true" type="text" class="form-control" value="${item.prod.nome}" id="nomeCli" name="nomeCli">
+                                    <input readonly="true" type="text" class="form-control" value="${item.produto.nome}" id="nomeCli" name="nomeCli">
                                     <label for="formGroupExampleInput">QUANTIDADE:</label>
-                                    <input type="number" class="form-control" value="${item.quantidade}" onchange="setQtd('qtdProd${item.prod.id}', 'qtdProd', '${item.prod.id}')" id="qtdProd${item.serprodvico.id}" style="width: 50px;">
+                                    <input type="number" class="form-control" value="${item.quantidade}" onchange="setQtd('qtdProd${item.produto.id}', 'qtdProd', '${item.produto.id}')" id="qtdProd${item.produto.id}" style="width: 50px;">
                                     <label for="formGroupExampleInput">ESTOQUE:</label>
-                                    <input readonly="true" type="number" class="form-control" value="${item.prod.qtdProd}" id="nomeCli" name="nomeCli">
+                                    <input readonly="true" type="number" class="form-control" value="${item.produto.qtdProd}" id="estoque" name="estoque">
                                     <button type="submit">X</button>
                                 </c:forEach>
                             </form>

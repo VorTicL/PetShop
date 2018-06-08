@@ -8,6 +8,7 @@ package Servlet.Venda;
 import Servlet.*;
 import Model.DAO.ClienteDAO;
 import Model.Entity.Cliente;
+import Model.Entity.User;
 import Model.Entity.Venda;
 import java.io.IOException;
 import java.util.List;
@@ -65,8 +66,11 @@ public class SearchClienteVenda extends HttpServlet {
             throws ServletException, IOException {
         HttpSession sessao = request.getSession();
         try {
+            
+            User user = (User) sessao.getAttribute("usuario");
             Venda venda = new Venda();
             venda.setIdcliente(Integer.parseInt(request.getParameter("idCli1")));
+            venda.setFilialID(user.getIdFilial());
             cli = clienteDAO.selectId(Integer.parseInt(request.getParameter("idCli1")));
             sessao.setAttribute("venda", venda);
             sessao.setAttribute("clienteV", cli);

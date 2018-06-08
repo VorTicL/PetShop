@@ -11,7 +11,7 @@ package Model.Entity;
  */
 public class ItensVenda {
     
-    private ModelCommercialProduct prod;
+    private ModelCommercialProduct produto;
     private int quantidade;
     private double valorUni;
     
@@ -20,17 +20,17 @@ public class ItensVenda {
     }
 
     public ItensVenda(ModelCommercialProduct produto, int quantidade, double valorUni) {
-        this.prod = produto;
+        this.produto = produto;
         this.quantidade = quantidade;
         this.valorUni = valorUni;
     }
 
-    public ModelCommercialProduct getIdProd() {
-        return prod;
+    public ModelCommercialProduct getProduto() {
+        return produto;
     }
 
-    public void setIdProd(ModelCommercialProduct prod) {
-        this.prod = prod;
+    public void setProduto(ModelCommercialProduct produto) {
+        this.produto = produto;
     }
 
     public int getQuantidade() {

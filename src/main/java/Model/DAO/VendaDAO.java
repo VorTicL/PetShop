@@ -35,11 +35,9 @@ public class VendaDAO {
         boolean aux = false;
         try {
 
-            StringBuilder sql = new StringBuilder();
-            sql.append("insert into venda(clienteID,dataCri,filialID, valorTotal)");
-            sql.append(" values (?,?,?,?)");
+            String sql = "insert into venda(clienteID,dataCri,filialId, valorTotal) values (?,?,?,?)";
 
-            pst = conexao.prepareStatement(sql.toString());
+            pst = conexao.prepareStatement(sql);
 
             pst.setInt(1, venda.getIdcliente());
             Timestamp time = new Timestamp(System.currentTimeMillis());
@@ -48,13 +46,11 @@ public class VendaDAO {
             pst.setDouble(4, venda.getValorTotal());
 
             pst.execute();
-            conexao.close();
+            //conexao.close();
 
-            sql = new StringBuilder();
-            sql.append("select id");
-            sql.append(" from venda where dataCri = ?");
+            sql = "select id from venda where dataCri = ?";
 
-            pst = conexao.prepareStatement(sql.toString());
+            pst = conexao.prepareStatement(sql);
 
             pst.setTimestamp(1, time);
 
@@ -63,29 +59,34 @@ public class VendaDAO {
             if (rs.next()) {
                 id = rs.getInt("id");
             }
-            conexao.close();
+            //conexao.close();
             if (id > 0) {
                 for (int i = 0; i < venda.getItens().size(); i++) {
-                    sql = new StringBuilder();
-                    sql.append("insert into itensVenda(vendaId,prodId,quantidade,valorUni)");
-                    sql.append(" values (?,?,?,?)");
+                    sql = "insert into itensVenda(vendaId,prodId,quantidade,valorUni) values (?,?,?,?)";
 
-                    pst = conexao.prepareStatement(sql.toString());
+                    pst = conexao.prepareStatement(sql);
 
                     pst.setInt(1, id);
-                    pst.setInt(2, venda.getServList().get(i).getServico().getId());
-                    pst.setInt(3, venda.getServList().get(i).getQuantidade());
-                    pst.setDouble(4, venda.getServList().get(i).getQuantidade());
+                    pst.setInt(2, venda.getItens().get(i).getProduto().getId());
+                    pst.setInt(3, venda.getItens().get(i).getQuantidade());
+                    pst.setDouble(4, venda.getItens().get(i).getValorUni());
+
+                    pst.execute();
+                    
+                    sql = "update produto set estoque = ? where id = ?";
+
+                    pst = conexao.prepareStatement(sql);
+
+                    pst.setInt(1, venda.getItens().get(i).getProduto().getQtdProd()-venda.getItens().get(i).getQuantidade());
+                    pst.setInt(2, venda.getItens().get(i).getProduto().getId());
 
                     pst.execute();
                 }
 
                 for (int i = 0; i < venda.getServList().size(); i++) {
-                    sql = new StringBuilder();
-                    sql.append("insert into itensServico(vendaId,servId,quantidade,valorUni)");
-                    sql.append(" values (?,?,?,?)");
+                    sql = "insert into itensServico(vendaId,servId,quantidade,valorUni) values (?,?,?,?)";
 
-                    pst = conexao.prepareStatement(sql.toString());
+                    pst = conexao.prepareStatement(sql);
 
                     pst.setInt(1, id);
                     pst.setInt(2, venda.getServList().get(i).getServico().getId());
@@ -167,7 +168,7 @@ public class VendaDAO {
                                 rs1.getDouble("itensVenda.valorUni"),
                                 rs1.getInt("produto.filialId"),
                                 rs1.getInt("produto.estoque"));
-                        itensVenda.setIdProd(modelCommercialProduct);
+                        itensVenda.setProduto(modelCommercialProduct);
 
                         listItens.add(itensVenda);
                     }

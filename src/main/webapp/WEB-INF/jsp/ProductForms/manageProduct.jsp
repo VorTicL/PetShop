@@ -114,11 +114,11 @@
                             <input type="number" name="idProd" value="${prod.id}" style="visibility: hidden">
                             <div class="form-group">
                                 <label for="formGroupExampleInput">Nome do Produto</label>
-                                <input type="text" class="form-control" value="${prod.nomeProd}" id="nomeProd" name="nomeProd" placeholder="NOME">
+                                <input type="text" class="form-control" value="${prod.nome}" id="nomeProd" name="nomeProd" placeholder="NOME">
                             </div>
                             <div class="form-group">
                                 <label for="formGroupExampleInput2">Valor</label>
-                                <input type="text" value="${prod.uniValue}" class="form-control" id="uniValue" name="uniValue"  placeholder="VALOR">
+                                <input type="text" value="${prod.valor}" class="form-control" id="uniValue" name="uniValue"  placeholder="VALOR">
                             </div>
                             <div class="form-group">
                                 <label for="formGroupExampleInput2">Filial</label>
@@ -131,7 +131,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="formGroupExampleInput2">Quantidade Estoque</label>
-                                <input type="text" class="form-control" id="qtdEstoque" value="${prod.qtdEstoque}" name="qtdEstoque"  placeholder="QUANTIDADE">
+                                <input type="text" class="form-control" id="qtdEstoque" value="${prod.qtdProd}" name="qtdEstoque"  placeholder="QUANTIDADE">
                             </div>
                             <button class="btn btn-lg btn-primary btn-block" type="submit">Alterar</button>
                             <button class="btn btn-lg btn-primary btn-block" type="submit" formmethod="post">Excluir</button>

@@ -110,77 +110,75 @@
         </nav>
 
         <section class="col-md-12">
-            <form action="${pageContext.request.contextPath}/ServletCarrinho" method="post">
-                <div class="container" style="margin-top: 150px">
-                    <div class="row" style="margin-bottom: 50px" >
-                        <h1 style="text-align: center; margin:  0 auto;">VENDA - CLIENTE - ADICIONAR - CARRINHO</h1>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4" style="margin: 0 auto;">
-                            <button class="btn btn-lg btn-primary btn-block" onclick="productShow()" type="button">PRODUTO</button>
-
-                        </div>
-                        <div class="col-md-4" style="margin: 0 auto;">
-
-                            <button class="btn btn-lg btn-primary btn-block" onclick="serviceShow()"type="button">SERVIÇO</button>
-                        </div>
-                    </div>    
-                    <div class="row"  style="">
-                        <div class="col-md-4" id="product" style="margin: 0 auto;float: left;margin-left: 5em;margin-top: 30px; display:${statusProd}">
-                            <form action="${pageContext.request.contextPath}/searchProductVenda" method="get">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="nomeProd" name="nomeProd"  placeholder="Pesquisa Produto">
-                                    <button class="btn btn-lg btn-primary btn-block" type="submit">Pesquisar</button>
-                                </div>
-                            </form>
-                            <form name="send" action="${pageContext.request.contextPath}/searchProductVenda" method="post">
-                                <table>     
-                                    <c:if test="${not empty listCommercialProduct}" >
-                                        <tr>
-                                            <c:forEach var="item" items="${listCommercialProduct}">
-                                                <td>
-                                                    <c:out value="${item.nome}"></c:out>
-                                                    <button class="btn" type="button" onclick="hdnID(${item.id})">selecionar</button>
-                                                </td>
-                                            </c:forEach>
-                                        </tr>
-                                    </c:if>  
-                                </table>
-                                <input type="text" id="idProd"  name="idProd1" value="" style="visibility: hidden">    
-                            </form>
-                        </div>                                
-
-
-
-                        <div class="col-md-4" id="service" style="margin: 0 auto; float: right;  margin-top: 30px;
-                             margin-right: 5em; display:${statusServ}">
-                            <form action="${pageContext.request.contextPath}/searchServiceVenda" method="get">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="nomeServ" name="nomeServ"  placeholder="Pesquisa Serviço">
-                                    <button class="btn btn-lg btn-primary btn-block" type="submit">Pesquisar</button>
-                                </div>
-                            </form>
-                            <form name="send1" action="${pageContext.request.contextPath}/searchServiceVenda" method="post">
-                                <table>     
-                                    <c:if test="${not empty listCommercialServ}" >
-                                        <tr>
-                                            <c:forEach var="item1" items="${listCommercialServ}">
-                                                <td>
-                                                    <c:out value="${item1.nome}"></c:out>
-                                                    <button class="btn" type="button" onclick="hdnIDServ(${item1.id})">selecionar</button>
-                                                </td>
-                                            </c:forEach>
-                                        </tr>
-                                    </c:if>  
-                                </table>
-                                <input type="text" id="idServ"  name="idServ1" value="" style="visibility: hidden">    
-                            </form>
-                        </div>
-
-                    </div>          
-
+            <div class="container" style="margin-top: 150px">
+                <div class="row" style="margin-bottom: 50px" >
+                    <h1 style="text-align: center; margin:  0 auto;">VENDA - CLIENTE - ADICIONAR - CARRINHO</h1>
                 </div>
-            </form>
+                <div class="row">
+                    <div class="col-md-4" style="margin: 0 auto;">
+                        <button class="btn btn-lg btn-primary btn-block" onclick="productShow()" type="button">PRODUTO</button>
+
+                    </div>
+                    <div class="col-md-4" style="margin: 0 auto;">
+
+                        <button class="btn btn-lg btn-primary btn-block" onclick="serviceShow()"type="button">SERVIÇO</button>
+                    </div>
+                </div>    
+                <div class="row"  style="">
+                    <div class="col-md-4" id="product" style="margin: 0 auto;float: left;margin-left: 5em;margin-top: 30px; display:${statusProd}">
+                        <form action="${pageContext.request.contextPath}/searchProductVenda" method="get">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="nomeProd" name="nomeProd"  placeholder="Pesquisa Produto">
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">Pesquisar</button>
+                            </div>
+                        </form>
+                        <form name="send" action="${pageContext.request.contextPath}/searchProductVenda" method="post">
+                            <table>     
+                                <c:if test="${not empty listCommercialProduct}" >
+                                    <tr>
+                                        <c:forEach var="item" items="${listCommercialProduct}">
+                                            <td>
+                                                <c:out value="${item.nome}"></c:out>
+                                                <button class="btn" type="button" onclick="hdnIDProd(${item.id})">selecionar</button>
+                                            </td>
+                                        </c:forEach>
+                                    </tr>
+                                </c:if>  
+                            </table>
+                            <input type="text" id="idProd"  name="idProd1" value="" style="visibility: hidden">    
+                        </form>
+                    </div>                                
+
+
+
+                    <div class="col-md-4" id="service" style="margin: 0 auto; float: right;  margin-top: 30px;
+                         margin-right: 5em; display:${statusServ}">
+                        <form action="${pageContext.request.contextPath}/searchServiceVenda" method="get">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="nomeServ" name="nomeServ"  placeholder="Pesquisa Serviço">
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">Pesquisar</button>
+                            </div>
+                        </form>
+                        <form name="send1" action="${pageContext.request.contextPath}/searchServiceVenda" method="post">
+                            <table>     
+                                <c:if test="${not empty listCommercialServ}" >
+                                    <tr>
+                                        <c:forEach var="item1" items="${listCommercialServ}">
+                                            <td>
+                                                <c:out value="${item1.nome}"></c:out>
+                                                <button class="btn" type="button" onclick="hdnIDServ(${item1.id})">selecionar</button>
+                                            </td>
+                                        </c:forEach>
+                                    </tr>
+                                </c:if>  
+                            </table>
+                            <input type="text" id="idServ"  name="idServ1" value="" style="visibility: hidden">    
+                        </form>
+                    </div>
+
+                </div>          
+
+            </div>
         </section>
         <script>
             function hdnIDServ(a) {

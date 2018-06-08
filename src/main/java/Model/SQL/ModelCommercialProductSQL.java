@@ -18,7 +18,7 @@ import java.sql.SQLException;
 public class ModelCommercialProductSQL {
     public void insert(Connection conexao, PreparedStatement pst, ModelCommercialProduct produto) throws SQLException {
 
-         String sql = "insert into produto (nome,valor,filial,estoque) values (?,?,?,?)";
+         String sql = "insert into produto (nome,valor,filialId,estoque) values (?,?,?,?)";
 
 
         pst = conexao.prepareStatement(sql);
@@ -34,7 +34,7 @@ public class ModelCommercialProductSQL {
 
     public void update(Connection conexao, PreparedStatement pst, ModelCommercialProduct produto) throws SQLException {
 
-        String sql = "update produto set nome = ?, valor = ?, filial = ?, estoque = ? where id = ? and ativo = true";
+        String sql = "update produto set nome = ?, valor = ?, filialId = ?, estoque = ? where id = ?";
 
         pst = conexao.prepareStatement(sql);
 
@@ -48,15 +48,14 @@ public class ModelCommercialProductSQL {
     }
 
     public ResultSet selectAll(Connection conexao, PreparedStatement pst) throws SQLException {
-        String sql = "select id,nome,valor,filial,estoque from produto where ativo = true";
+        String sql = "select * from produto where ativo = 1";
         pst = conexao.prepareStatement(sql);
 
         return pst.executeQuery();
     }
 
     public ResultSet selectId(Connection conexao, PreparedStatement pst, int id) throws SQLException {
-        String sql = "select id,nome,valor,filial,"
-                + "estoque from produto where id = ? and ativo = 1";
+        String sql = "select * from produto where id = ? and ativo = 1";
         pst = conexao.prepareStatement(sql);
         pst.setInt(1, id);
 
@@ -64,7 +63,7 @@ public class ModelCommercialProductSQL {
     }
 
     public void delete(Connection conexao, PreparedStatement pst, int id) throws SQLException {
-        String sql = "update produto set ativo = false where id = ?";
+        String sql = "update produto set ativo = 0 where id = ?";
         pst = conexao.prepareStatement(sql);
         pst.setInt(1, id);
 
