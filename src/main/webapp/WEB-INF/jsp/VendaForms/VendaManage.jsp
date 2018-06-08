@@ -116,7 +116,7 @@
                 </div>
                 <div class="row">
 
-                    <div class="col-md-5" style="margin: 0 auto;">
+                    <div class="col-md-4" style="margin: 0 auto;">
                         <h3 style="text-align: center; margin:  0 auto;"> Cliente</h3>
                         <div class="form-group" style="display: flex">
                             <label for="formGroupExampleInput">Nome: </label>
@@ -125,7 +125,7 @@
                     </div>
 
                     <input type="none" id="none" style="display: none" name="none" value="none" style="visibility: hidden">
-                    <div class="col-md-5" style="margin: 0 auto; ">
+                    <div class="col-md-4" style="margin: 0 auto; ">
 
                         <h3 style="text-align: center; margin:  0 auto;"> Produtos</h3>
                         <div class="form-group" style="display: flex">
@@ -144,7 +144,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col-md-5" style="margin: 0 auto;">
+                    <div class="col-md-4" style="margin: 0 auto;">
                         <form action="${pageContext.request.contextPath}/manageVenda" method="get">
                             <h3 style="text-align: center; margin:  0 auto;"> Serviços</h3>
                             <div class="form-group" style="display: flex">
@@ -160,22 +160,31 @@
                             </div>
                         </form>
                     </div>
-                    <form action="${pageContext.request.contextPath}/searchProductVenda" method="get">
+                    
+                </div>
+                        
+                        <div class="row">
+                            
+                            <div class="col-md-4"> <form action="${pageContext.request.contextPath}/searchProductVenda" method="get">
                         <button class="btn btn-lg btn-primary btn-block" type="submit" >CARRINHO</button>    
-                    </form>
-                    <form action="${pageContext.request.contextPath}/manageVenda" method="get">
+                    </form></div>
+                            <div class="col-md-4"><form action="${pageContext.request.contextPath}/manageVenda" method="get">
                         <input type="text" id="command"  name="command" value="-venda" style="visibility: hidden">
                         <button class="btn btn-lg btn-primary btn-block" type="submit" >CANCELAR VENDA</button>
-                    </form>
-                    <form action="${pageContext.request.contextPath}/manageVenda" method="post" >
+                    </form></div>
+                            <div class="col-md-4"><form action="${pageContext.request.contextPath}/manageVenda" method="post" >
                         <button class="btn btn-lg btn-primary btn-block" type="submit">EFETUAR VENDA</button>
-                    </form>
-                    <form name="valueChange" action="${pageContext.request.contextPath}/manageVenda" method="get">
+                    </form></div>
+                            
+                        </div> 
+                        
+                        <div class="row">
+                            <form name="valueChange" action="${pageContext.request.contextPath}/manageVenda" method="get">
                         <input type="text" id="command1"  name="command" value="" style="visibility: hidden">
                         <input type="text" id="idOb"  name="obj" value="" style="visibility: hidden">
                         <input type="text" id="qtd"  name="qtd" value="" style="visibility: hidden">
-                    </form>    
-                </div>
+                    </form>
+                        </div>
             </div>
         </section>
         <script>
