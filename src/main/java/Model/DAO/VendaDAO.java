@@ -61,41 +61,45 @@ public class VendaDAO {
             }
             //conexao.close();
             if (id > 0) {
-                for (int i = 0; i < venda.getItens().size(); i++) {
-                    sql = "insert into itensVenda(vendaId,prodId,quantidade,valorUni) values (?,?,?,?)";
+                if (venda.getItens() != null && !venda.getItens().isEmpty()) {
 
-                    pst = conexao.prepareStatement(sql);
+                    for (int i = 0; i < venda.getItens().size(); i++) {
+                        sql = "insert into itensVenda(vendaId,prodId,quantidade,valorUni) values (?,?,?,?)";
 
-                    pst.setInt(1, id);
-                    pst.setInt(2, venda.getItens().get(i).getProduto().getId());
-                    pst.setInt(3, venda.getItens().get(i).getQuantidade());
-                    pst.setDouble(4, venda.getItens().get(i).getValorUni());
+                        pst = conexao.prepareStatement(sql);
 
-                    pst.execute();
-                    
-                    sql = "update produto set estoque = ? where id = ?";
+                        pst.setInt(1, id);
+                        pst.setInt(2, venda.getItens().get(i).getProduto().getId());
+                        pst.setInt(3, venda.getItens().get(i).getQuantidade());
+                        pst.setDouble(4, venda.getItens().get(i).getValorUni());
 
-                    pst = conexao.prepareStatement(sql);
+                        pst.execute();
 
-                    pst.setInt(1, venda.getItens().get(i).getProduto().getQtdProd()-venda.getItens().get(i).getQuantidade());
-                    pst.setInt(2, venda.getItens().get(i).getProduto().getId());
+                        sql = "update produto set estoque = ? where id = ?";
 
-                    pst.execute();
+                        pst = conexao.prepareStatement(sql);
+
+                        pst.setInt(1, venda.getItens().get(i).getProduto().getQtdProd() - venda.getItens().get(i).getQuantidade());
+                        pst.setInt(2, venda.getItens().get(i).getProduto().getId());
+
+                        pst.execute();
+                    }
                 }
+                if (venda.getServList() != null && !venda.getServList().isEmpty()) {
 
-                for (int i = 0; i < venda.getServList().size(); i++) {
-                    sql = "insert into itensServico(vendaId,servId,quantidade,valorUni) values (?,?,?,?)";
+                    for (int i = 0; i < venda.getServList().size(); i++) {
+                        sql = "insert into itensServico(vendaId,servId,quantidade,valorUni) values (?,?,?,?)";
 
-                    pst = conexao.prepareStatement(sql);
+                        pst = conexao.prepareStatement(sql);
 
-                    pst.setInt(1, id);
-                    pst.setInt(2, venda.getServList().get(i).getServico().getId());
-                    pst.setInt(3, venda.getServList().get(i).getQuantidade());
-                    pst.setDouble(4, venda.getServList().get(i).getValorUni());
+                        pst.setInt(1, id);
+                        pst.setInt(2, venda.getServList().get(i).getServico().getId());
+                        pst.setInt(3, venda.getServList().get(i).getQuantidade());
+                        pst.setDouble(4, venda.getServList().get(i).getValorUni());
 
-                    pst.execute();
+                        pst.execute();
+                    }
                 }
-
                 aux = true;
             } else {
                 aux = false;
