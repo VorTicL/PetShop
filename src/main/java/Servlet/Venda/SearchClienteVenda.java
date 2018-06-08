@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Victor de Lucca
  */
-@WebServlet(name = "SearchCliente", urlPatterns = {"/searchClienteVenda"})
+@WebServlet(name = "SearchClienteVenda", urlPatterns = {"/searchClienteVenda"})
 public class SearchClienteVenda extends HttpServlet {
 
     ClienteDAO clienteDAO = new ClienteDAO();
@@ -36,7 +36,7 @@ public class SearchClienteVenda extends HttpServlet {
         HttpSession sessao = request.getSession();
         Venda venda = (Venda) sessao.getAttribute("venda");
         if (venda != null && venda.getIdcliente() != 0) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/VendaForms/SearchClienteVenda.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/VendaForms/VendaManage.jsp");
             dispatcher.forward(request, response);
             return;
         }
@@ -58,7 +58,6 @@ public class SearchClienteVenda extends HttpServlet {
         }
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/VendaForms/SearchClienteVenda.jsp");
         dispatcher.forward(request, response);
-
     }
 
     @Override
@@ -78,7 +77,7 @@ public class SearchClienteVenda extends HttpServlet {
         } catch (Exception e) {
             sessao.removeAttribute("venda");
             sessao.removeAttribute("clienteV");
-            request.getRequestDispatcher("WEB-INF/jsp/VendaForms/ManageVenda.jsp")
+            request.getRequestDispatcher("WEB-INF/jsp/VendaForms/SearchClienteVenda.jsp")
                     .forward(request, response);
         }
 

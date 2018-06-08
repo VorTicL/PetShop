@@ -118,11 +118,15 @@
                     <div class="row">
                         <div class="col-md-4" style="margin: 0 auto;">
                             <button class="btn btn-lg btn-primary btn-block" onclick="productShow()" type="button">PRODUTO</button>
+
+                        </div>
+                        <div class="col-md-4" style="margin: 0 auto;">
+
                             <button class="btn btn-lg btn-primary btn-block" onclick="serviceShow()"type="button">SERVIÇO</button>
                         </div>
                     </div>    
-                    <div class="row" id="product" style="display:${statusProd}">
-                        <div class="col-md-4" style="margin: 0 auto;">
+                    <div class="row"  style="">
+                        <div class="col-md-4" id="product" style="margin: 0 auto;float: left;margin-left: 5em;margin-top: 30px; display:${statusProd}">
                             <form action="${pageContext.request.contextPath}/searchProductVenda" method="get">
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="nomeProd" name="nomeProd"  placeholder="Pesquisa Produto">
@@ -144,10 +148,12 @@
                                 </table>
                                 <input type="text" id="idProd"  name="idProd1" value="" style="visibility: hidden">    
                             </form>
-                        </div>
-                    </div>
-                    <div class="row" id="service" style="display:${statusServ}">
-                        <div class="col-md-4" style="margin: 0 auto;">
+                        </div>                                
+
+
+
+                        <div class="col-md-4" id="service" style="margin: 0 auto; float: right;  margin-top: 30px;
+                             margin-right: 5em; display:${statusServ}">
                             <form action="${pageContext.request.contextPath}/searchServiceVenda" method="get">
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="nomeServ" name="nomeServ"  placeholder="Pesquisa Serviço">
@@ -170,7 +176,9 @@
                                 <input type="text" id="idServ"  name="idServ1" value="" style="visibility: hidden">    
                             </form>
                         </div>
-                    </div>            
+
+                    </div>          
+
                 </div>
             </form>
         </section>
@@ -184,14 +192,16 @@
                 document.send.submit();
             }
             function productShow() {
-                var y = document.getElementById("service");
                 var x = document.getElementById("product");
-                x.style.display = "block";
+                var y = document.getElementById("service");
+
                 y.style.display = "none";
+                x.style.display = "block";
             }
             function serviceShow() {
                 var y = document.getElementById("service");
                 var x = document.getElementById("product");
+
                 x.style.display = "none";
                 y.style.display = "block";
             }

@@ -74,6 +74,7 @@ public class SearchProductVenda extends HttpServlet {
             ItensVenda itensV = new ItensVenda();
             itensV.setIdProd(prod1);
             itensV.setValorUni(prod1.getValor());
+            itensV.setQuantidade(itensV.getQuantidade()+1);
             if (venda.getItens() == null) {
                 itens = new ArrayList<>();
             } else {

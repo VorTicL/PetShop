@@ -73,6 +73,7 @@ public class SearchServiceVenda extends HttpServlet {
             ServicosList itensV = new ServicosList();
             itensV.setServico(serv);
             itensV.setValorUni(serv.getValor());
+            itensV.setQuantidade(itensV.getQuantidade()+1);
             if (venda.getServList() == null) {
                 itens = new ArrayList<>();
             } else {
