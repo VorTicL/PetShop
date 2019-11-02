@@ -19,9 +19,9 @@ public class Connect {
 
         try {
             String driver = "com.mysql.jdbc.Driver";
-            String url = "jdbc:mysql://localhost:3306/petshop";
-            String user = "root";
-            String password = "";
+            String url = "jdbc:mysql://wm63be5w8m7gs25a.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/z5c32cq2n3788otg";
+            String user = "uc2z0ljujh5n6x1k";
+            String password = "imet5dkp9xdmypse";
 
             Class.forName(driver);
             return DriverManager.getConnection(url, user, password);
