@@ -26,7 +26,7 @@ import Model.Entity.User;
  * @author Victor de Lucca
  */
 @WebFilter(filterName = "filter", 
-	urlPatterns = {"/User","/ServiceForms", "ProductForms"},
+	urlPatterns = {"/User","/ServiceForms", "/manageProduct"},
 	servletNames = {"HomeServlet", "manageProduct", "manageService", "manageUser", "manageCliente", "searchProduct",
         "searchService", "searchUser", "searchCliente", "user", "service", "product", "cliente"})
 public class FilterServlet implements Filter {

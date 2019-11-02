@@ -105,7 +105,7 @@
         <section class="col-md-12">
             <div class="container" style="margin-top: 150px">
                 <div class="row" style="margin-bottom: 50px" >
-                    <h1 style="text-align: center; margin:  0 auto;"><c:out value="${response}"></h1>
+                    <h1 style="text-align: center; margin:  0 auto;"><c:out value="${response}"/></h1>
                 </div>
                 <div class="row">
                     <div class="col-md-4" style="margin: 0 auto;">
